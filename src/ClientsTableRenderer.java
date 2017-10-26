@@ -8,6 +8,7 @@ import java.sql.Statement;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 
@@ -18,7 +19,8 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 	private boolean clicked;
 	private int row, col;
 	private JTable table;
-	private Articulo articulo;
+	private String tipoArticulo;
+	private Conexion conexion;
 
 	public ClientsTableRenderer(JCheckBox checkBox) {
 		super(checkBox);
@@ -31,7 +33,7 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 		});
 	}
 
-	public ClientsTableRenderer(JCheckBox checkBox, Articulo art) {
+	public ClientsTableRenderer(JCheckBox checkBox,String tipo) {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
@@ -40,7 +42,8 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 				fireEditingStopped();
 			}
 		});
-		articulo = art;
+		tipoArticulo = tipo;
+		conexion = new Conexion();
 	}
 
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
@@ -58,7 +61,9 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 
 	public Object getCellEditorValue() {
 		if (clicked) {
-			alquilar(articulo);
+			alquilar();
+			JOptionPane.showMessageDialog(button,
+					"Ha alquilado el "+ tipoArticulo + ": " + table.getValueAt(row, 1));
 		}
 		clicked = false;
 		return new String(label);
@@ -73,22 +78,13 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 		super.fireEditingStopped();
 	}
 	
-	public void alquilar(Articulo a) {
-		try {
-			Connection conexion = (Connection) new Conexion().establecerConexion();
-			Statement s = (Statement) conexion.createStatement();
-			
-			if(a.getTipo().equalsIgnoreCase("cd")) {
-				s.executeQuery("UPDATE cd SET stock = " + (a.getStock()-1) + " WHERE idCD = " + a.getId_articulo());
-			}else if(a.getTipo().equalsIgnoreCase("dvd")) {
-				s.executeQuery("");
-			}else{
-				s.executeQuery("");
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("ERROR AL INTENTAR ACTUALIZAR STOCK");
-			e.printStackTrace();
+	public void alquilar() {
+		int stock = Integer.parseInt( table.getValueAt(row, 4).toString() );;
+		boolean exitoso = conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
+		if(exitoso = false) {
+			System.out.println("Error al actualizar el stock de " + table.getValueAt(row, 1) + " con ID: " + table.getValueAt(row, 1));
+		}else {
+			System.out.println("Stock de " + tipoArticulo +" con ID: " + table.getValueAt(row, 1) + " actualizado con éxito");
 		}
 	}
 }

@@ -67,12 +67,15 @@ public class Conexion{
 	}
 	
 	
-	public void ejecutarSentencia(String sentencia) {
+	public boolean ejecutarSentencia(String sentencia) {
 		String tipoSentencia = sentencia.substring(0,1);
+		int sentenciaValida = 0;
+		boolean valida = false;
 		switch(tipoSentencia.toUpperCase()){
 		case "I" : 
 			try {
 				consulta = conn.prepareStatement(sentencia);
+				sentenciaValida = consulta.executeUpdate();
 			} catch (SQLException e) {
 				System.out.println("No se ha podido realizar inserción de datos");
 			}
@@ -80,13 +83,16 @@ public class Conexion{
 		case "U" :
 			try {
 				consulta = conn.prepareStatement(sentencia);
+				sentenciaValida = consulta.executeUpdate();
 			} catch (SQLException e) {
 				System.out.println("No se ha podido realizar la actualización de datos");
 			}
 			break;
+			//CREO Q NUNCA SE DA ESTE CASO
 		case "S" : 
 			try {
 				consulta = conn.prepareStatement(sentencia);
+				sentenciaValida = consulta.executeUpdate();
 			} catch (SQLException e) {
 				System.out.println("No se ha podido realizar la consulta");
 			}
@@ -94,12 +100,16 @@ public class Conexion{
 		case "D" : 
 			try {
 				consulta = conn.prepareStatement(sentencia);
+				sentenciaValida = consulta.executeUpdate();
 			} catch (SQLException e) {
 				System.out.println("No se han podido eliminar los datos");
 			}
 			break;	
-			
 		}
+		if(sentenciaValida < 0) {
+			valida = true;
+		}
+		return valida;
 	}
 	
 	public ResultSet getResultSet(String sentencia) {
