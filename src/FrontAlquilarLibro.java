@@ -59,6 +59,7 @@ public class FrontAlquilarLibro extends JFrame{
 			}
         };
 		
+        String tipo = "libro";
 		
 		try {
 			Connection conexion = (Connection) new Conexion().establecerConexion();
@@ -91,7 +92,7 @@ public class FrontAlquilarLibro extends JFrame{
 		tabla = new JTable(modelo);
 		
 		tabla.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererLibro());
-		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRenderer(new JCheckBox(), articulo));
+		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRenderer(new JCheckBox(), tipo));
 		
 		return tabla;
 	}

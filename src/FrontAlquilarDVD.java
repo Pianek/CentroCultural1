@@ -60,6 +60,7 @@ public class FrontAlquilarDVD  extends JFrame{
 			}
         };
 		
+        String tipo = "dvd";
 		
 		try {
 			Connection conexion = (Connection) new Conexion().establecerConexion();
@@ -90,7 +91,7 @@ public class FrontAlquilarDVD  extends JFrame{
 		tabla = new JTable(modelo);
 		
 		tabla.getColumnModel().getColumn(4).setCellRenderer(new ClientsTableButtonRendererDVD());
-		tabla.getColumnModel().getColumn(4).setCellEditor(new ClientsTableRenderer(new JCheckBox(), articulo));
+		tabla.getColumnModel().getColumn(4).setCellEditor(new ClientsTableRenderer(new JCheckBox(), tipo));
 		
 		return tabla;
 	}
