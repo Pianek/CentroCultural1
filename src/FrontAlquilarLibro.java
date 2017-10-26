@@ -52,7 +52,7 @@ public class FrontAlquilarLibro extends JFrame{
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
 				boolean editable = false;
-				if(column == 4) {
+				if(column == 5) {
 					editable = true;
 				}
 				return editable;
@@ -62,10 +62,10 @@ public class FrontAlquilarLibro extends JFrame{
         String tipo = "libro";
 		
 		try {
-			Connection conexion = (Connection) new Conexion().establecerConexion();
-			Statement s = (Statement) conexion.createStatement();
-			ResultSet rs = s.executeQuery("SELECT titulo, autor, capMuestra, numPagina, stock FROM libro");
+			Conexion conexion = new Conexion();			
+			ResultSet rs = conexion.getResultSet("SELECT idLIBRO, titulo, autor, capMuestra, numPagina, stock FROM libro");
 			// Creamos las columnas.
+			modelo.addColumn("Código LIBRO");
 			modelo.addColumn("Título");
 			modelo.addColumn("Autor");
 			modelo.addColumn("Capítulo de muestra");
@@ -76,13 +76,14 @@ public class FrontAlquilarLibro extends JFrame{
 			// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
-				String titulo = rs.getString(1);
-				String autor = rs.getString(2);
-				String capMuestra = rs.getString(3);
-				String numPaginas = String.valueOf(rs.getInt(4));
-				String stock = String.valueOf(rs.getInt(5));
+				String  idlibro=rs.getString(1)
+;				String titulo = rs.getString(2);
+				String autor = rs.getString(3);
+				String capMuestra = rs.getString(4);
+				String numPaginas = String.valueOf(rs.getInt(5));
+				String stock = String.valueOf(rs.getInt(6));
 				
-				modelo.addRow(new Object[] {titulo,autor,capMuestra,numPaginas,stock});
+				modelo.addRow(new Object[] {idlibro,titulo,autor,capMuestra,numPaginas,stock});
 			}
 		} catch (SQLException e) {
 			System.out.println("Error al crear la tabla");
@@ -91,8 +92,8 @@ public class FrontAlquilarLibro extends JFrame{
 		
 		tabla = new JTable(modelo);
 		
-		tabla.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererLibro());
-		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRenderer(new JCheckBox(), tipo));
+		tabla.getColumnModel().getColumn(6).setCellRenderer(new ClientsTableButtonRendererLibro());
+		tabla.getColumnModel().getColumn(6).setCellEditor(new ClientsTableRenderer(new JCheckBox(), tipo));
 		
 		return tabla;
 	}
