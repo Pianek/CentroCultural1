@@ -61,9 +61,18 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 
 	public Object getCellEditorValue() {
 		if (clicked) {
-			alquilar();
-			JOptionPane.showMessageDialog(button,
-					"Ha alquilado el "+ tipoArticulo + ": " + table.getValueAt(row, 1));
+			int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
+			if(stock == 0) {
+				JOptionPane.showMessageDialog(button,"No puede alquilar el "+ tipoArticulo.toUpperCase() + table.getValueAt(row, 1) + ", están todos alquilados.");
+			}else {
+				stock--;
+				table.setValueAt((Object) stock,row, 4); 
+				alquilar();
+				JOptionPane.showMessageDialog(button,
+						"Ha alquilado el "+ tipoArticulo + ": " + table.getValueAt(row, 1));
+			}
+			
+			
 		}
 		clicked = false;
 		return new String(label);
@@ -79,12 +88,13 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 	}
 	
 	public void alquilar() {
-		int stock = Integer.parseInt( table.getValueAt(row, 4).toString() );;
-		boolean exitoso = conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
-		if(exitoso = false) {
-			System.out.println("Error al actualizar el stock de " + table.getValueAt(row, 1) + " con ID: " + table.getValueAt(row, 1));
-		}else {
-			System.out.println("Stock de " + tipoArticulo +" con ID: " + table.getValueAt(row, 1) + " actualizado con éxito");
-		}
+		int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
+		conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
+//		boolean exitoso = conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
+//		if(exitoso = false) {
+//			System.out.println("Error al actualizar el stock de " + table.getValueAt(row, 1) + " con ID: " + table.getValueAt(row, 1));
+//		}else {
+//			System.out.println("Stock de " + tipoArticulo +" con ID: " + table.getValueAt(row, 1) + " actualizado con éxito");
+//		}
 	}
 }
