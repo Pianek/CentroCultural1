@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.sql.Connection;
@@ -21,6 +22,7 @@ public class FrontAlquilarLibro extends JFrame{
 	JPanel panelPrincipal;
 	JTable tabla;
 	JButton alquilar; 
+	Color colorFondo;
 	
 	public FrontAlquilarLibro() {
 		this.setTitle("Panel Administrador");
@@ -45,6 +47,9 @@ public class FrontAlquilarLibro extends JFrame{
 		panelPrincipal.add(new JScrollPane(tabla));
 
 		getContentPane().add(panelPrincipal);
+		panelPrincipal.setBackground(colorFondo=new Color (99,193,111));
+		tabla.setBackground(colorFondo=new Color (215,246,185));
+		alquilar.setBackground(colorFondo=new Color (215,246,185));
 	}
 	
 	public JTable rellenarTabla() {

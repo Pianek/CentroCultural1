@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ public class FrontAlquilarCD extends JFrame{
 	JPanel panelPrincipal;
 	JTable tabla;
 	JButton alquilar;
+	Color colorFondo;
 	
 	public FrontAlquilarCD() {
 		this.setTitle("Panel Administrador");
@@ -36,13 +38,18 @@ public class FrontAlquilarCD extends JFrame{
 		panelPrincipal.setBorder(new EmptyBorder(100,100,50,100));
 		panelPrincipal.setLayout(new GridLayout(2,2,10,30));
 		
+		
 		alquilar = new JButton();
 		
 		tabla = rellenarTabla();
 		
+		
 		panelPrincipal.add(new JScrollPane(tabla));
 
 		getContentPane().add(panelPrincipal);
+		panelPrincipal.setBackground(colorFondo=new Color (99,193,111));
+		tabla.setBackground(colorFondo=new Color (215,246,185));
+		alquilar.setBackground(colorFondo=new Color (215,246,185));
 	}
 	
 	public JTable rellenarTabla() {
@@ -70,6 +77,7 @@ public class FrontAlquilarCD extends JFrame{
 			modelo.addColumn("Discografia");
 			modelo.addColumn("Stock");
 			modelo.addColumn("Opciones");
+			
 			
 			// Bucle para cada resultado en la consulta
 			while (rs.next()){
