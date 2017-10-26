@@ -16,7 +16,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-
 public class FrontAlquilarDVD  extends JFrame{
 
 	Articulo articulo;
@@ -53,7 +52,7 @@ public class FrontAlquilarDVD  extends JFrame{
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
 				boolean editable = false;
-				if(column == 4) {
+				if(column == 5) {
 					editable = true;
 				}
 				return editable;
@@ -63,10 +62,10 @@ public class FrontAlquilarDVD  extends JFrame{
         String tipo = "dvd";
 		
 		try {
-			Connection conexion = (Connection) new Conexion().establecerConexion();
-			Statement s = (Statement) conexion.createStatement();
-			ResultSet rs = s.executeQuery("SELECT titulo, director, productora, stock FROM dvd");
+			Conexion conexion = new Conexion();
+			ResultSet rs = conexion.getResultSet("SELECT idDVD, titulo, director, productora, stock FROM dvd");
 			// Creamos las columnas.
+			modelo.addColumn("Código de DVD");
 			modelo.addColumn("Título");
 			modelo.addColumn("Director");
 			modelo.addColumn("Productora");
@@ -76,13 +75,15 @@ public class FrontAlquilarDVD  extends JFrame{
 			// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
-				String titulo = rs.getString(1);
-				String director = rs.getString(2);
-				String productora = rs.getString(3);
-				String stock = String.valueOf(rs.getInt(4));
+				String iddvd = rs.getString(1);
+				String titulo = rs.getString(2);
+				String director = rs.getString(3);
+				String productora = rs.getString(4);
+				String stock = String.valueOf(rs.getInt(5));
 				
-				modelo.addRow(new Object[] {titulo,director,productora,stock});
+				modelo.addRow(new Object[] {iddvd,titulo,director,productora,stock});
 			}
+			conexion.cerrarConexion();
 		} catch (SQLException e) {
 			System.out.println("Error al crear la tabla");
 			e.printStackTrace();
@@ -90,8 +91,8 @@ public class FrontAlquilarDVD  extends JFrame{
 		
 		tabla = new JTable(modelo);
 		
-		tabla.getColumnModel().getColumn(4).setCellRenderer(new ClientsTableButtonRendererDVD());
-		tabla.getColumnModel().getColumn(4).setCellEditor(new ClientsTableRenderer(new JCheckBox(), tipo));
+		tabla.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererDVD());
+		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRenderer(new JCheckBox(), tipo));
 		
 		return tabla;
 	}

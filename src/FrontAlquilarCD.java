@@ -98,7 +98,6 @@ public class FrontAlquilarCD extends JFrame{
 		return tabla;
 	}
 }
-
 class ClientsTableButtonRendererCD extends JButton implements TableCellRenderer {
 	
 	public ClientsTableButtonRendererCD() {
