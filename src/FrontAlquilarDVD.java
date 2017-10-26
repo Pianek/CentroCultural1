@@ -1,9 +1,7 @@
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -105,7 +103,12 @@ public class FrontAlquilarDVD  extends JFrame{
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
 		setBackground(UIManager.getColor("Button.background"));
-		setText((value == null) ? "Alquilar" : value.toString());
+		int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
+		if(stock != 0) {
+			setText((value == null) ? "Alquilar" : value.toString());
+		}else {
+			setText((value == null) ? "No se puede alquilar" : value.toString());
+		}
 		return this;
 	}
 }

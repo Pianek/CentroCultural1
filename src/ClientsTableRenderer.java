@@ -58,9 +58,12 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 			button.setBackground(UIManager.getColor("Button.background"));
 			label = (value == null) ? "Alquilado" : value.toString();
 			button.setText(label);
-			clicked = true;
+		}else {
+			button.setBackground(UIManager.getColor("Button.background"));
+			label = (value == null) ? "No se puede alquilar" : value.toString();
+			button.setText(label);
 		}
-		
+		clicked = true;
 		return button;
 	}
 
@@ -76,8 +79,6 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 				JOptionPane.showMessageDialog(button,
 						"Ha alquilado el "+ tipoArticulo + ": " + table.getValueAt(row, 1));
 			}
-			
-			
 		}
 		clicked = false;
 		return new String(label);
@@ -95,11 +96,5 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 	public void alquilar() {
 		int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
 		conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
-//		boolean exitoso = conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
-//		if(exitoso = false) {
-//			System.out.println("Error al actualizar el stock de " + table.getValueAt(row, 1) + " con ID: " + table.getValueAt(row, 1));
-//		}else {
-//			System.out.println("Stock de " + tipoArticulo +" con ID: " + table.getValueAt(row, 1) + " actualizado con éxito");
-//		}
 	}
 }
