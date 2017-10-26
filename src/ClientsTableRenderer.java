@@ -52,10 +52,15 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 		this.row = row;
 		this.col = column;
 
-		button.setBackground(UIManager.getColor("Button.background"));
-		label = (value == null) ? "Alquilado" : value.toString();
-		button.setText(label);
-		clicked = true;
+		
+		int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
+		if(stock != 0) {
+			button.setBackground(UIManager.getColor("Button.background"));
+			label = (value == null) ? "Alquilado" : value.toString();
+			button.setText(label);
+			clicked = true;
+		}
+		
 		return button;
 	}
 
@@ -63,7 +68,7 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 		if (clicked) {
 			int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
 			if(stock == 0) {
-				JOptionPane.showMessageDialog(button,"No puede alquilar el "+ tipoArticulo.toUpperCase() + table.getValueAt(row, 1) + ", están todos alquilados.");
+				JOptionPane.showMessageDialog(button,"No puede alquilar el "+ tipoArticulo.toUpperCase() + " " + table.getValueAt(row, 1) + ", están todos alquilados.");
 			}else {
 				stock--;
 				table.setValueAt((Object) stock,row, 4); 

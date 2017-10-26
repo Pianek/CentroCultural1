@@ -2,7 +2,9 @@
 public class MainCentroCultural {
 
 	public static void main(String[] args) {
-		FrontAlquilarCD alquilarCD = new FrontAlquilarCD();
+//		FrontAlquilarCD alquilarCD = new FrontAlquilarCD();
+//		FrontAlquilarDVD alquilarDVD = new FrontAlquilarDVD();
+		FrontAlquilarLibro alquilarLibro = new FrontAlquilarLibro();
 //		FrontLogin login = new FrontLogin(); 
 //		FrontArticulo articulo = new FrontArticulo();
 //		FrontAdmin admin = new FrontAdmin();
