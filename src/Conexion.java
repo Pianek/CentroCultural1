@@ -59,7 +59,7 @@ public class Conexion{
 	public Connection establecerConexion() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn=DriverManager.getConnection(ruta,usuario,password);
+			conn = DriverManager.getConnection(ruta,usuario,password);
 		} catch (ClassNotFoundException | SQLException e) {
 			System.out.println("Error al conectar con la BBDD");
 		}
