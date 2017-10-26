@@ -14,14 +14,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class FrontAlquilarCD extends JFrame{
+public class FrontActualizarBorrarCD extends JFrame{
 
 	Articulo articulo;
 	JPanel panelPrincipal;
 	JTable tabla;
 	JButton alquilar;
 	
-	public FrontAlquilarCD() {
+	public FrontActualizarBorrarCD() {
 		this.setTitle("Panel Administrador");
 		init();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -49,11 +49,7 @@ public class FrontAlquilarCD extends JFrame{
 		DefaultTableModel modelo = new DefaultTableModel() {
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
-				boolean editable = false;
-				if(column == 5) {
-					editable = true;
-				}
-				return editable;
+				return true;
 			}
         };
 
@@ -69,7 +65,8 @@ public class FrontAlquilarCD extends JFrame{
 			modelo.addColumn("Cantante");
 			modelo.addColumn("Discografia");
 			modelo.addColumn("Stock");
-			modelo.addColumn("Opciones");
+			modelo.addColumn("");
+			modelo.addColumn("");
 			
 			// Bucle para cada resultado en la consulta
 			while (rs.next()){
@@ -90,15 +87,19 @@ public class FrontAlquilarCD extends JFrame{
 		
 		tabla = new JTable(modelo);
 		
-		tabla.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererCD());
-		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRendererAlquilar(new JCheckBox(), tipo));
+		tabla.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererActualizarCD());
+		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRendererActualizar(new JCheckBox(), tipo));
+		
+		tabla.getColumnModel().getColumn(6).setCellRenderer(new ClientsTableButtonRendererBorrarCD());
+		tabla.getColumnModel().getColumn(6).setCellEditor(new ClientsTableRendererBorrar(new JCheckBox(), tipo));
         
 		return tabla;
 	}
 }
-class ClientsTableButtonRendererCD extends JButton implements TableCellRenderer {
+
+class ClientsTableButtonRendererActualizarCD extends JButton implements TableCellRenderer {
 	
-	public ClientsTableButtonRendererCD() {
+	public ClientsTableButtonRendererActualizarCD() {
 		setOpaque(true);
 	}
 
@@ -106,12 +107,21 @@ class ClientsTableButtonRendererCD extends JButton implements TableCellRenderer 
 			int row, int column) {
 		
 		setBackground(UIManager.getColor("Button.background"));
-		int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
-		if(stock != 0) {
-			setText((value == null) ? "Alquilar" : value.toString());
-		}else {
-			setText((value == null) ? "No se puede alquilar" : value.toString());
-		}
+		setText((value == null) ? "Actualizar" : value.toString());
+		return this;
+	}
+}
+class ClientsTableButtonRendererBorrarCD extends JButton implements TableCellRenderer {
+	
+	public ClientsTableButtonRendererBorrarCD() {
+		setOpaque(true);
+	}
+
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+		
+		setBackground(UIManager.getColor("Button.background"));
+		setText((value == null) ? "Borrar" : value.toString());
 		return this;
 	}
 }

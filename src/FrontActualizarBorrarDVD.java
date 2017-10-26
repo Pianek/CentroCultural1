@@ -14,14 +14,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class FrontAlquilarCD extends JFrame{
+public class FrontActualizarBorrarDVD  extends JFrame{
 
 	Articulo articulo;
 	JPanel panelPrincipal;
 	JTable tabla;
-	JButton alquilar;
+	JButton alquilar; 
 	
-	public FrontAlquilarCD() {
+	public FrontActualizarBorrarDVD() {
 		this.setTitle("Panel Administrador");
 		init();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -49,38 +49,34 @@ public class FrontAlquilarCD extends JFrame{
 		DefaultTableModel modelo = new DefaultTableModel() {
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
-				boolean editable = false;
-				if(column == 5) {
-					editable = true;
-				}
-				return editable;
+				return true;
 			}
         };
-
-        String tipo = "cd";
-        
+		
+        String tipo = "dvd";
+		
 		try {
 			Conexion conexion = new Conexion();
-			ResultSet rs = conexion.getResultSet("SELECT idCD, titulo, cantante, discografia, stock FROM cd");
-
+			ResultSet rs = conexion.getResultSet("SELECT idDVD, titulo, director, productora, stock FROM dvd");
 			// Creamos las columnas.
-			modelo.addColumn("Código CD");
+			modelo.addColumn("Código de DVD");
 			modelo.addColumn("Título");
-			modelo.addColumn("Cantante");
-			modelo.addColumn("Discografia");
+			modelo.addColumn("Director");
+			modelo.addColumn("Productora");
 			modelo.addColumn("Stock");
-			modelo.addColumn("Opciones");
+			modelo.addColumn("");
+			modelo.addColumn("");
 			
 			// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
-				String idcd = rs.getString(1);
+				String iddvd = rs.getString(1);
 				String titulo = rs.getString(2);
-				String cantante = rs.getString(3);
-				String discografia = rs.getString(4);
+				String director = rs.getString(3);
+				String productora = rs.getString(4);
 				String stock = String.valueOf(rs.getInt(5));
 				
-				modelo.addRow(new Object[] {idcd,titulo,cantante,discografia, stock});
+				modelo.addRow(new Object[] {iddvd,titulo,director,productora,stock});
 			}
 			conexion.cerrarConexion();
 		} catch (SQLException e) {
@@ -90,15 +86,18 @@ public class FrontAlquilarCD extends JFrame{
 		
 		tabla = new JTable(modelo);
 		
-		tabla.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererCD());
-		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRendererAlquilar(new JCheckBox(), tipo));
+		tabla.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererActualizarDVD());
+		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRendererActualizar(new JCheckBox(), tipo));
+		
+		tabla.getColumnModel().getColumn(6).setCellRenderer(new ClientsTableButtonRendererBorrarDVD());
+		tabla.getColumnModel().getColumn(6).setCellEditor(new ClientsTableRendererBorrar(new JCheckBox(), tipo));
         
 		return tabla;
 	}
 }
-class ClientsTableButtonRendererCD extends JButton implements TableCellRenderer {
+class ClientsTableButtonRendererActualizarDVD extends JButton implements TableCellRenderer {
 	
-	public ClientsTableButtonRendererCD() {
+	public ClientsTableButtonRendererActualizarDVD() {
 		setOpaque(true);
 	}
 
@@ -106,12 +105,21 @@ class ClientsTableButtonRendererCD extends JButton implements TableCellRenderer 
 			int row, int column) {
 		
 		setBackground(UIManager.getColor("Button.background"));
-		int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
-		if(stock != 0) {
-			setText((value == null) ? "Alquilar" : value.toString());
-		}else {
-			setText((value == null) ? "No se puede alquilar" : value.toString());
-		}
+		setText((value == null) ? "Actualizar" : value.toString());
+		return this;
+	}
+}
+class ClientsTableButtonRendererBorrarDVD extends JButton implements TableCellRenderer {
+	
+	public ClientsTableButtonRendererBorrarDVD() {
+		setOpaque(true);
+	}
+
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+		
+		setBackground(UIManager.getColor("Button.background"));
+		setText((value == null) ? "Borrar" : value.toString());
 		return this;
 	}
 }

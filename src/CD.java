@@ -39,12 +39,11 @@ public class CD extends Articulo {
 	
 	public String actualizar() {
 		return  "UPDATE cd" + 
-			    "SET" + 
-					"idCD = " + super.getId_articulo() + "" + 
-					"titulo = \"" + super.getTitulo() + "\"," +  
-					"discografia = \"" + discografia + "\"," + 
-					"stock = " + super.getStock() + "," + 
-					"cantante = \"" + cantante + "\"," + 
+			    "SET " + 
+					" titulo = \"" + super.getTitulo() + "\"," +  
+					" discografia = \"" + discografia + "\"," + 
+					" stock = " + super.getStock() + "," + 
+					" cantante = \"" + cantante + "\" " + 
 				"WEHERE idCD = " + this.getId_articulo();
 	}
 	

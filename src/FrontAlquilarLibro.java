@@ -1,9 +1,7 @@
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -52,7 +50,7 @@ public class FrontAlquilarLibro extends JFrame{
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
 				boolean editable = false;
-				if(column == 5) {
+				if(column == 6) {
 					editable = true;
 				}
 				return editable;
@@ -65,7 +63,7 @@ public class FrontAlquilarLibro extends JFrame{
 			Conexion conexion = new Conexion();			
 			ResultSet rs = conexion.getResultSet("SELECT idLIBRO, titulo, autor, capMuestra, numPagina, stock FROM libro");
 			// Creamos las columnas.
-			modelo.addColumn("Código LIBRO");
+			modelo.addColumn("Código Libro");
 			modelo.addColumn("Título");
 			modelo.addColumn("Autor");
 			modelo.addColumn("Capítulo de muestra");
@@ -76,8 +74,8 @@ public class FrontAlquilarLibro extends JFrame{
 			// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
-				String  idlibro=rs.getString(1)
-;				String titulo = rs.getString(2);
+				String idlibro = String.valueOf(rs.getInt(1));
+				String titulo = rs.getString(2);
 				String autor = rs.getString(3);
 				String capMuestra = rs.getString(4);
 				String numPaginas = String.valueOf(rs.getInt(5));
@@ -93,7 +91,7 @@ public class FrontAlquilarLibro extends JFrame{
 		tabla = new JTable(modelo);
 		
 		tabla.getColumnModel().getColumn(6).setCellRenderer(new ClientsTableButtonRendererLibro());
-		tabla.getColumnModel().getColumn(6).setCellEditor(new ClientsTableRenderer(new JCheckBox(), tipo));
+		tabla.getColumnModel().getColumn(6).setCellEditor(new ClientsTableRendererAlquilar(new JCheckBox(), tipo));
 		
 		return tabla;
 	}
@@ -107,7 +105,12 @@ class ClientsTableButtonRendererLibro extends JButton implements TableCellRender
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
 		setBackground(UIManager.getColor("Button.background"));
-		setText((value == null) ? "Alquilar" : value.toString());
+		int stock = Integer.parseInt( table.getValueAt(row, 5).toString());
+		if(stock != 0) {
+			setText((value == null) ? "Alquilar" : value.toString());
+		}else {
+			setText((value == null) ? "No se puede alquilar" : value.toString());
+		}
 		return this;
 	}
 }

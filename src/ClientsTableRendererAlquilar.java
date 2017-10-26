@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 
-public class ClientsTableRenderer extends DefaultCellEditor {
+public class ClientsTableRendererAlquilar extends DefaultCellEditor {
 	
 	private JButton button;
 	private String label;
@@ -21,8 +21,9 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 	private JTable table;
 	private String tipoArticulo;
 	private Conexion conexion;
+	private int stock; 
 
-	public ClientsTableRenderer(JCheckBox checkBox) {
+	public ClientsTableRendererAlquilar(JCheckBox checkBox) {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
@@ -33,7 +34,7 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 		});
 	}
 
-	public ClientsTableRenderer(JCheckBox checkBox,String tipo) {
+	public ClientsTableRendererAlquilar(JCheckBox checkBox,String tipo) {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
@@ -52,8 +53,12 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 		this.row = row;
 		this.col = column;
 
+		if(tipoArticulo.equals("libro")) {
+			stock = Integer.parseInt( table.getValueAt(row, 5).toString());
+		}else {
+			stock = Integer.parseInt( table.getValueAt(row, 4).toString());
+		}
 		
-		int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
 		if(stock != 0) {
 			button.setBackground(UIManager.getColor("Button.background"));
 			label = (value == null) ? "Alquilado" : value.toString();
@@ -69,12 +74,21 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 
 	public Object getCellEditorValue() {
 		if (clicked) {
-			int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
+			if(tipoArticulo.equals("libro")) {
+				stock = Integer.parseInt( table.getValueAt(row, 5).toString());
+			}else {
+				stock = Integer.parseInt( table.getValueAt(row, 4).toString());
+			}
+			
 			if(stock == 0) {
 				JOptionPane.showMessageDialog(button,"No puede alquilar el "+ tipoArticulo.toUpperCase() + " " + table.getValueAt(row, 1) + ", están todos alquilados.");
 			}else {
 				stock--;
-				table.setValueAt((Object) stock,row, 4); 
+				if(tipoArticulo.equals("libro")) {
+					table.setValueAt((Object) stock,row, 5);
+				}else {
+					table.setValueAt((Object) stock,row, 4);
+				}
 				alquilar();
 				JOptionPane.showMessageDialog(button,
 						"Ha alquilado el "+ tipoArticulo + ": " + table.getValueAt(row, 1));
@@ -94,7 +108,11 @@ public class ClientsTableRenderer extends DefaultCellEditor {
 	}
 	
 	public void alquilar() {
-		int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
+		if(tipoArticulo.equals("libro")) {
+			stock = Integer.parseInt( table.getValueAt(row, 5).toString());
+		}else {
+			stock = Integer.parseInt( table.getValueAt(row, 4).toString());
+		}
 		conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
 	}
 }

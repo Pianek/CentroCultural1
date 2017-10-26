@@ -14,17 +14,17 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class FrontAlquilarDVD  extends JFrame{
-
+public class FrontActualizarBorrarLibro  extends JFrame{
 	Articulo articulo;
 	JPanel panelPrincipal;
 	JTable tabla;
 	JButton alquilar; 
 	
-	public FrontAlquilarDVD() {
+	public FrontActualizarBorrarLibro() {
 		this.setTitle("Panel Administrador");
 		init();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//		this.setUn decorated(true);
 		
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,39 +49,37 @@ public class FrontAlquilarDVD  extends JFrame{
 		DefaultTableModel modelo = new DefaultTableModel() {
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
-				boolean editable = false;
-				if(column == 5) {
-					editable = true;
-				}
-				return editable;
+				return true;
 			}
         };
 		
-        String tipo = "dvd";
+        String tipo = "libro";
 		
 		try {
-			Conexion conexion = new Conexion();
-			ResultSet rs = conexion.getResultSet("SELECT idDVD, titulo, director, productora, stock FROM dvd");
+			Conexion conexion = new Conexion();			
+			ResultSet rs = conexion.getResultSet("SELECT idLIBRO, titulo, autor, capMuestra, numPagina, stock FROM libro");
 			// Creamos las columnas.
-			modelo.addColumn("Código de DVD");
+			modelo.addColumn("Código Libro");
 			modelo.addColumn("Título");
-			modelo.addColumn("Director");
-			modelo.addColumn("Productora");
+			modelo.addColumn("Autor");
+			modelo.addColumn("Capítulo de muestra");
+			modelo.addColumn("Nº páginas");
 			modelo.addColumn("Stock");
-			modelo.addColumn("Opciones");
+			modelo.addColumn("");
+			modelo.addColumn("");
 			
 			// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
-				String iddvd = rs.getString(1);
+				String idlibro = String.valueOf(rs.getInt(1));
 				String titulo = rs.getString(2);
-				String director = rs.getString(3);
-				String productora = rs.getString(4);
-				String stock = String.valueOf(rs.getInt(5));
+				String autor = rs.getString(3);
+				String capMuestra = rs.getString(4);
+				String numPaginas = String.valueOf(rs.getInt(5));
+				String stock = String.valueOf(rs.getInt(6));
 				
-				modelo.addRow(new Object[] {iddvd,titulo,director,productora,stock});
+				modelo.addRow(new Object[] {idlibro,titulo,autor,capMuestra,numPaginas,stock});
 			}
-			conexion.cerrarConexion();
 		} catch (SQLException e) {
 			System.out.println("Error al crear la tabla");
 			e.printStackTrace();
@@ -89,26 +87,41 @@ public class FrontAlquilarDVD  extends JFrame{
 		
 		tabla = new JTable(modelo);
 		
-		tabla.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererDVD());
-		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRendererAlquilar(new JCheckBox(), tipo));
+		tabla.getColumnModel().getColumn(6).setCellRenderer(new ClientsTableButtonRendererActualizarLibro());
+		tabla.getColumnModel().getColumn(6).setCellEditor(new ClientsTableRendererActualizar(new JCheckBox(), tipo));
 		
+		tabla.getColumnModel().getColumn(7).setCellRenderer(new ClientsTableButtonRendererBorrarLibro());
+		tabla.getColumnModel().getColumn(7).setCellEditor(new ClientsTableRendererBorrar(new JCheckBox(), tipo));
+       	
 		return tabla;
 	}
 }
- class ClientsTableButtonRendererDVD extends JButton implements TableCellRenderer {
-	public ClientsTableButtonRendererDVD() {
+
+class ClientsTableButtonRendererActualizarLibro extends JButton implements TableCellRenderer {
+	
+	public ClientsTableButtonRendererActualizarLibro() {
 		setOpaque(true);
 	}
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
+		
 		setBackground(UIManager.getColor("Button.background"));
-		int stock = Integer.parseInt( table.getValueAt(row, 4).toString());
-		if(stock != 0) {
-			setText((value == null) ? "Alquilar" : value.toString());
-		}else {
-			setText((value == null) ? "No se puede alquilar" : value.toString());
-		}
+		setText((value == null) ? "Actualizar" : value.toString());
+		return this;
+	}
+}
+class ClientsTableButtonRendererBorrarLibro extends JButton implements TableCellRenderer {
+	
+	public ClientsTableButtonRendererBorrarLibro() {
+		setOpaque(true);
+	}
+
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+		
+		setBackground(UIManager.getColor("Button.background"));
+		setText((value == null) ? "Borrar" : value.toString());
 		return this;
 	}
 }

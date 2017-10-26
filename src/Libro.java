@@ -13,12 +13,11 @@ public class Libro extends Articulo {
 	}
 	
 	public String actualizar() {
-		return "UPDATE libro " + 
-					"SET idLibro = " + super.getId_articulo() + "," + 
-					"titulo = \"" + super.getTitulo() + "\"," + 
-					"numPagina = " + numPagina + "," + 
-					"capMuestra = \"" + capMuestra + "\"," + 
-					"stock = " + super.getStock() + 
+		return "UPDATE libro SET " + 
+					" titulo = \"" + super.getTitulo() + "\"," + 
+					" numPagina = " + numPagina + "," + 
+					" capMuestra = \"" + capMuestra + "\"," + 
+					" stock = " + super.getStock() + " " + 
 				"WHERE idLibro = " + super.getId_articulo();
 	}
 	

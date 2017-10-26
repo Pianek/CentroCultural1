@@ -30,11 +30,10 @@ public class DVD extends Articulo{
 	public String actualizar() {
 		return  "UPDATE dvd" +
 				"SET " + 
-					"idDVD = " + super.getId_articulo() + "," + 
-					"titulo = " + super.getTitulo() + "," +
-					"productora = " + this.productora + "," +
-					"director = " + this.productora + "," + 
-					"stock = " + super.getStock() + "," + 
+					" titulo = " + super.getTitulo() + "," +
+					" productora = " + this.productora + "," +
+					" director = " + this.productora + "," + 
+					" stock = " + super.getStock() + " " + 
 				"WHERE idDVD = " + super.getId_articulo();
 	}
 	
