@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 
@@ -20,6 +21,7 @@ public class FrontAdmin extends JFrame{
 	JButton bActualizar;
 	JButton bAlquilar;
 	JButton bDevolver;
+	Color colorFondo;
 
 	public FrontAdmin(){
 		this.setTitle("Panel Administrador");
@@ -78,6 +80,16 @@ public class FrontAdmin extends JFrame{
 	    panelBotones.add(bActualizar);
 	    panelBotones.add(bAlquilar);
 	    panelBotones.add(bDevolver);
+	    
+	    panelPrincipal.setBackground(colorFondo=new Color (99,193,111));
+	    panelIzquierda.setBackground(colorFondo=new Color (99,193,111));
+	    panelDerecha.setBackground(colorFondo=new Color (99,193,111));
+	    panelBotones.setBackground(colorFondo=new Color (99,193,111));
+		bCrear.setBackground(colorFondo=new Color (215,246,185));
+		bBorrar.setBackground(colorFondo=new Color (215,246,185));
+		bActualizar.setBackground(colorFondo=new Color (215,246,185));
+		bAlquilar.setBackground(colorFondo=new Color (215,246,185));
+		bDevolver.setBackground(colorFondo=new Color (215,246,185));
 			
 
 }

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Insets;
 
 import javax.swing.BoxLayout;
@@ -15,6 +16,7 @@ public class FrontLogin extends JFrame {
 	private JTextField fUsuario;
 	private JTextField fPassword;
 	private JButton aceptar;
+	private Color colorFondo;
 	
 	public FrontLogin() {
 		panel = new JPanel();
@@ -32,6 +34,8 @@ public class FrontLogin extends JFrame {
 		fPassword = new JTextField(10);
 		
 		aceptar = new JButton("Aceptar");
+		panel.setBackground(colorFondo=new Color (99,193,111));
+		aceptar.setBackground(colorFondo=new Color (215,246,185));
 		
 		add(panel);
 		panel.add(usuario);
