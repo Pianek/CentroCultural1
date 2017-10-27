@@ -270,17 +270,9 @@ public class FrontCrearArticulo  extends JFrame{
 	class crear extends MouseAdapter{//se crea una clase privada
 		public void mouseClicked(MouseEvent event){
 			//Boton de atrás
-	    	if (event.getSource()==atrasCD){
+	    	if (event.getSource()==atrasCD || event.getSource()==atrasDVD || event.getSource()==atrasLIBRO){
 	    		FrontAdmin frame = new  FrontAdmin();
 		        frame.setVisible(true);
-	        }
-	        if (event.getSource()==atrasDVD){
-	        	FrontAdmin frame = new  FrontAdmin();
-	        	frame.setVisible(true);
-	        }
-	        if (event.getSource()==atrasLIBRO){
-	        	FrontAdmin frame = new  FrontAdmin();
-	        	frame.setVisible(true);
 	        }
 	
 	        //Añadir elementos a la BBDD

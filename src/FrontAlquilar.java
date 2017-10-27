@@ -1,7 +1,9 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +15,9 @@ public class FrontAlquilar extends JFrame{
 	private JLabel lblcd;
 	private JLabel lbldvd;
 	private JLabel lbllibro;
+	private JButton atrasCD;
+	private JButton atrasDVD;
+	private JButton atrasLIBRO;
 	
 	public FrontAlquilar(){
 		
@@ -43,6 +48,11 @@ public class FrontAlquilar extends JFrame{
 		panelcd.add(cd);	
 		cd.setVisible(true);
 		
+		atrasCD  = new JButton ("Atrás");
+		atrasCD.setBounds(900, 50, 100, 25);
+		atrasCD.addMouseListener(new atras());
+		panelcd.add(atrasCD);
+		
 		panelDePestanas.addTab("CD", panelcd);
 		
 		
@@ -60,6 +70,11 @@ public class FrontAlquilar extends JFrame{
 		paneldvd.add(dvd);	
 		dvd.setVisible(true);
 	
+		atrasDVD  = new JButton ("Atrás");
+		atrasDVD.setBounds(900, 50, 100, 25);
+		atrasDVD.addMouseListener(new atras());
+		paneldvd.add(atrasDVD);
+		
 		panelDePestanas.addTab("DVD",paneldvd);
 		
 		
@@ -77,8 +92,15 @@ public class FrontAlquilar extends JFrame{
 		panelLibro.add(libro);	
 		libro.setVisible(true);
 		
-		//Diseño general
+		atrasLIBRO  = new JButton ("Atrás");
+		atrasLIBRO.setBounds(1200, 50, 100, 25);
+		atrasLIBRO.addMouseListener(new atras());
+		panelLibro.add(atrasLIBRO);
+		
 		panelDePestanas.addTab("LIBRO", panelLibro);
+		
+		
+		//Diseño general
 		panelPrincipal.add(panelDePestanas);
 		add(panelPrincipal);
 		panelPrincipal.setBackground(new Color (99,193,111));
@@ -88,6 +110,16 @@ public class FrontAlquilar extends JFrame{
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+	
+	class atras extends MouseAdapter{//se crea una clase privada
+		public void mouseClicked(MouseEvent event){
+			//Boton de atrás
+	    	if (event.getSource()==atrasCD || event.getSource()==atrasDVD || event.getSource()==atrasLIBRO){
+	    		FrontAdmin frame = new  FrontAdmin();
+		        frame.setVisible(true);
+	        }
+	    }
 	}
 }
 

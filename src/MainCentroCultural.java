@@ -16,5 +16,4 @@ public class MainCentroCultural {
 //		FrontActualizarBorrarDVD actualizarDVD = new FrontActualizarBorrarDVD();
 //		FrontActualizarBorrarLibro actualizarLibro = new FrontActualizarBorrarLibro();
 	}
-
 }
