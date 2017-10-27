@@ -53,10 +53,10 @@ public class FrontUsuario extends JFrame {
 				frame.setVisible(true);
 			}
 			
-//			if (evento.getSource() == devolver) {
-//				FrontPrestamos frame = new FrontPrestamos();
-//				frame.setVisible(true);
-//			}
+			if (evento.getSource() == devolver) {
+				FrontDevolver frame = new FrontDevolver();
+				frame.setVisible(true);
+			}
 		}
 	}
 }

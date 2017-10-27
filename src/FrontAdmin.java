@@ -99,10 +99,10 @@ public class FrontAdmin extends JFrame{
 				frame.setVisible(true);
 			}
 			
-//			if (event.getSource() == bDevolver){
-//				FrontDevolverCD frame = new FrontDevolverCD();
-//				frame.setVisible(true);
-//			}
+			if (event.getSource() == bDevolver){
+				FrontDevolver frame = new FrontDevolver();
+				frame.setVisible(true);
+			}
 		}
 	}
 }
