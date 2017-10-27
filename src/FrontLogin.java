@@ -79,7 +79,7 @@ public class FrontLogin extends JFrame {
 	    	System.out.println(permiso);
 	    	if(permiso.equalsIgnoreCase("usuario")) {
 
-//	    		panel.setVisible(true);
+	//    		panel.setVisible(true);
 //	    		FrontPrestamo prestamo = new FrontPrestamo();
 //	    		prestamo.setVisible(true);
 	    		

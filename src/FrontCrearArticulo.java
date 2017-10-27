@@ -23,14 +23,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 	import javax.swing.border.EmptyBorder;
 
-	public class FrontArticulo  extends JFrame{
+	public class FrontCrearArticulo  extends JFrame{
 		private JPanel  panelPrincipal;	
 		private JLabel background;
 		private BorderLayout fondoEntero;
 		private Color colorFondo;
 		private String tipoArticulo;
-		private Conexion conexion;
-		
+		private Conexion conexion;		
 		private ImageIcon iconoCD;
 		private ImageIcon iconoDVD;
 		private ImageIcon iconoLibro;
@@ -56,7 +55,7 @@ import javax.swing.JTextField;
 		
 		
 
-		public FrontArticulo(){			
+		public FrontCrearArticulo(){			
 			
 			conexion= new Conexion();
 			iconoCD = new ImageIcon("iconos\\iconoCD.png");
@@ -140,12 +139,7 @@ import javax.swing.JTextField;
 			atrasCD.addMouseListener(new crear());
 			panelcd.add(atrasCD);
 						
-			panelDePestanas.addTab("CD", panelcd);
-		
-		
-			
-			
-			
+			panelDePestanas.addTab("CD", panelcd);			
 				
 			
 			//segunda pestaña
