@@ -20,7 +20,7 @@ public class DVD extends Articulo{
 	
 	public String borrar() {
 		return "DELETE FROM dvd "+
-		"WHERE idDVD="+super.getId_articulo()+";";
+		"WHERE idDVD ="+super.getId_articulo()+";";
 	}
 
 	public String buscar() {

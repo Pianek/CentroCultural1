@@ -29,7 +29,7 @@ public class CD extends Articulo {
 	}
 	
 	public String borrar() {
-		return "DELETE FROM cd" + 	
+		return "DELETE FROM cd " + 	
 				"WHERE idCD="+super.getId_articulo()+";";
 	}
 	

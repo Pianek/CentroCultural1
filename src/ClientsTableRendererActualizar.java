@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -81,7 +82,7 @@ public class ClientsTableRendererActualizar extends DefaultCellEditor {
 //			int id, String ti, int stock,   String cantante, String discografia
 			CD cd = new CD(Integer.parseInt(table.getValueAt(row, 0).toString()), table.getValueAt(row, 1).toString(),Integer.parseInt(table.getValueAt(row, 4).toString()),
 					table.getValueAt(row, 2).toString(), table.getValueAt(row, 3).toString());
-			System.out.println(cd.actualizar());
+//			System.out.println(cd.actualizar());
 			conexion.ejecutarSentencia(cd.actualizar());
 		}else if(tipoArticulo.equals("dvd")){
 //			int id, String titulo, int stock, String prod, String dire
