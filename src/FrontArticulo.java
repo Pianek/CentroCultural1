@@ -7,15 +7,20 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 	import javax.swing.JFrame;
 	import javax.swing.JLabel;
-	import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 	import javax.swing.JTabbedPane;
-	import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 	import javax.swing.border.EmptyBorder;
 
 	public class FrontArticulo  extends JFrame{
@@ -23,31 +28,41 @@ import javax.swing.JButton;
 		private JLabel background;
 		private BorderLayout fondoEntero;
 		private Color colorFondo;
+		private String tipoArticulo;
+		private Conexion conexion;
 		
 		private ImageIcon iconoCD;
 		private ImageIcon iconoDVD;
 		private ImageIcon iconoLibro;
+		private JButton anadirCD;
+		private JButton anadirDVD;
+		private JButton anadirLIBRO;
+		private JTextField textoTituloCD;
+		private JTextField textoDiscografia;
+		private JTextField textoStock;
+		private JTextField textoCantante;
+		private JTextField TextoTitulo;
+		private JTextField TextoDirector;
+		private JTextField TextoProductor;
+		private JTextField TextoStockDVD;
+		private JTextField textoTituloLibro;
+		private JTextField textoAutor;	
+		private JTextArea textoCapMuestra;
+		private JTextField textoNumPag;
+		private JTextField textoStockLibro;
+		
+		
 
-		public FrontArticulo(){
-				
+		public FrontArticulo(){			
 			
-			
+			conexion= new Conexion();
 			iconoCD = new ImageIcon("iconos\\iconoCD.png");
 			iconoDVD = new ImageIcon("iconos\\iconoDVD.png");
 			iconoLibro = new ImageIcon("iconos\\iconoLibro.png");
-			
+						
 			this.setTitle("Selecciona tu artículo");
-			this.setSize(1000,500);
-			init();
-			setVisible(true);
-			this.setLocationRelativeTo(null);   
-			this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-			BorderLayout fondoEntero= new BorderLayout();
-			setResizable(false);
-			setDefaultCloseOperation(EXIT_ON_CLOSE);
-			
-		}
-		public void init() {
+			this.setSize(1000,500);		
+	
 			
 						
 			//posiciono el JPanel
@@ -61,40 +76,29 @@ import javax.swing.JButton;
 			JTabbedPane panelDePestanas = new JTabbedPane();
 				
 			 
-			//primera pestaña
+			//primera pestaña CD
 			JPanel panelcd = new JPanel();				
 			panelcd.setLayout(null);
 			
-			//Elementos de la pestaña de cd
+			//Elementos de la pestaña de CD
 			
 			JLabel lblcd = new JLabel();						
 			lblcd.setBounds(10, 20, 10, 10);
-			panelcd.setBackground(colorFondo=new Color (215,246,185));
-			
+			panelcd.setBackground(colorFondo=new Color (215,246,185));			
 			
 			JLabel iconocd = new JLabel();
 			iconocd.setBounds(100, 30, 250, 250);
-			iconocd.setIcon(iconoCD);
-			
+			iconocd.setIcon(iconoCD);			
 			panelcd.add(lblcd);
 			panelcd.add(iconocd);
 			
-			
-			
-//			JLabel idCD = new JLabel(" idCD");
-//			idCD.setBounds(620, 18, 50, 50);
-//			panelcd.add(idCD);
-	//	
-//			
-//			JTextField textoId = new JTextField(10);
-//			textoId.setBounds(545,53,200,25);
-//			panelcd.add(textoId);
-//			
+					
 			JLabel tituloCD = new JLabel("Título");
 			tituloCD.setBounds(620, 68, 100, 50);	;
 			panelcd.add(tituloCD);
 			
-			JTextField  textoTituloCD= new JTextField(10);
+			textoTituloCD= new JTextField(10);
+			
 			textoTituloCD.setBounds(545, 103, 200, 25);	
 			panelcd.add(textoTituloCD);	
 
@@ -103,7 +107,7 @@ import javax.swing.JButton;
 			discografia.setBounds(610,118,100,50);
 			panelcd.add(discografia);
 			
-			JTextField textoDiscografia = new JTextField(10);
+			textoDiscografia = new JTextField(10);
 			textoDiscografia.setBounds(545,153,200,25);
 			panelcd.add(textoDiscografia);
 			
@@ -111,7 +115,7 @@ import javax.swing.JButton;
 			stockCD.setBounds(620,168,50,50);
 			panelcd.add(stockCD);
 			
-			JTextField textoStock = new JTextField(10);
+			textoStock = new JTextField(10);
 			textoStock.setBounds(545,203,200,25);
 			panelcd.add(textoStock);
 			
@@ -119,16 +123,18 @@ import javax.swing.JButton;
 			cantante.setBounds(620,218,90,50);
 			panelcd.add(cantante);
 			
-			JTextField textoCantante = new JTextField(10);
+			textoCantante = new JTextField(10);
 			textoCantante.setBounds(545,253,200,25);
 			panelcd.add(textoCantante);
 			
-			JButton anadirCD = new JButton("Añadir");
+			anadirCD = new JButton("Añadir");
 			anadirCD.setBounds(600,283,100,20);
+			anadirCD.addMouseListener(new crear());
 			panelcd.add(anadirCD);
-			
-			
+						
 			panelDePestanas.addTab("CD", panelcd);
+		
+		
 			
 			
 			
@@ -156,7 +162,7 @@ import javax.swing.JButton;
 			tituloDVD.setBounds(600, 5, 200,200);
 			paneldvd.add(tituloDVD);
 			
-			JTextField TextoTitulo = new JTextField(10);
+			TextoTitulo = new JTextField(10);
 			TextoTitulo.setBounds(545, 113,200,25);
 			paneldvd.add(TextoTitulo);
 			
@@ -165,7 +171,7 @@ import javax.swing.JButton;
 			director.setBounds(615, 125, 100,50);
 			paneldvd.add(director);
 			
-			JTextField TextoDirector = new JTextField(10);
+			TextoDirector = new JTextField(10);
 			TextoDirector.setBounds(545,160,200,25 );
 			paneldvd.add(TextoDirector);
 			
@@ -173,7 +179,7 @@ import javax.swing.JButton;
 			productor.setBounds(615, 147, 100,100);
 			paneldvd.add(productor);
 			
-			JTextField TextoProductor = new JTextField(10);
+			TextoProductor = new JTextField(10);
 			TextoProductor.setBounds(545,205,200,25 );
 			paneldvd.add(TextoProductor);
 			
@@ -181,14 +187,15 @@ import javax.swing.JButton;
 			stockDVD.setBounds(625,218,90,50);
 			paneldvd.add(stockDVD);
 			
-			JTextField TextoStock = new JTextField(10);
-			TextoStock.setBounds(545,253,200,25);
-			paneldvd.add(TextoStock);
+			TextoStockDVD = new JTextField(10);
+			TextoStockDVD.setBounds(545,253,200,25);
+			paneldvd.add(TextoStockDVD);
 				
 		
-			JButton anadir = new JButton("Añadir");
-			anadir.setBounds(600,283,100,20);
-			paneldvd.add(anadir);
+			anadirDVD = new JButton("Añadir");
+			anadirDVD.setBounds(600,283,100,20);
+			anadirDVD.addMouseListener(new crear());
+			paneldvd.add(anadirDVD);
 			
 			
 			panelDePestanas.addTab("DVD",paneldvd);
@@ -217,7 +224,7 @@ import javax.swing.JButton;
 			tituloLibro.setBounds(620, 45, 50, 50);	;
 			panelLibro.add(tituloLibro);
 			
-			JTextField  textoTituloLibro= new JTextField(10);
+			textoTituloLibro= new JTextField(10);
 			textoTituloLibro.setBounds(545, 80, 200, 25);	
 			panelLibro.add(textoTituloLibro);	
 			panelLibro.setBackground(colorFondo=new Color (215,246,185));
@@ -227,7 +234,7 @@ import javax.swing.JButton;
 			autor.setBounds(620,100,100,50);
 			panelLibro.add(autor);
 			
-			JTextField textoAutor = new JTextField(10);
+			textoAutor = new JTextField(10);
 			textoAutor.setBounds(545,133,200,25);
 			panelLibro.add(textoAutor);
 			
@@ -236,7 +243,8 @@ import javax.swing.JButton;
 			capMuestra.setBounds(850,45,120,100);
 			panelLibro.add(capMuestra);
 			
-			JTextField textoCapMuestra = new JTextField(10);
+			textoCapMuestra = new JTextArea();
+			textoCapMuestra.setLineWrap(true);
 			textoCapMuestra.setBounds(830,120,250,150);
 			panelLibro.add(textoCapMuestra);
 			
@@ -244,7 +252,7 @@ import javax.swing.JButton;
 			numPag.setBounds(600,125,100,100);
 			panelLibro.add(numPag);
 			
-			JTextField textoNumPag = new JTextField(10);
+			textoNumPag = new JTextField(10);
 			textoNumPag.setBounds(545,185,200,25);
 			panelLibro.add(textoNumPag);
 			
@@ -252,13 +260,14 @@ import javax.swing.JButton;
 			stockLibro.setBounds(620,195,50,50);
 			panelLibro.add(stockLibro);
 			
-			JTextField textoStockLibro = new JTextField(10);
+			textoStockLibro = new JTextField(10);
 			textoStockLibro.setBounds(545,235,200,25);
 			panelLibro.add(textoStockLibro);	
 			
 			
-			JButton anadirLIBRO = new JButton("Añadir");
+			anadirLIBRO = new JButton("Añadir");
 			anadirLIBRO.setBounds(600,270,100,20);
+			anadirLIBRO.addMouseListener(new crear());
 			panelLibro.add(anadirLIBRO);
 			
 			
@@ -268,9 +277,54 @@ import javax.swing.JButton;
 			
 			add(panelPrincipal);
 			panelPrincipal.setBackground(colorFondo=new Color (99,193,111));
-		
+			 
+			
+				setVisible(true);
+				this.setLocationRelativeTo(null);   
+				this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				BorderLayout fondoEntero= new BorderLayout();
+				setResizable(false);
+				setDefaultCloseOperation(EXIT_ON_CLOSE);
 			
 		}
 		
+
+		 class crear extends MouseAdapter{//se crea una clase privada
+		       public void mouseClicked(MouseEvent event){
+		           boolean valido= (true);
+		           if(event.getSource()==anadirCD){		        	 
+		        	  CD cd = new CD(textoTituloCD.getText(), Integer.parseInt(textoStock.getText()), textoCantante.getText(), textoDiscografia.getText());
+		        	  valido=conexion.ejecutarSentencia(cd.crear());
+		        	  if (valido) {
+		        		  JOptionPane.showMessageDialog(anadirCD, "Se ha creado con exito");
+		        	  }else {
+		        		  JOptionPane.showMessageDialog(anadirCD, "No se ha podido crear");
+		        	  }
+		        	  
+		           }
+		             if(event.getSource()==anadirDVD){
+		              DVD dvd= new DVD(TextoTitulo.getText(),TextoDirector.getText(),TextoProductor.getText(),Integer.parseInt(TextoStockDVD.getText())); 
+		              valido=conexion.ejecutarSentencia(dvd.crear());
+		              if (valido) {
+		        		  JOptionPane.showMessageDialog(anadirDVD, "Se ha creado con exito");
+		        	  }else {
+		        		  JOptionPane.showMessageDialog(anadirDVD, "No se ha podido crear");
+		        	  }
+		           }
+		               if(event.getSource()==anadirLIBRO){
+		             Libro libro= new Libro(textoTituloLibro.getText(),textoAutor.getText(),textoCapMuestra.getText(),Integer.parseInt(textoNumPag.getText()),Integer.parseInt(textoStockLibro.getText())); 
+				        System.out.println(libro.crear());   
+				        valido=conexion.ejecutarSentencia(libro.crear());
+				        if (valido) {
+			        		  JOptionPane.showMessageDialog(anadirLIBRO, "Se ha creado con exito");
+			        	  }else {
+			        		  JOptionPane.showMessageDialog(anadirLIBRO, "No se ha podido crear");
+			        	  }
+		           }
 	
-	}
+	       	}
+		      
+			}
+		
+	
+   }

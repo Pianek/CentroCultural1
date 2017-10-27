@@ -12,6 +12,17 @@ public class Libro extends Articulo {
 		this.capMuestra=cap;
 	}
 	
+	public Libro(String titulo, String autor, String capMuestra, int numPagina, int stock) {
+		super(titulo,stock);
+		this.autor=autor;
+		this.capMuestra=capMuestra;
+		this.numPagina=numPagina;
+		
+		
+		
+		// TODO Auto-generated constructor stub
+	}
+
 	public String actualizar() {
 		return "UPDATE libro SET " + 
 					" titulo = \"" + super.getTitulo() + "\"," + 
@@ -28,9 +39,9 @@ public class Libro extends Articulo {
 	
 	public String crear() {
 		return "INSERT INTO libro " + 
-					"(idLibro, titulo, numPagina, capMuestra, stock)" + 
+					"(idLibro, titulo, autor,numPagina, capMuestra, stock)" + 
 				"VALUES " +
-					"(" + super.getId_articulo()+",\""+ super.getTitulo() +"\","+ numPagina +",\""+ capMuestra +"\","+ super.getStock() +");";
+					"(" + super.getId_articulo()+",\""+ super.getTitulo() +"\",\""+autor+"\","+ numPagina +",\""+ capMuestra +"\","+ super.getStock() +");";
 	}
 	
 	public String buscar() {

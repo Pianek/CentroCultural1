@@ -11,7 +11,11 @@ public class CD extends Articulo {
 		this.cantante = cantante;
 		this.discografia = discografia;
 	}
-	
+	public CD (String titulo, int stock, String cantante, String discografia) {
+		super(titulo, stock);
+		this.cantante = cantante;
+		this.discografia = discografia;
+	}
 	public String getCantante() {
 		return cantante;
 	}
@@ -48,8 +52,9 @@ public class CD extends Articulo {
 	}
 	
 	public String crear() {
-		return "INSERT INTO cd (idCD, titulo, discografia, stock, cantante)" +
-				"VALUES (" + super.getId_articulo() + ",\""+super.getTitulo()+",\""+ discografia+ ",\""+super.getStock()+",\""+ cantante+",\")";
+		return "INSERT INTO cd ( titulo, discografia, stock, cantante)" +
+				"VALUES ('"+super.getTitulo()+"','"+ discografia + "',"+super.getStock()+",'"+ cantante +"')";
+				
 	}
 
 }
