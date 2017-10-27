@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -17,7 +18,7 @@ public class FrontLogin extends JFrame {
 	private JLabel usuario;
 	private JLabel password;
 	private JTextField fUsuario;
-	private JTextField fPassword;
+	private JPasswordField fPassword;
 	private JButton aceptar;
 	private Conexion conexion;
 	
@@ -51,7 +52,8 @@ public class FrontLogin extends JFrame {
 		fUsuario.setBounds(100, 10, 100, 100);
 		
 		password = new JLabel("Contraseña");
-		fPassword = new JTextField(10);
+		fPassword = new JPasswordField(10);
+		fPassword.setEchoChar('*');
 		fPassword.setBounds(100, 10, 100, 100);
 		
 		aceptar = new JButton("Aceptar");
