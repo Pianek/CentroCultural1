@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultCellEditor;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -60,7 +61,7 @@ public class ClientsTableRendererActualizar extends DefaultCellEditor {
 		if (clicked) {
 			actualizar();
 			JOptionPane.showMessageDialog(button,"Actualizado con éxito el " +
-					tipoArticulo.toUpperCase() + " con código " + table.getValueAt(row, 1));
+					tipoArticulo.toUpperCase() + " con código " + table.getValueAt(row, 0));
 		}
 		clicked = false;
 		return new String(label);

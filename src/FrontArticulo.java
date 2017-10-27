@@ -32,9 +32,9 @@ import javax.swing.JButton;
 				
 			
 			
-			iconoCD =new ImageIcon("iconos\\iconoCD.png");
-			iconoDVD =new ImageIcon("iconos\\iconoDVD.png");
-			iconoLibro =new ImageIcon("iconos\\iconoLibro.png");
+			iconoCD = new ImageIcon("iconos\\iconoCD.png");
+			iconoDVD = new ImageIcon("iconos\\iconoDVD.png");
+			iconoLibro = new ImageIcon("iconos\\iconoLibro.png");
 			
 			this.setTitle("Selecciona tu artículo");
 			this.setSize(1000,500);

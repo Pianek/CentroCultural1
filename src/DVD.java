@@ -12,14 +12,14 @@ public class DVD extends Articulo{
 	
 	
 	public String crear() {
-		return "INSERT INTO dvd (idDVD,titulo, productora, director, stock)" + 
+		return "INSERT INTO dvd (idDVD,titulo, productora, director, stock) " + 
 		"VALUES (" + super.getId_articulo() + ",\"" + super.getTitulo() + "\", \""
 				+ this.productora + "\",\"" + this.director + "\"," + super.getStock() + ")";
 
 	}
 	
 	public String borrar() {
-		return "DELETE FROM dvd"+
+		return "DELETE FROM dvd "+
 		"WHERE idDVD="+super.getId_articulo()+";";
 	}
 
@@ -28,7 +28,7 @@ public class DVD extends Articulo{
 	}
 	
 	public String actualizar() {
-		return  "UPDATE dvd" +
+		return  "UPDATE dvd " +
 				"SET " + 
 					" titulo = " + super.getTitulo() + "," +
 					" productora = " + this.productora + "," +

@@ -38,13 +38,13 @@ public class CD extends Articulo {
 	}
 	
 	public String actualizar() {
-		return  "UPDATE cd" + 
+		return  "UPDATE cd " + 
 			    "SET " + 
 					" titulo = \"" + super.getTitulo() + "\"," +  
 					" discografia = \"" + discografia + "\"," + 
 					" stock = " + super.getStock() + "," + 
 					" cantante = \"" + cantante + "\" " + 
-				"WEHERE idCD = " + this.getId_articulo();
+				"WHERE idCD = " + this.getId_articulo();
 	}
 	
 	public String crear() {

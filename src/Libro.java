@@ -22,12 +22,12 @@ public class Libro extends Articulo {
 	}
 	
 	public String borrar() {
-		return "DELETE FROM libro" + 
+		return "DELETE FROM libro " + 
 				"WHERE idLibro = " + super.getId_articulo();
 	}
 	
 	public String crear() {
-		return "INSERT INTO libro" + 
+		return "INSERT INTO libro " + 
 					"(idLibro, titulo, numPagina, capMuestra, stock)" + 
 				"VALUES " +
 					"(" + super.getId_articulo()+",\""+ super.getTitulo() +"\","+ numPagina +",\""+ capMuestra +"\","+ super.getStock() +");";

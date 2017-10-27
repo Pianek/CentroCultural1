@@ -59,8 +59,8 @@ public class ClientsTableRendererBorrar extends DefaultCellEditor {
 	public Object getCellEditorValue() {
 		if (clicked) {
 			borrar();
-			JOptionPane.showMessageDialog(button,"Actualizado con éxito el " +
-					tipoArticulo.toUpperCase() + " con código " + table.getValueAt(row, 1));
+			JOptionPane.showMessageDialog(button,"Borrado con éxito el " +
+					tipoArticulo.toUpperCase() + " con código " + table.getValueAt(row, 0));
 		}
 		clicked = false;
 		return new String(label);
