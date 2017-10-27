@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -5,6 +6,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -18,14 +20,11 @@ public class FrontActualizarBorrarCD extends JPanel{
 	
 	public FrontActualizarBorrarCD() {
 		alquilar = new JButton();
-		
 		tabla = rellenarTabla();
-		((DefaultTableModel) tabla.getModel()).fireTableDataChanged();
+		this.add(new JScrollPane(tabla));
+		tabla.setBackground(new Color (215,246,185));
+		alquilar.setBackground(new Color (215,246,185));
 	}
-		
-//		panelPrincipal.add(new JScrollPane(tabla));
-
-//		getContentPane().add(panelPrincipal);
 	
 	public JTable rellenarTabla() {
 		DefaultTableModel modelo = new DefaultTableModel() {

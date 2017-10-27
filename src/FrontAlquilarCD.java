@@ -1,56 +1,31 @@
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class FrontAlquilarCD extends JFrame{
+public class FrontAlquilarCD extends JPanel{
 
 	Articulo articulo;
-	JPanel panelPrincipal;
 	JTable tabla;
 	JButton alquilar;
-	Color colorFondo;
 	
 	public FrontAlquilarCD() {
-		this.setTitle("Panel Administrador");
-		init();
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		alquilar = new JButton();
+		tabla = rellenarTabla();
+		this.add(new JScrollPane(tabla));
+		tabla.setBackground(new Color (215,246,185));
+		alquilar.setBackground(new Color (215,246,185));
 	}
 	
-	public void init() {
-		panelPrincipal = new JPanel();
-		/*AQUI LAS COORDENADAS PARA SITUARLO EN LAS PESTAÑAS*/
-		panelPrincipal.setBorder(new EmptyBorder(100,100,50,100));
-		panelPrincipal.setLayout(new GridLayout(2,2,10,30));
-		
-		
-		alquilar = new JButton();
-		
-		tabla = rellenarTabla();
-		
-		
-		panelPrincipal.add(new JScrollPane(tabla));
-
-		getContentPane().add(panelPrincipal);
-		panelPrincipal.setBackground(colorFondo=new Color (99,193,111));
-		tabla.setBackground(colorFondo=new Color (215,246,185));
-		alquilar.setBackground(colorFondo=new Color (215,246,185));
-	}
 	
 	public JTable rellenarTabla() {
 		DefaultTableModel modelo = new DefaultTableModel() {
