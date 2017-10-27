@@ -9,7 +9,8 @@ public class MainCentroCultural {
 //		FrontLogin login = new FrontLogin(); 
 		//FrontArticulo articulo = new FrontArticulo();
 		//FrontAlquilar  alquilar= new FrontAlquilar();
-		FrontActualizarBorrar AB = new FrontActualizarBorrar();
+		//FrontActualizarBorrar AB = new FrontActualizarBorrar();
+		FrontDevolver dv= new FrontDevolver();
 
 		//FrontLogin login = new FrontLogin(); 
 //		FrontArticulo articulo = new FrontArticulo();
