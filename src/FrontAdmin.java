@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -114,7 +115,30 @@ public class FrontAdmin extends JFrame{
 				FrontArticulo frame = new FrontArticulo();
 				frame.setVisible(true);
 			}
+			//Se necesita modificar
+			if (event.getSource() == bBorrar){
+				FrontActualizarBorrarCD frame = new FrontActualizarBorrarCD();
+				frame.setVisible(true);
+			}
+			//Se necesita modificar
+			if (event.getSource() == bBorrar){
+				FrontActualizarBorrarDVD frame = new FrontActualizarBorrarDVD();
+				frame.setVisible(true);
+			}
+			if (event.getSource() == bAlquilar){
+				FrontAlquilarCD frame = new FrontAlquilarCD();
+				frame.setVisible(true);
+			}
+//			if (event.getSource() == bDevolver){
+//				FrontDevolverCD frame = new FrontDevolverCD();
+//				frame.setVisible(true);
+//			}
+			
 		}
+	
 	}
+
+	      
+
 
 }

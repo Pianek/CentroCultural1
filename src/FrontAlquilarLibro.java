@@ -3,7 +3,6 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
