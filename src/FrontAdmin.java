@@ -13,9 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
-
-
 // Falta diseño  del panel
 public class FrontAdmin extends JFrame{
 	JPanel panelPrincipal;	
@@ -38,9 +35,9 @@ public class FrontAdmin extends JFrame{
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 	}
-	//Método que se utilizada para colocar botones por coordenadas
-//	GridBagConstraints restricciones = new GridBagConstraints();
-//    setLayout(new GridBagLayout());
+//		Método que se utilizada para colocar botones por coordenadas
+//		GridBagConstraints restricciones = new GridBagConstraints();
+//    	setLayout(new GridBagLayout());
        
 	public void init(){	
 	   panelPrincipal = new JPanel();
@@ -137,8 +134,4 @@ public class FrontAdmin extends JFrame{
 		}
 	
 	}
-
-	      
-
-
 }

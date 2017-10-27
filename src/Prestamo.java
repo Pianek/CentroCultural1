@@ -17,49 +17,33 @@ public class Prestamo {
 		fecha_devolucion = devolucion;
 	}
 	
-	
-	
 	public int getIdPrestamo() {
 		return id_prestamo;
 	}
-
-
 
 	public void setIdPrestamo(int id_prestamo) {
 		this.id_prestamo = id_prestamo;
 	}
 
-
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
-
-
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-
-
 	public String getFechaReserva() {
 		return fecha_reserva;
 	}
-
-
 
 	public void setFechaReserva(String fecha_reserva) {
 		this.fecha_reserva = fecha_reserva;
 	}
 
-
-
 	public String getFechaDevolucion() {
 		return fecha_devolucion;
 	}
-
-
 
 	public void setFechaDevolucion(String fecha_devolucion) {
 		this.fecha_devolucion = fecha_devolucion;
@@ -75,8 +59,6 @@ public class Prestamo {
 								 	  "AND Usuario_idUsuario = " + usuario.getIdUsuario());
 		if(rs != null) {
 			try {
-				/*res.next() coge los valores de la primera fila
-				 *this.setIdPrestamo(rs.getInt("1")); nos coge el primer valor de la primera fila*/
 				rs.next();
 				id=rs.getInt("1");
 			} catch (SQLException e) {
@@ -100,11 +82,9 @@ public class Prestamo {
 		
 	}
 	
-	
 	public String buscar() {
 		return "SELECT idPrestamo, fechaPrestamo,fechaDevolucion, Usuario_idUsuario FROM prestamo";
 	}
-	
 
 	public String actualizarStock() {
 		return "UPDATE " + articulo.getTipo() + "SET stock = " + articulo.getStock() + "WHERE id" + articulo.getTipo().toUpperCase() + " = " + articulo.getId_articulo();
@@ -128,5 +108,4 @@ public class Prestamo {
 				+ " Prestamo_idPrestamo = " + this.id_prestamo 
 				+" Prestamo_Usuario_idUsuario = " + this.usuario.getIdUsuario();
 	}
-	
 }

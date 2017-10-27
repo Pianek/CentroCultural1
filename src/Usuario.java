@@ -39,5 +39,4 @@ public class Usuario {
 			 + "FROM usuario "
 			 + "WHERE Nombre = \"" + nombre + "\" AND password = \"" + password + "\"";
 	}
-
 }

@@ -17,10 +17,6 @@ public class Libro extends Articulo {
 		this.autor=autor;
 		this.capMuestra=capMuestra;
 		this.numPagina=numPagina;
-		
-		
-		
-		// TODO Auto-generated constructor stub
 	}
 
 	public String actualizar() {

@@ -1,29 +1,25 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.border.EmptyBorder;
 
-
-	import java.awt.BorderLayout;
-	import java.awt.Color;
-	import java.awt.GridLayout;
-
-	import javax.swing.ImageIcon;
-	import javax.swing.JFrame;
-	import javax.swing.JLabel;
-	import javax.swing.JPanel;
-	import javax.swing.JTabbedPane;
-	import javax.swing.border.EmptyBorder;
-
-	public class FrontActualizarBorrar  extends JFrame{
-		private JPanel panelPrincipal;	
-		private JLabel background;
-		private BorderLayout fondoEntero;
-		private Color colorFondo;
-		private String tipoArticulo;
-		private JLabel  lblcd;
-		private JLabel lbldvd;
-		private JLabel lbllibro;
-		//private Conexion conexion;
-		
-
+public class FrontActualizarBorrar  extends JFrame{
+	private JPanel panelPrincipal;	
+	private JLabel background;
+	private BorderLayout fondoEntero;
+	private Color colorFondo;
+	private String tipoArticulo;
+	private JLabel  lblcd;
+	private JLabel lbldvd;
+	private JLabel lbllibro;
+	//private Conexion conexion;
+	
 	public FrontActualizarBorrar(){
 		//conexion= new Conexion();
 		
@@ -46,11 +42,14 @@
 		//Elementos de la pestaña de CD	
 		lblcd = new JLabel();						
 		lblcd.setBounds(10, 20, 150, 150);
-		panelcd.setBackground(colorFondo=new Color (215,246,185));				
+		panelcd.setBackground(colorFondo=new Color (215,246,185));
+		panelcd.setBounds(10, 10, 500, 500);
+		panelcd.setBorder(new EmptyBorder(100,100,50,100));
 		panelcd.add(lblcd);
 		
 		FrontActualizarBorrarCD  cd=  new FrontActualizarBorrarCD();
 		cd.setBounds(10, 10, 500, 500);
+		cd.setLayout(new GridLayout(2,2,100,300));
 		panelcd.add(cd);	
 		cd.setVisible(true);
 		
@@ -105,4 +104,4 @@
 	}
 		
 
-	}
+}

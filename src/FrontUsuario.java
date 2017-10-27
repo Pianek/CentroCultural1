@@ -8,15 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-//import com.sun.glass.events.MouseEvent;
-
-//import FrontAdmin.MiClick;
-
 public class FrontUsuario extends JFrame {
 	private JPanel panel;
 	private JButton alquilar;
 	private JButton devolver;
-	private Color colorFondo;
 	
 	public FrontUsuario() {
 		this.setTitle("Panel usuario");
@@ -30,7 +25,7 @@ public class FrontUsuario extends JFrame {
 	public void init() {	
 		panel = new JPanel();
 		GridLayout grid = new GridLayout();
-		panel.setBackground(colorFondo=new Color (99,193,111));
+		panel.setBackground(new Color (99,193,111));
 		panel.setLayout(grid);
 		grid.setHgap(50);
 		panel.setBorder(new EmptyBorder(350,400,350,400));
@@ -38,13 +33,13 @@ public class FrontUsuario extends JFrame {
 		
 		alquilar = new JButton("Alquilar");
 		alquilar.setFont(new Font("Arial", Font.PLAIN, 40));
-		alquilar.setBackground(colorFondo=new Color (215,246,185));
+		alquilar.setBackground(new Color (215,246,185));
 		alquilar.addMouseListener(new Click());
 		panel.add(alquilar);
 		
 		devolver = new JButton("Devolver");
 		devolver.setFont(new Font("Arial", Font.PLAIN, 40));
-		devolver.setBackground(colorFondo=new Color (215,246,185));
+		devolver.setBackground(new Color (215,246,185));
 		devolver.addMouseListener(new Click());
 		panel.add(devolver);
 	}
@@ -57,10 +52,6 @@ public class FrontUsuario extends JFrame {
 				FrontAlquilarCD frame = new FrontAlquilarCD();
 				frame.setVisible(true);
 			}
-//			if (event.getSource() == devolver){
-//			FrontDevolverCD frame = new FrontDevolverCD();
-//			frame.setVisible(true);
-//		}
 		}
 	}
 }

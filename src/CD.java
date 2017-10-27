@@ -56,5 +56,4 @@ public class CD extends Articulo {
 				"VALUES ('"+super.getTitulo()+"','"+ discografia + "',"+super.getStock()+",'"+ cantante +"')";
 				
 	}
-
 }

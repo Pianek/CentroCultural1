@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -21,6 +22,7 @@ public class FrontAlquilarCD extends JPanel{
 	public FrontAlquilarCD() {
 		alquilar = new JButton();
 		tabla = rellenarTabla();
+		tabla.setBorder(new EmptyBorder(100,100,50,50));
 		this.add(new JScrollPane(tabla));
 		tabla.setBackground(new Color (215,246,185));
 		alquilar.setBackground(new Color (215,246,185));

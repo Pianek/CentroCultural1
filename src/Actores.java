@@ -18,14 +18,10 @@ public class Actores {
 		return id_actor;
 	}
 	
-
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
-	
 }
