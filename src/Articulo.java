@@ -11,6 +11,10 @@ public class Articulo {
 		this.stock=stock;
 		this.tipo = "";
 	}
+	public Articulo(String titulo, int stock) {
+		this.titulo=titulo;
+		this.stock=stock;
+	}
 	
 	public String getTipo() {
 		String aux = "";

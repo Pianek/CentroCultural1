@@ -6,10 +6,10 @@ public class Usuario {
 	private String password;
 	private String permisos;
 	
-	public Usuario(String nombre, String password, String permisos) {
+	public Usuario(String nombre, String password) {
 		this.nombre = nombre;
 		this.password = password;
-		this.permisos = permisos;
+		this.permisos = "ninguno";
 	}
 	
 	public String getNombre() {
@@ -33,6 +33,11 @@ public class Usuario {
 	public int getIdUsuario() {
 		return idUsuario;
 	}
-	
+
+	public String buscarUsuario() {
+		return "SELECT idUsuario, Nombre, password, permisos "
+			 + "FROM usuario "
+			 + "WHERE Nombre = \"" + nombre + "\" AND password = \"" + password + "\"";
+	}
 
 }

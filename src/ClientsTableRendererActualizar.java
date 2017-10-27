@@ -96,4 +96,6 @@ public class ClientsTableRendererActualizar extends DefaultCellEditor {
 			conexion.ejecutarSentencia(libro.actualizar());
 		}
 	}
+	
+	
 }
