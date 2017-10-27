@@ -1,13 +1,18 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-import com.sun.glass.events.MouseEvent;
+
 
 
 // Falta diseño  del panel
@@ -29,6 +34,7 @@ public class FrontAdmin extends JFrame{
 		init();
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 	}
 	//Método que se utilizada para colocar botones por coordenadas
@@ -37,7 +43,8 @@ public class FrontAdmin extends JFrame{
        
 	public void init(){	
 	   panelPrincipal = new JPanel();
-       panelPrincipal.setLayout(new BorderLayout());
+	   panelPrincipal.setLayout(new BorderLayout());
+       panelPrincipal.setBorder(new EmptyBorder(new Insets(300, 450, 300, 450)));
        
        panelBotones = new JPanel();
        panelIzquierda = new JPanel();
@@ -51,7 +58,8 @@ public class FrontAdmin extends JFrame{
        
      		
 		bCrear= new  JButton("Crear");
-		bCrear.addMouseListener(new Click());
+		bCrear.setFont(new Font("Arial", Font.PLAIN, 40));
+		bCrear.addMouseListener(new MiClick());
 		
 //		restricciones para poner botones con coordenadas
 //		restricciones.gridx = 0;
@@ -61,18 +69,22 @@ public class FrontAdmin extends JFrame{
 //		this.getContentPane().add(bCrear, restricciones);
 		
 		bBorrar= new  JButton("Borrar");
-		bBorrar.addMouseListener(new Click());
+		bBorrar.setFont(new Font("Arial", Font.PLAIN, 40));
+		bBorrar.addMouseListener(new MiClick());
 
 		
 		bActualizar= new  JButton("Actualizar");
-		bActualizar.addMouseListener(new Click());
+		bActualizar.setFont(new Font("Arial", Font.PLAIN, 40));
+		bActualizar.addMouseListener(new MiClick());
 
 		bAlquilar= new  JButton("Alquilar");
-		bAlquilar.addMouseListener(new Click());
+		bAlquilar.setFont(new Font("Arial", Font.PLAIN, 40));
+		bAlquilar.addMouseListener(new MiClick());
 
 		
 		bDevolver= new  JButton("Devolver");
-		bDevolver.addMouseListener(new Click());
+		bDevolver.setFont(new Font("Arial", Font.PLAIN, 40));
+		bDevolver.addMouseListener(new MiClick());
 		
 		//Se añaden los botones al panel
 		panelBotones.add(bCrear);
@@ -90,12 +102,18 @@ public class FrontAdmin extends JFrame{
 		bActualizar.setBackground(colorFondo=new Color (215,246,185));
 		bAlquilar.setBackground(colorFondo=new Color (215,246,185));
 		bDevolver.setBackground(colorFondo=new Color (215,246,185));
+		
+	
 			
 
-}
-	
-private class Click extends  MouseAdapter {
-	public void mouseClicked(MouseEvent eve) {
+	}
+		
+	class MiClick extends  MouseAdapter {
+		public void mouseClicked(MouseEvent event) {
+			if (event.getSource() == bCrear) {
+				FrontArticulo frame = new FrontArticulo();
+				frame.setVisible(true);
+			}
 		}
 	}
 
