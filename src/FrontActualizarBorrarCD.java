@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -39,6 +40,7 @@ public class FrontActualizarBorrarCD extends JFrame{
 		alquilar = new JButton();
 		
 		tabla = rellenarTabla();
+		((DefaultTableModel) tabla.getModel()).fireTableDataChanged();
 		
 		panelPrincipal.add(new JScrollPane(tabla));
 
