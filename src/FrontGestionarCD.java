@@ -12,13 +12,13 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class FrontActualizarBorrarCD extends JPanel{
+public class FrontGestionarCD extends JPanel{
 
 	Articulo articulo;
 	JTable tabla;
 	JButton alquilar;
 	
-	public FrontActualizarBorrarCD() {
+	public FrontGestionarCD() {
 		alquilar = new JButton();
 		tabla = rellenarTabla();
 		this.add(new JScrollPane(tabla));

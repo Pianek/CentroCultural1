@@ -1,19 +1,25 @@
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
-public class FrontActualizarBorrar  extends JFrame{
+public class FrontGestionar  extends JFrame{
 	private JPanel panelPrincipal;	
-	private JLabel  lblcd;
+	private JLabel lblcd;
 	private JLabel lbldvd;
 	private JLabel lbllibro;
+	private JButton atrasCD;
+	private JButton atrasDVD;
+	private JButton atrasLIBRO;
 	
-	public FrontActualizarBorrar(){
+	public FrontGestionar(){
 		
 		this.setTitle("Selecciona tu artículo");
 		this.setSize(1000,500);	
@@ -38,11 +44,16 @@ public class FrontActualizarBorrar  extends JFrame{
 		panelcd.setBorder(new EmptyBorder(100,100,50,100));
 		panelcd.add(lblcd);
 		
-		FrontActualizarBorrarCD  cd=  new FrontActualizarBorrarCD();
+		FrontGestionarCD  cd=  new FrontGestionarCD();
 		cd.setBounds(10, 10, 500, 500);
 		cd.setLayout(new GridLayout(2,2,100,300));
 		panelcd.add(cd);	
 		cd.setVisible(true);
+		
+		atrasCD  = new JButton ("Atrás");
+		atrasCD.setBounds(900, 50, 100, 25);
+		atrasCD.addMouseListener(new atras());
+		panelcd.add(atrasCD);
 		
 		panelDePestanas.addTab("CD", panelcd);
 		
@@ -55,11 +66,15 @@ public class FrontActualizarBorrar  extends JFrame{
 		paneldvd.setBackground(new Color (215,246,185));
 		paneldvd.add(lbldvd);
 		
-		FrontActualizarBorrarDVD  dvd=  new FrontActualizarBorrarDVD();
+		FrontGestionarDVD  dvd=  new FrontGestionarDVD();
 		dvd.setBounds(0, 0, 500, 500);
 		paneldvd.add(dvd);	
 		dvd.setVisible(true);
-
+		
+		atrasDVD  = new JButton ("Atrás");
+		atrasDVD.setBounds(900, 50, 100, 25);
+		atrasDVD.addMouseListener(new atras());
+		paneldvd.add(atrasDVD);
 		
 		panelDePestanas.addTab("DVD",paneldvd);
 		
@@ -72,13 +87,19 @@ public class FrontActualizarBorrar  extends JFrame{
 		panelLibro.setBackground(new Color (215,246,185));
 		panelLibro.add(lbllibro);
 		
-		FrontActualizarBorrarLibro  libro=  new FrontActualizarBorrarLibro();
+		FrontGestionarLibro  libro=  new FrontGestionarLibro();
 		libro.setBounds(0, 0, 500, 500);
 		panelLibro.add(libro);	
 		libro.setVisible(true);
 
+		atrasLIBRO  = new JButton ("Atrás");
+		atrasLIBRO.setBounds(1200, 50, 100, 25);
+		atrasLIBRO.addMouseListener(new atras());
+		panelLibro.add(atrasLIBRO);
 		
 		panelDePestanas.addTab("LIBRO", panelLibro);
+		
+		//Diseño panel general
 		panelPrincipal.add(panelDePestanas);
 		add(panelPrincipal);
 		panelPrincipal.setBackground(new Color (99,193,111));
@@ -89,6 +110,13 @@ public class FrontActualizarBorrar  extends JFrame{
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-		
-
+	class atras extends MouseAdapter{
+		public void mouseClicked(MouseEvent event){
+			//Boton de atrás
+	    	if (event.getSource()==atrasCD || event.getSource()==atrasDVD || event.getSource()==atrasLIBRO){
+	    		FrontAdmin frame = new  FrontAdmin();
+		        frame.setVisible(true);
+	        }
+	    }
+	}
 }

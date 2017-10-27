@@ -90,7 +90,7 @@ public class FrontAdmin extends JFrame{
 			}
 			
 			if (event.getSource() == bGestionar){
-				FrontActualizarBorrar frame = new FrontActualizarBorrar();
+				FrontGestionar frame = new FrontGestionar();
 				frame.setVisible(true);
 			}
 			

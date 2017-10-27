@@ -112,7 +112,7 @@ public class FrontAlquilar extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	class atras extends MouseAdapter{//se crea una clase privada
+	class atras extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
 			//Boton de atrás
 	    	if (event.getSource()==atrasCD || event.getSource()==atrasDVD || event.getSource()==atrasLIBRO){
