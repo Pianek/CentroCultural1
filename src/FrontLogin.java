@@ -1,13 +1,11 @@
 import java.awt.Color;
-import java.awt.Insets;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,32 +19,47 @@ public class FrontLogin extends JFrame {
 	private JTextField fUsuario;
 	private JTextField fPassword;
 	private JButton aceptar;
-	private Color colorFondo;
 	private Conexion conexion;
 	
 	public FrontLogin() {
 		
 		conexion = new Conexion();
 		
-		panel = new JPanel();
-		BoxLayout box = new BoxLayout(panel, BoxLayout.Y_AXIS);
-		panel.setLayout(box);
+//		panel = new JPanel();
+//		BoxLayout box = new BoxLayout(panel, BoxLayout.Y_AXIS);
+//		panel.setLayout(box);
+		
+		panel=new JPanel();
+		panel.setBorder(new EmptyBorder(300,500,300,500));
+		panel.setLayout(new GridLayout(5, 1, 70, 70));
+		this.setLocationRelativeTo(null);
+		
 		this.setTitle("Login");
-		this.setSize(500, 100);
+//		this.setSize(500, 100);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		panel.setBorder(new EmptyBorder(new Insets(300, 450, 300, 450)));
+		
+		
+//		setBounds(1000, 500, 1000, 1000);
+//		panel=new JPanel();
+//		panel.setBorder(new EmptyBorder(5, 100, 5, 100));			
+//		panel.setLayout(new GridLayout(2, 2, 100, 30));
+//		this.setLocationRelativeTo(null);   
+//		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		usuario = new JLabel("Usuario");
 		fUsuario = new JTextField(10);
+		fUsuario.setBounds(100, 10, 100, 100);
 		
 		password = new JLabel("Contraseña");
 		fPassword = new JTextField(10);
+		fPassword.setBounds(100, 10, 100, 100);
 		
 		aceptar = new JButton("Aceptar");
+		aceptar.setBounds(100, 10, 100, 150);
 		aceptar.addMouseListener(new acceder());
 		
-		panel.setBackground(colorFondo=new Color (99,193,111));
-		aceptar.setBackground(colorFondo=new Color (215,246,185));
+		panel.setBackground(new Color (99,193,111));
+		aceptar.setBackground(new Color (215,246,185));
 		
 		add(panel);
 		panel.add(usuario);
@@ -75,20 +88,13 @@ public class FrontLogin extends JFrame {
 					conexion.cerrarConexion();
 				}
 	    	}
-	    	
-	    	System.out.println(permiso);
 	    	if(permiso.equalsIgnoreCase("usuario")) {
-
-//	    		panel.setVisible(true);
-//	    		FrontPrestamo prestamo = new FrontPrestamo();
-//	    		prestamo.setVisible(true);
+	    		FrontPrestamo prestamo = new FrontPrestamo();
+	    		prestamo.setVisible(true);
 	    		
 	    	}else if(permiso.equalsIgnoreCase("administrador")) {
-	    		
-//	    		panel.disable();
-//	    		FrontAdmin admin = new FrontAdmin();
-//	    		admin.setVisible(true);
-	    		
+	    		FrontAdmin admin = new FrontAdmin();
+	    		admin.setVisible(true);
 	    	}
 	    }
 	}
