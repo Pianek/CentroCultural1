@@ -112,7 +112,7 @@ public class FrontAdmin extends JFrame{
 	class MiClick extends  MouseAdapter {
 		public void mouseClicked(MouseEvent event) {
 			if (event.getSource() == bCrear) {
-				FrontArticulo frame = new FrontArticulo();
+				FrontCrearArticulo frame = new FrontCrearArticulo();
 				frame.setVisible(true);
 			}
 			//Se necesita modificar

@@ -12,13 +12,13 @@ import javax.swing.border.EmptyBorder;
 
 //import FrontAdmin.MiClick;
 
-public class FrontPrestamo extends JFrame {
+public class FrontUsuario extends JFrame {
 	private JPanel panel;
 	private JButton alquilar;
 	private JButton devolver;
 	private Color colorFondo;
 	
-	public FrontPrestamo() {
+	public FrontUsuario() {
 		this.setTitle("Panel usuario");
 		this.setSize(1000,1000);
 		init();
