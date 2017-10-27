@@ -53,21 +53,20 @@ public class FrontCrearArticulo  extends JFrame{
 		this.setTitle("Selecciona tu artículo");
 		this.setSize(1000,500);		
 					
-		//posiciono el JPanel
+		//Posiciono el JPanel
 		setBounds(1000, 500, 1000, 1000);
 		panelPrincipal=new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 100, 5, 100));			
 		panelPrincipal.setLayout(new GridLayout(2, 2, 100, 30));
 		
-		//aqui se crea y posiciona el panel de pestañas
+		//Posiciona el panel de pestañas
 		JTabbedPane panelDePestanas = new JTabbedPane();
 			
 		 
-		//primera pestaña CD
+		//Primera pestaña CD
 		JPanel panelcd = new JPanel();				
 		panelcd.setLayout(null);
 		
-		//Elementos de la pestaña de CD
 		JLabel lblcd = new JLabel();						
 		lblcd.setBounds(10, 20, 10, 10);
 		panelcd.setBackground(new Color (215,246,185));			
@@ -124,11 +123,10 @@ public class FrontCrearArticulo  extends JFrame{
 		panelDePestanas.addTab("CD", panelcd);			
 			
 		
-		//segunda pestaña
+		//Segunda pestaña DVD
 		JPanel paneldvd = new JPanel();		
 		paneldvd.setLayout(null);
 		  
-		//etiqueta para la pestaña de dvd
 		JLabel lbldvd = new JLabel();			
 		lbldvd.setBounds(10, 20, 70, 70);			
 		paneldvd.setBackground(new Color (215,246,185));
@@ -185,12 +183,11 @@ public class FrontCrearArticulo  extends JFrame{
 		panelDePestanas.addTab("DVD",paneldvd);
 		 
 		
-		//tercera pestaña
+		//Tercera pestaña LIBRO
 		JPanel panelLibro = new JPanel();
 		
 		panelLibro.setLayout(null);
 			  
-		//elementos del panel LIBRO
 		JLabel lblLibro = new JLabel();
 		lblcd.setBounds(10, 20, 70, 70);
 		paneldvd.setBackground(new Color (215,246,185));

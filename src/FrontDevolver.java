@@ -2,7 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,29 +13,26 @@ public class FrontDevolver  extends JFrame{
 	private JLabel  lblcd;
 	private JLabel lbldvd;
 	private JLabel lbllibro;
-	//private Conexion conexion;
 		
 	public FrontDevolver(){
-		//conexion= new Conexion();
 		
 		this.setTitle("Selecciona tu artículo");
 		this.setSize(1000,500);	
 		
-		//posiciono el JPanel
+		//Posiciono el JPanel
 		setBounds(1000, 500, 1000, 1000);
 		panelPrincipal=new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 100, 5, 100));			
 		panelPrincipal.setLayout(new GridLayout(2, 2, 100, 30));
 		
-		//aqui se crea y posiciona el panel de pestañas
+		//Posiciona el panel de pestañas
 		JTabbedPane panelDePestanas = new JTabbedPane();
 		
 		
-		//primera pestaña CD
+		//Primera pestaña CD
 		JPanel panelcd = new JPanel();				
 		panelcd.setLayout(null);
 		
-		//Elementos de la pestaña de CD	
 		lblcd = new JLabel("Devolver CD");						
 		lblcd.setBounds(10, 20, 150, 150);
 		panelcd.setBackground(new Color (215,246,185));				
@@ -45,11 +41,10 @@ public class FrontDevolver  extends JFrame{
 		panelDePestanas.addTab("CD", panelcd);
 		
 		
-		//segunda pestaña	
+		//Degunda pestaña DVD	
 		JPanel paneldvd = new JPanel();		
 		paneldvd.setLayout(null);
 		  
-		//etiqueta para la pestaña de dvd
 		lbldvd = new JLabel("Devolver DVD");			
 		lbldvd.setBounds(10, 20, 150, 150);			
 		paneldvd.setBackground(new Color (215,246,185));
@@ -58,17 +53,19 @@ public class FrontDevolver  extends JFrame{
 		panelDePestanas.addTab("DVD",paneldvd);
 		
 		
-		//tercera pestaña
+		//Tercera pestaña LIBRO
 		JPanel panelLibro = new JPanel();			
 		panelLibro.setLayout(null);
-			  
-		//elementos del panel LIBRO
-		JLabel lblLibro = new JLabel("Devolver Libro");
-		lblLibro.setBounds(10, 20, 150, 150);
+		
+		lbllibro = new JLabel("Devolver LIBRO");  
+		lbllibro.setBounds(10, 20, 150, 150);
 		panelLibro.setBackground(new Color (215,246,185));
-		panelLibro.add(lblLibro);
+		panelLibro.add(lbllibro);
 
 		panelDePestanas.addTab("LIBRO", panelLibro);
+		
+		
+		//Diseño panel principal
 		panelPrincipal.add(panelDePestanas);
 		add(panelPrincipal);
 		panelPrincipal.setBackground(new Color (99,193,111));

@@ -114,5 +114,7 @@ public class ClientsTableRendererAlquilar extends DefaultCellEditor {
 			stock = Integer.parseInt( table.getValueAt(row, 4).toString());
 		}
 		conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
+		
+		//FALTA AÑADIR A tipoArticulo_has_prestamo!!
 	}
 }

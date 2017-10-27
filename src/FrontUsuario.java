@@ -49,9 +49,14 @@ public class FrontUsuario extends JFrame {
 		public void mouseClicked (MouseEvent evento) {
 			
 			if (evento.getSource() == alquilar) {
-				FrontAlquilarCD frame = new FrontAlquilarCD();
+				FrontAlquilar frame = new FrontAlquilar();
 				frame.setVisible(true);
 			}
+			
+//			if (evento.getSource() == devolver) {
+//				FrontPrestamos frame = new FrontPrestamos();
+//				frame.setVisible(true);
+//			}
 		}
 	}
 }

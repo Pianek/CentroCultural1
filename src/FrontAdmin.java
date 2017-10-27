@@ -6,25 +6,20 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-// Falta diseño  del panel
 public class FrontAdmin extends JFrame{
 	JPanel panelPrincipal;	
 	JPanel panelBotones;
 	JPanel panelIzquierda;
 	JPanel panelDerecha;
 	JButton bCrear;
-	JButton bBorrar;
-	JButton bActualizar;
+	JButton bGestionar;
 	JButton bAlquilar;
 	JButton bDevolver;
-	Color colorFondo;
 
 	public FrontAdmin(){
 		this.setTitle("Panel Administrador");
@@ -35,7 +30,7 @@ public class FrontAdmin extends JFrame{
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 	}
-//		Método que se utilizada para colocar botones por coordenadas
+		//Método que se utilizada para colocar botones por coordenadas
 //		GridBagConstraints restricciones = new GridBagConstraints();
 //    	setLayout(new GridBagLayout());
        
@@ -53,57 +48,38 @@ public class FrontAdmin extends JFrame{
        panelPrincipal.add("West", panelDerecha);
        getContentPane().add(panelPrincipal);
        
-       
      		
-		bCrear= new  JButton("Crear");
-		bCrear.setFont(new Font("Arial", Font.PLAIN, 40));
-		bCrear.addMouseListener(new MiClick());
+       bCrear= new  JButton("Crear");
+       bCrear.setFont(new Font("Arial", Font.PLAIN, 40));
+       bCrear.addMouseListener(new MiClick());
 		
-//		restricciones para poner botones con coordenadas
-//		restricciones.gridx = 0;
-//		restricciones.gridy = 2;
-//		restricciones.gridwidth = 1;
-//		restricciones.gridheight = 1;
-//		this.getContentPane().add(bCrear, restricciones);
-		
-		bBorrar= new  JButton("Borrar");
-		bBorrar.setFont(new Font("Arial", Font.PLAIN, 40));
-		bBorrar.addMouseListener(new MiClick());
+       bGestionar = new  JButton("Gestionar");
+       bGestionar.setFont(new Font("Arial", Font.PLAIN, 40));
+       bGestionar.addMouseListener(new MiClick());
+
+       bAlquilar= new  JButton("Alquilar");
+       bAlquilar.setFont(new Font("Arial", Font.PLAIN, 40));
+       bAlquilar.addMouseListener(new MiClick());
 
 		
-		bActualizar= new  JButton("Actualizar");
-		bActualizar.setFont(new Font("Arial", Font.PLAIN, 40));
-		bActualizar.addMouseListener(new MiClick());
-
-		bAlquilar= new  JButton("Alquilar");
-		bAlquilar.setFont(new Font("Arial", Font.PLAIN, 40));
-		bAlquilar.addMouseListener(new MiClick());
-
+       bDevolver= new  JButton("Devolver");
+       bDevolver.setFont(new Font("Arial", Font.PLAIN, 40));
+       bDevolver.addMouseListener(new MiClick());
 		
-		bDevolver= new  JButton("Devolver");
-		bDevolver.setFont(new Font("Arial", Font.PLAIN, 40));
-		bDevolver.addMouseListener(new MiClick());
-		
-		//Se añaden los botones al panel
-		panelBotones.add(bCrear);
-	    panelBotones.add(bBorrar);
-	    panelBotones.add(bActualizar);
-	    panelBotones.add(bAlquilar);
-	    panelBotones.add(bDevolver);
+       //Se añaden los botones al panel
+       panelBotones.add(bCrear);
+       panelBotones.add(bGestionar);
+	   panelBotones.add(bAlquilar);
+	   panelBotones.add(bDevolver);
 	    
-	    panelPrincipal.setBackground(colorFondo=new Color (99,193,111));
-	    panelIzquierda.setBackground(colorFondo=new Color (99,193,111));
-	    panelDerecha.setBackground(colorFondo=new Color (99,193,111));
-	    panelBotones.setBackground(colorFondo=new Color (99,193,111));
-		bCrear.setBackground(colorFondo=new Color (215,246,185));
-		bBorrar.setBackground(colorFondo=new Color (215,246,185));
-		bActualizar.setBackground(colorFondo=new Color (215,246,185));
-		bAlquilar.setBackground(colorFondo=new Color (215,246,185));
-		bDevolver.setBackground(colorFondo=new Color (215,246,185));
-		
-	
-			
-
+	   panelPrincipal.setBackground(new Color (99,193,111));
+	   panelIzquierda.setBackground(new Color (99,193,111));
+	   panelDerecha.setBackground(new Color (99,193,111));
+	   panelBotones.setBackground(new Color (99,193,111));
+	   bCrear.setBackground(new Color (215,246,185));
+	   bGestionar.setBackground(new Color (215,246,185));
+	   bAlquilar.setBackground(new Color (215,246,185));
+	   bDevolver.setBackground(new Color (215,246,185));
 	}
 		
 	class MiClick extends  MouseAdapter {
@@ -112,26 +88,21 @@ public class FrontAdmin extends JFrame{
 				FrontCrearArticulo frame = new FrontCrearArticulo();
 				frame.setVisible(true);
 			}
-			//Se necesita modificar
-			if (event.getSource() == bBorrar){
-				FrontActualizarBorrarCD frame = new FrontActualizarBorrarCD();
+			
+			if (event.getSource() == bGestionar){
+				FrontActualizarBorrar frame = new FrontActualizarBorrar();
 				frame.setVisible(true);
 			}
-			//Se necesita modificar
-			if (event.getSource() == bBorrar){
-				FrontActualizarBorrarDVD frame = new FrontActualizarBorrarDVD();
-				frame.setVisible(true);
-			}
+			
 			if (event.getSource() == bAlquilar){
-				FrontAlquilarCD frame = new FrontAlquilarCD();
+				FrontAlquilar frame = new FrontAlquilar();
 				frame.setVisible(true);
 			}
+			
 //			if (event.getSource() == bDevolver){
 //				FrontDevolverCD frame = new FrontDevolverCD();
 //				frame.setVisible(true);
 //			}
-			
 		}
-	
 	}
 }
