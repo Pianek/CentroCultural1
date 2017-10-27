@@ -44,11 +44,15 @@
 		panelcd.setLayout(null);
 		
 		//Elementos de la pestaña de CD	
-		lblcd = new JLabel("Actualizar CD");						
+		lblcd = new JLabel();						
 		lblcd.setBounds(10, 20, 150, 150);
 		panelcd.setBackground(colorFondo=new Color (215,246,185));				
 		panelcd.add(lblcd);
 		
+		FrontActualizarBorrarCD  cd=  new FrontActualizarBorrarCD();
+		cd.setBounds(10, 10, 500, 500);
+		panelcd.add(cd);	
+		cd.setVisible(true);
 		
 		panelDePestanas.addTab("CD", panelcd);
 		
@@ -61,6 +65,11 @@
 		lbldvd.setBounds(10, 20, 150, 150);			
 		paneldvd.setBackground(colorFondo=new Color (215,246,185));
 		paneldvd.add(lbldvd);
+		
+		FrontActualizarBorrarDVD  dvd=  new FrontActualizarBorrarDVD();
+		dvd.setBounds(0, 0, 500, 500);
+		paneldvd.add(dvd);	
+		dvd.setVisible(true);
 
 		
 		panelDePestanas.addTab("DVD",paneldvd);
@@ -74,6 +83,11 @@
 		lblLibro.setBounds(10, 20, 150, 150);
 		panelLibro.setBackground(colorFondo=new Color (215,246,185));
 		panelLibro.add(lblLibro);
+		
+		FrontActualizarBorrarLibro  libro=  new FrontActualizarBorrarLibro();
+		libro.setBounds(0, 0, 500, 500);
+		panelLibro.add(libro);	
+		libro.setVisible(true);
 
 		
 		
@@ -85,7 +99,7 @@
 		setVisible(true);
 		this.setLocationRelativeTo(null);   
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		BorderLayout fondoEntero= new BorderLayout();
+		//BorderLayout fondoEntero= new BorderLayout();
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}

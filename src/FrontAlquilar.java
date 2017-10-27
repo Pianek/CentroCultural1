@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -46,6 +47,13 @@ public FrontAlquilar(){
 	panelcd.setBackground(colorFondo=new Color (215,246,185));				
 	panelcd.add(lblcd);
 	
+	FrontAlquilarCD  cd=  new FrontAlquilarCD();
+	cd.setBounds(0, 0, 500, 500);
+	panelcd.add(cd);	
+	cd.setVisible(true);
+	
+
+	
 	
 	panelDePestanas.addTab("CD", panelcd);
 	
@@ -58,6 +66,11 @@ public FrontAlquilar(){
 	lbldvd.setBounds(10, 20, 70, 70);			
 	paneldvd.setBackground(colorFondo=new Color (215,246,185));
 	paneldvd.add(lbldvd);
+	
+	FrontAlquilarDVD  dvd=  new FrontAlquilarDVD();
+	dvd.setBounds(0, 0, 500, 500);
+	paneldvd.add(dvd);	
+	dvd.setVisible(true);
 
 	
 	panelDePestanas.addTab("DVD",paneldvd);
@@ -71,8 +84,12 @@ public FrontAlquilar(){
 	lblcd.setBounds(10, 20, 70, 70);
 	panelLibro.setBackground(colorFondo=new Color (215,246,185));
 	panelLibro.add(lblLibro);
-
 	
+	
+	FrontAlquilarLibro  libro=  new FrontAlquilarLibro();
+	libro.setBounds(0, 0, 500, 500);
+	panelLibro.add(libro);	
+	libro.setVisible(true);
 	
 	panelDePestanas.addTab("LIBRO", panelLibro);
 	panelPrincipal.add(panelDePestanas);
