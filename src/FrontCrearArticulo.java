@@ -17,16 +17,22 @@ import javax.swing.JTextField;
 
 public class FrontCrearArticulo  extends JFrame{
 	private JPanel  panelPrincipal;	
-	private Conexion conexion;		
+	private Conexion conexion;
+	
 	private ImageIcon iconoCD;
 	private ImageIcon iconoDVD;
 	private ImageIcon iconoLibro;
+	
 	private JButton anadirCD;
 	private JButton anadirDVD;
 	private JButton anadirLIBRO;
 	private JButton atrasCD;
 	private JButton atrasDVD;
 	private JButton atrasLIBRO;
+	private JButton  cerrarSesionCD;
+	private JButton  cerrarSesionDVD;
+	private JButton  cerrarSesionLIBRO;
+	
 	private JTextField textoTituloCD;
 	private JTextField textoDiscografia;
 	private JTextField textoStock;
@@ -40,6 +46,7 @@ public class FrontCrearArticulo  extends JFrame{
 	private JTextArea textoCapMuestra;
 	private JTextField textoNumPag;
 	private JTextField textoStockLibro;
+	
 	
 	
 
@@ -120,6 +127,11 @@ public class FrontCrearArticulo  extends JFrame{
 		atrasCD.addMouseListener(new crear());
 		panelcd.add(atrasCD);
 					
+		cerrarSesionCD  = new JButton ("Cerrar Sesion");
+		cerrarSesionCD.setBounds(1050, 50, 135, 25);
+		cerrarSesionCD.addMouseListener(new crear());
+		panelcd.add(cerrarSesionCD);
+		
 		panelDePestanas.addTab("CD", panelcd);			
 			
 		
@@ -179,6 +191,11 @@ public class FrontCrearArticulo  extends JFrame{
 		atrasDVD.setBounds(900, 50, 100, 25);
 		atrasDVD.addMouseListener(new crear());
 		paneldvd.add(atrasDVD);
+		
+		cerrarSesionDVD  = new JButton ("Cerrar Sesion");
+		cerrarSesionDVD.setBounds(1050, 50, 135, 25);
+		cerrarSesionDVD.addMouseListener(new crear());
+		paneldvd.add(cerrarSesionDVD);
 		
 		panelDePestanas.addTab("DVD",paneldvd);
 		 
@@ -251,6 +268,11 @@ public class FrontCrearArticulo  extends JFrame{
 		atrasLIBRO.addMouseListener(new crear());
 		panelLibro.add(atrasLIBRO);
 		
+		cerrarSesionLIBRO  = new JButton ("Cerrar Sesion");
+		cerrarSesionLIBRO.setBounds(1350, 50, 135, 25);
+		cerrarSesionLIBRO.addMouseListener(new crear());
+		panelLibro.add(cerrarSesionLIBRO);
+		
 		panelDePestanas.addTab("LIBRO", panelLibro);
 		panelPrincipal.add(panelDePestanas);
 		
@@ -274,9 +296,13 @@ public class FrontCrearArticulo  extends JFrame{
 	    		FrontAdmin frame = new  FrontAdmin();
 		        frame.setVisible(true);
 	        }
-	
-	        //Añadir elementos a la BBDD
-	        boolean valido= (true);
+	    	  if (event.getSource()==cerrarSesionCD||event.getSource()==cerrarSesionDVD||event.getSource()==cerrarSesionLIBRO){
+		    		FrontLogin lg= new FrontLogin();
+		    		lg.setVisible(true);
+		    }
+
+	   //Añadir elementos a la BBDD
+	    	 boolean valido= (true);
 	        if(event.getSource()==anadirCD){	
 	        	CD cd = new CD(textoTituloCD.getText(), Integer.parseInt(textoStock.getText()), textoCantante.getText(), textoDiscografia.getText());
 	        	valido=conexion.ejecutarSentencia(cd.crear());
@@ -286,6 +312,7 @@ public class FrontCrearArticulo  extends JFrame{
 	        		JOptionPane.showMessageDialog(anadirCD, "No se ha podido crear");
 	        	}
 	        }
+	        
 	        if(event.getSource()==anadirDVD){
 	        	DVD dvd= new DVD(TextoTitulo.getText(),TextoDirector.getText(),TextoProductor.getText(),Integer.parseInt(TextoStockDVD.getText())); 
 	        	valido=conexion.ejecutarSentencia(dvd.crear());
@@ -295,6 +322,7 @@ public class FrontCrearArticulo  extends JFrame{
 					JOptionPane.showMessageDialog(anadirDVD, "No se ha podido crear");
 				}	
 	        }
+	        
 	        if(event.getSource()==anadirLIBRO){
 	        	Libro libro= new Libro(textoTituloLibro.getText(),textoAutor.getText(),textoCapMuestra.getText(),Integer.parseInt(textoNumPag.getText()),Integer.parseInt(textoStockLibro.getText())); 
 	        	System.out.println(libro.crear());   
@@ -304,6 +332,7 @@ public class FrontCrearArticulo  extends JFrame{
 	        	}else {
 	        		JOptionPane.showMessageDialog(anadirLIBRO, "No se ha podido crear");
 	        	}
+	        	
 	        }
 	    }
 	}

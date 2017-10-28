@@ -11,8 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+
 public class FrontAdmin extends JFrame{
-	JPanel panelPrincipal;	
+	JPanel panelPrincipal;
+	JPanel panelAbajo;
 	JPanel panelBotones;
 	JPanel panelIzquierda;
 	JPanel panelDerecha;
@@ -20,6 +22,7 @@ public class FrontAdmin extends JFrame{
 	JButton bGestionar;
 	JButton bAlquilar;
 	JButton bDevolver;
+	JButton cerrarSesion;
 
 	public FrontAdmin(){
 		this.setTitle("Panel Administrador");
@@ -42,10 +45,13 @@ public class FrontAdmin extends JFrame{
        panelBotones = new JPanel();
        panelIzquierda = new JPanel();
        panelDerecha= new JPanel();
+       panelAbajo= new JPanel();
+      
        panelBotones.setLayout(new GridLayout(3, 2, 3, 3));
        panelPrincipal.add("Center", panelBotones);
        panelPrincipal.add("East", panelIzquierda);
        panelPrincipal.add("West", panelDerecha);
+       panelPrincipal.add("South", panelAbajo);
        getContentPane().add(panelPrincipal);
        
      		
@@ -65,6 +71,11 @@ public class FrontAdmin extends JFrame{
        bDevolver= new  JButton("Devolver");
        bDevolver.setFont(new Font("Arial", Font.PLAIN, 40));
        bDevolver.addMouseListener(new MiClick());
+       
+       cerrarSesion = new JButton ("Cerrar Sesion");
+		cerrarSesion.setBounds(10, 10, 135, 25);
+		cerrarSesion.addMouseListener(new MiClick());
+		panelAbajo.add(cerrarSesion);
 		
        //Se añaden los botones al panel
        panelBotones.add(bCrear);
@@ -76,6 +87,7 @@ public class FrontAdmin extends JFrame{
 	   panelIzquierda.setBackground(new Color (99,193,111));
 	   panelDerecha.setBackground(new Color (99,193,111));
 	   panelBotones.setBackground(new Color (99,193,111));
+	   panelAbajo.setBackground(new Color (99,193,111));
 	   bCrear.setBackground(new Color (215,246,185));
 	   bGestionar.setBackground(new Color (215,246,185));
 	   bAlquilar.setBackground(new Color (215,246,185));
@@ -88,6 +100,10 @@ public class FrontAdmin extends JFrame{
 				FrontCrearArticulo frame = new FrontCrearArticulo();
 				frame.setVisible(true);
 			}
+			if (event.getSource()==cerrarSesion){
+	    		FrontLogin lg= new FrontLogin();
+	    		lg.setVisible(true);
+	    }
 			
 			if (event.getSource() == bGestionar){
 				FrontGestionar frame = new FrontGestionar();

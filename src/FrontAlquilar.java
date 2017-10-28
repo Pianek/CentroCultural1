@@ -18,6 +18,9 @@ public class FrontAlquilar extends JFrame{
 	private JButton atrasCD;
 	private JButton atrasDVD;
 	private JButton atrasLIBRO;
+	private JButton cerrarSesionCD;
+	private JButton cerrarSesionDVD;
+	private JButton cerrarSesionLIBRO;
 	
 	public FrontAlquilar(){
 		
@@ -34,7 +37,7 @@ public class FrontAlquilar extends JFrame{
 		JTabbedPane panelDePestanas = new JTabbedPane();
 		
 		
-		//Rrimera pestaña CD
+		//Prrimera pestaña CD
 		JPanel panelcd = new JPanel();				
 		panelcd.setLayout(null);
 		
@@ -54,6 +57,11 @@ public class FrontAlquilar extends JFrame{
 		atrasCD.setBounds(1200, 50, 100, 25);
 		atrasCD.addMouseListener(new atras());
 		panelcd.add(atrasCD);
+		
+		cerrarSesionCD  = new JButton ("Cerrar Sesion");
+		cerrarSesionCD.setBounds(1350, 50, 135, 25);
+		cerrarSesionCD.addMouseListener(new atras());
+		panelcd.add(cerrarSesionCD);
 		
 		panelDePestanas.addTab("CD", panelcd);
 		
@@ -79,6 +87,11 @@ public class FrontAlquilar extends JFrame{
 		atrasDVD.addMouseListener(new atras());
 		paneldvd.add(atrasDVD);
 		
+		cerrarSesionDVD  = new JButton ("Cerrar Sesion");
+		cerrarSesionDVD.setBounds(1350, 50, 135, 25);
+		cerrarSesionDVD.addMouseListener(new atras());
+		paneldvd.add(cerrarSesionDVD);
+		
 		panelDePestanas.addTab("DVD",paneldvd);
 		
 		
@@ -103,6 +116,11 @@ public class FrontAlquilar extends JFrame{
 		atrasLIBRO.addMouseListener(new atras());
 		panelLibro.add(atrasLIBRO);
 		
+		cerrarSesionLIBRO  = new JButton ("Cerrar Sesion");
+		cerrarSesionLIBRO.setBounds(1350, 50, 135, 25);
+		cerrarSesionLIBRO.addMouseListener(new atras());
+		panelLibro.add(cerrarSesionLIBRO);
+		
 		panelDePestanas.addTab("LIBRO", panelLibro);
 		
 		
@@ -125,7 +143,11 @@ public class FrontAlquilar extends JFrame{
 	    		FrontAdmin frame = new  FrontAdmin();
 		        frame.setVisible(true);
 	        }
-	    }
+	    	if (event.getSource()==cerrarSesionCD||event.getSource()==cerrarSesionDVD||event.getSource()==cerrarSesionLIBRO){
+	    		FrontLogin lg= new FrontLogin();
+	    		lg.setVisible(true);
+	    	}
+		}
 	}
 }
 
