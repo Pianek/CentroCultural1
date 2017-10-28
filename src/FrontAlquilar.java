@@ -44,12 +44,14 @@ public class FrontAlquilar extends JFrame{
 		panelcd.add(lblcd);
 		
 		FrontAlquilarCD  cd=  new FrontAlquilarCD();
-		cd.setBounds(0, 0, 500, 500);
+		cd.setBounds(100, 50, 900, 900);
+		cd.setLayout(new GridLayout(2,2,100,300));
+		cd.setBackground(new Color (215,246,185));
 		panelcd.add(cd);	
 		cd.setVisible(true);
 		
 		atrasCD  = new JButton ("Atrás");
-		atrasCD.setBounds(900, 50, 100, 25);
+		atrasCD.setBounds(1200, 50, 100, 25);
 		atrasCD.addMouseListener(new atras());
 		panelcd.add(atrasCD);
 		
@@ -66,12 +68,14 @@ public class FrontAlquilar extends JFrame{
 		paneldvd.add(lbldvd);
 		
 		FrontAlquilarDVD  dvd=  new FrontAlquilarDVD();
-		dvd.setBounds(0, 0, 500, 500);
+		dvd.setBounds(100, 50, 900, 900);
+		dvd.setLayout(new GridLayout(2,2,100,300));
+		dvd.setBackground(new Color (215,246,185));
 		paneldvd.add(dvd);	
 		dvd.setVisible(true);
 	
 		atrasDVD  = new JButton ("Atrás");
-		atrasDVD.setBounds(900, 50, 100, 25);
+		atrasDVD.setBounds(1200, 50, 100, 25);
 		atrasDVD.addMouseListener(new atras());
 		paneldvd.add(atrasDVD);
 		
@@ -88,7 +92,9 @@ public class FrontAlquilar extends JFrame{
 		panelLibro.add(lbllibro);
 		
 		FrontAlquilarLibro  libro=  new FrontAlquilarLibro();
-		libro.setBounds(0, 0, 500, 500);
+		libro.setBounds(100, 50, 900, 900);
+		libro.setLayout(new GridLayout(2,2,100,300));
+		libro.setBackground(new Color (215,246,185));
 		panelLibro.add(libro);	
 		libro.setVisible(true);
 		

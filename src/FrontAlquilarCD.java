@@ -24,7 +24,7 @@ public class FrontAlquilarCD extends JPanel{
 		tabla = rellenarTabla();
 		tabla.setBorder(new EmptyBorder(100,100,50,50));
 		this.add(new JScrollPane(tabla));
-		tabla.setBackground(new Color (215,246,185));
+		tabla.setBackground(new Color (215, 232, 218));
 		alquilar.setBackground(new Color (215,246,185));
 	}
 	

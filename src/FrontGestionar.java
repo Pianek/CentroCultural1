@@ -22,16 +22,17 @@ public class FrontGestionar  extends JFrame{
 	public FrontGestionar(){
 		
 		this.setTitle("Selecciona tu artículo");
-		this.setSize(1000,500);	
+		this.setSize(1000,100);	
 		
 		//Posiciono el JPanel
 		setBounds(1000, 500, 1000, 1000);
 		panelPrincipal=new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 100, 5, 100));			
-		panelPrincipal.setLayout(new GridLayout(2, 2, 100, 30));
+		panelPrincipal.setLayout(new GridLayout(2, 20, 100, 30));
 		
 		//Posiciona el panel de pestañas
 		JTabbedPane panelDePestanas = new JTabbedPane();
+
 		
 		//Primera pestaña CD
 		JPanel panelcd = new JPanel();				
@@ -45,17 +46,20 @@ public class FrontGestionar  extends JFrame{
 		panelcd.add(lblcd);
 		
 		FrontGestionarCD  cd=  new FrontGestionarCD();
-		cd.setBounds(10, 10, 500, 500);
+		cd.setBounds(100, 50, 900, 900);
 		cd.setLayout(new GridLayout(2,2,100,300));
+		cd.setBackground(new Color (215,246,185));
 		panelcd.add(cd);	
 		cd.setVisible(true);
 		
 		atrasCD  = new JButton ("Atrás");
-		atrasCD.setBounds(900, 50, 100, 25);
+		atrasCD.setBounds(1200, 50, 100, 25);
 		atrasCD.addMouseListener(new atras());
 		panelcd.add(atrasCD);
 		
+		
 		panelDePestanas.addTab("CD", panelcd);
+		
 		
 		//Segunda pestaña DVD	
 		JPanel paneldvd = new JPanel();		
@@ -67,12 +71,14 @@ public class FrontGestionar  extends JFrame{
 		paneldvd.add(lbldvd);
 		
 		FrontGestionarDVD  dvd=  new FrontGestionarDVD();
-		dvd.setBounds(0, 0, 500, 500);
+		dvd.setBounds(100, 50, 900, 900);
+		dvd.setLayout(new GridLayout(2,2,100,300));
+		dvd.setBackground(new Color (215,246,185));
 		paneldvd.add(dvd);	
 		dvd.setVisible(true);
 		
 		atrasDVD  = new JButton ("Atrás");
-		atrasDVD.setBounds(900, 50, 100, 25);
+		atrasDVD.setBounds(1200, 50, 100, 25);
 		atrasDVD.addMouseListener(new atras());
 		paneldvd.add(atrasDVD);
 		
@@ -88,7 +94,9 @@ public class FrontGestionar  extends JFrame{
 		panelLibro.add(lbllibro);
 		
 		FrontGestionarLibro  libro=  new FrontGestionarLibro();
-		libro.setBounds(0, 0, 500, 500);
+		libro.setBounds(100, 50, 900, 900);
+		libro.setLayout(new GridLayout(2,2,100,300));
+		libro.setBackground(new Color (215,246,185));
 		panelLibro.add(libro);	
 		libro.setVisible(true);
 

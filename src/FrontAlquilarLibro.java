@@ -20,10 +20,9 @@ public class FrontAlquilarLibro extends JPanel{
 		alquilar = new JButton();
 		tabla = rellenarTabla();
 		this.add(new JScrollPane(tabla));
-		tabla.setBackground(new Color (215,246,185));
+		tabla.setBackground(new Color (215, 232, 218));
 		alquilar.setBackground(new Color (215,246,185));
-	}
-	
+	}	
 	public JTable rellenarTabla() {
 		DefaultTableModel modelo = new DefaultTableModel() {
 			//setting the jtable read only
