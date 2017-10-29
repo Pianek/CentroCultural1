@@ -9,6 +9,10 @@ public class Actores {
 		this.nombre   = nom;
 	}
 	
+	public Actores(String nombre) {
+		this.nombre=nombre;
+	}
+
 	public String crear() {
 		return "INSERT INTO actores (idActores,Nombre) " + 
 				"VALUES (" + this.id_actor + ", \"" + this.nombre + "\")";

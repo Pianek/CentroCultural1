@@ -16,8 +16,7 @@ public class DVD extends Articulo{
 		this.director=director;
 		this.productora=productora;
 	}
-
-
+	
 	public String crear() {
 		return "INSERT INTO dvd (idDVD,titulo, productora, director, stock) " + 
 		"VALUES (" + super.getId_articulo() + ",\"" + super.getTitulo() + "\", \""
