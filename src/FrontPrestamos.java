@@ -23,10 +23,12 @@ public class FrontPrestamos extends JFrame{
 	private JButton cerrar;
 	private JTable tabla;
 	private Usuario usuario;
+	private String devolucionTotal;
 		
 	public FrontPrestamos(Usuario usu){
 		
 		usuario = usu;
+		devolucionTotal = "";
 		
 		this.setTitle("Selecciona tu artículo");
 		this.setSize(1000,500);	
@@ -98,7 +100,6 @@ public class FrontPrestamos extends JFrame{
 				
 				String idPrestamo = String.valueOf(rs.getInt(1));
 				String fecha = rs.getString(2);
-				String fechaDevolucion = rs.getString(3);
 				String numeroArt = String.valueOf(rs.getInt(4) + rs.getInt(5) + rs.getInt(6));
 				
 				modelo.addRow(new Object[] {idPrestamo,fecha,numeroArt});
@@ -114,6 +115,8 @@ public class FrontPrestamos extends JFrame{
 		tabla.getColumnModel().getColumn(3).setCellRenderer(new ClientsTableButtonRendererPres());
 		tabla.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererPrestamos(new JCheckBox(), usuario));
         
+		
+		
 		return tabla;
 	}
 	
@@ -149,6 +152,55 @@ class ClientsTableButtonRendererPres extends JButton implements TableCellRendere
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
+		
+		String id = (table.getValueAt(row, 0).toString()).substring(0,1);
+		if(id.equals("*")) {
+			id = (table.getValueAt(row, 0).toString()).substring(1);
+		}else {
+			id = (table.getValueAt(row, 0).toString());
+		}
+		
+		Conexion conexion = new Conexion();
+		ResultSet devuelto = conexion.getResultSet("SELECT fechaDevolucionTotal FROM prestamo WHERE idPrestamo = " + id);
+		try {
+			devuelto.next();
+			if(devuelto.wasNull()) {
+				setBackground(UIManager.getColor("Button.background"));
+				setText((value == null) ? "DEVUELTO" : value.toString());
+			}else {
+				setBackground(UIManager.getColor("Button.background"));
+				setText((value == null) ? "Devolver" : value.toString());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ResultSet rsCD = conexion.getResultSet("SELECT * FROM cd_has_prestamo WHERE Prestamo_idPrestamo = " + id + " AND fechaDevolucion IS NULL;");
+		ResultSet rsDVD = conexion.getResultSet("SELECT * FROM dvd_has_prestamo WHERE Prestamo_idPrestamo = " + id + " AND fechaDevolucion IS NULL;");
+		ResultSet rsLIB = conexion.getResultSet("SELECT * FROM libro_has_prestamo WHERE Prestamo_idPrestamo = " + id + " AND fechaDevolucion IS NULL;");
+		
+		int devueltos = 0;
+		try {
+			while(rsCD.next()) {
+				devueltos++;
+			}
+			while(rsDVD.next()) {
+				devueltos++;
+			}
+			while(rsLIB.next()) {
+				devueltos++;
+			}
+			
+			if(devueltos == 0) {
+				conexion.ejecutarSentencia("UPDATE prestamo SET fechaDevolucionTotal = CURDATE() WHERE idPrestamo = " + id);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		setBackground(UIManager.getColor("Button.background"));
 		setText((value == null) ? "Ver detalles" : value.toString());

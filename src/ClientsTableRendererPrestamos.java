@@ -51,13 +51,14 @@ public class ClientsTableRendererPrestamos extends DefaultCellEditor {
 		button.setBackground(UIManager.getColor("Button.background"));
 		label = (value == null) ? "Ver detalles" : value.toString();
 		button.setText(label);
-		
+		clicked = true;
 		return button;
 	}
 
 	public Object getCellEditorValue() {
 		if (clicked) {
-			detalles();
+			FrontDevolver devolver = new FrontDevolver(usuario, table.getValueAt(row, 0).toString());
+			devolver.setVisible(true);
 		}
 		clicked = false;
 		return new String(label);
@@ -70,10 +71,5 @@ public class ClientsTableRendererPrestamos extends DefaultCellEditor {
 
 	protected void fireEditingStopped() {
 		super.fireEditingStopped();
-	}
-	
-	public void detalles() {
-		FrontDevolver devolver = new FrontDevolver(usuario);
-		devolver.setVisible(true);
 	}
 }

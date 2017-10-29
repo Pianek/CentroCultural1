@@ -21,15 +21,20 @@ public class FrontDevolver extends JFrame{
 	private JPanel panelPrincipal;	
 	private JButton atras;
 	private JButton cerrar;
+	private JPanel cd;
+	private JPanel dvd;
+	private JPanel libro;
 	private JTable tablaCD;
 	private JTable tablaDVD;
 	private JTable tablaLIB;
 	private Usuario usuario;
 	private String tipoArticulo;
+	private int idPrestamo;
 		
-	public FrontDevolver(Usuario usu){
+	public FrontDevolver(Usuario usu, String idPrest){
 		
 		usuario = usu;
+		idPrestamo = Integer.parseInt(idPrest);
 		
 		this.setTitle("Selecciona tu artículo");
 		this.setSize(1000,500);	
@@ -45,11 +50,18 @@ public class FrontDevolver extends JFrame{
 		tablaDVD = rellenarTablaDVD();
 		tablaLIB = rellenarTablaLIB();
 		
+		cd = new JPanel();
+		dvd = new JPanel();
+		libro = new JPanel();
 		
 		//Diseño panel principal
-		panelPrincipal.add(new JScrollPane(tablaCD));
-		panelPrincipal.add(new JScrollPane(tablaDVD));
-		panelPrincipal.add(new JScrollPane(tablaLIB));
+		cd.add(new JScrollPane(tablaCD));
+		dvd.add(new JScrollPane(tablaDVD));
+		libro.add(new JScrollPane(tablaLIB));
+		
+		panelPrincipal.add(cd);
+		panelPrincipal.add(dvd);
+		panelPrincipal.add(libro);
 		
 		atras = new JButton ("Atrás");
 		atras.setBounds(1200, 502, 100, 25);
@@ -75,7 +87,11 @@ public class FrontDevolver extends JFrame{
 		DefaultTableModel modelo = new DefaultTableModel() {
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
-				return false;
+				boolean editable = false;
+				if(column == 5) {
+					editable = true;
+				}
+				return editable;
 			}
         };
 
@@ -92,6 +108,7 @@ public class FrontDevolver extends JFrame{
 												 "LEFT JOIN cd ON (pcd.CD_idCD = cd.idCD) " + 
 												 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + " " +  
 												 "AND cd.idCD IS NOT NULL " + 
+												 "AND p.idPrestamo = " + idPrestamo + " " +
 												 "GROUP BY cd.idCD;");
 
 			// Creamos las columnas.
@@ -105,10 +122,9 @@ public class FrontDevolver extends JFrame{
 						// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
-				String fechaDevolucion = rs.getString(2);
-				String idPrestamo = String.valueOf(rs.getInt(1));
-				if(!fechaDevolucion.equalsIgnoreCase("null") || !fechaDevolucion.equalsIgnoreCase("") || !fechaDevolucion.equalsIgnoreCase(" ")) {
-					idPrestamo = "1" + String.valueOf(rs.getInt(1));
+				String idCD = String.valueOf(rs.getInt(3));
+				if(!rs.wasNull()) {
+					idCD = "*" + String.valueOf(rs.getInt(3));
 					numDevueltos++;
 				}				
 				
@@ -118,7 +134,7 @@ public class FrontDevolver extends JFrame{
 				String discografia = rs.getString(6);
 				String stock = String.valueOf(rs.getInt(7));
 				
-				modelo.addRow(new Object[] {idPrestamo,titulo,cantante,discografia,stock});
+				modelo.addRow(new Object[] {idCD,titulo,cantante,discografia,stock});
 				
 				numRows++;
 			}
@@ -135,8 +151,8 @@ public class FrontDevolver extends JFrame{
 			prestamoDevuelto = true;
 		}
 		
-		tablaCD.getColumnModel().getColumn(3).setCellRenderer(new ClientsTableButtonRendererPres());
-		tablaCD.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(), usuario, prestamoDevuelto));
+		tablaCD.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererPres());
+		tablaCD.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(), tipoArticulo));
         
 		return tablaCD;
 	}
@@ -145,7 +161,11 @@ public class FrontDevolver extends JFrame{
 		DefaultTableModel modelo = new DefaultTableModel() {
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
-				return false;
+				boolean editable = false;
+				if(column == 5) {
+					editable = true;
+				}
+				return editable;
 			}
         };
 
@@ -161,7 +181,8 @@ public class FrontDevolver extends JFrame{
 												 										+ "AND p.idPrestamo = pdvd.Prestamo_idPrestamo) " + 
 												 "LEFT JOIN dvd ON (pdvd.DVD_idDVD = dvd.idDVD) " + 
 												 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + " " + 
-												 "AND dvd.idDVD IS NOT NULL " +   
+												 "AND dvd.idDVD IS NOT NULL " +  
+												 "AND p.idPrestamo = " + idPrestamo + " " + 
 												 "GROUP BY dvd.idDVD;");
 
 			// Creamos las columnas.
@@ -175,20 +196,19 @@ public class FrontDevolver extends JFrame{
 						// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
-				String fechaDevolucion = rs.getString(2);
-				String idPrestamo = String.valueOf(rs.getInt(1));
-				if(!fechaDevolucion.equalsIgnoreCase("null") || !fechaDevolucion.equalsIgnoreCase("") || !fechaDevolucion.equalsIgnoreCase(" ")) {
-					idPrestamo = "1" + String.valueOf(rs.getInt(1));
+				String idDVD = String.valueOf(rs.getInt(3));
+				if(!rs.wasNull()) {
+					idDVD = "*" + String.valueOf(rs.getInt(3));
 					numDevueltos++;
 				}				
 				
-//				String idCD = rs.getString(3);
+//				String idDVD = rs.getString(3);
 				String titulo = rs.getString(4);
 				String productora = rs.getString(5);
 				String director = rs.getString(6);
 				String stock = String.valueOf(rs.getInt(7));
 				
-				modelo.addRow(new Object[] {idPrestamo,titulo,productora,director,stock});
+				modelo.addRow(new Object[] {idDVD,titulo,productora,director,stock});
 				
 				numRows++;
 			}
@@ -205,8 +225,8 @@ public class FrontDevolver extends JFrame{
 			prestamoDevuelto = true;
 		}
 		
-		tablaDVD.getColumnModel().getColumn(3).setCellRenderer(new ClientsTableButtonRendererPres());
-		tablaDVD.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(), usuario, prestamoDevuelto));
+		tablaDVD.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererPres());
+		tablaDVD.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(),tipoArticulo));
         
 		return tablaDVD;
 	}
@@ -215,7 +235,11 @@ public class FrontDevolver extends JFrame{
 		DefaultTableModel modelo = new DefaultTableModel() {
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
-				return false;
+				boolean editable = false;
+				if(column == 4) {
+					editable = true;
+				}
+				return editable;
 			}
         };
 
@@ -232,10 +256,11 @@ public class FrontDevolver extends JFrame{
 												 "LEFT JOIN libro ON (plib.LIBRO_idLIBRO = libro.idLIBRO) " + 
 												 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + " " + 
 												 "AND libro.idLIBRO IS NOT NULL " + 
+												 "AND p.idPrestamo = " + idPrestamo + " " +
 												 "GROUP BY libro.idLIBRO;");
 
 			// Creamos las columnas.
-			modelo.addColumn("Código préstamo");
+			modelo.addColumn("Código CD");
 			modelo.addColumn("Título");
 			modelo.addColumn("Autor");
 			modelo.addColumn("Stock");
@@ -244,19 +269,18 @@ public class FrontDevolver extends JFrame{
 						// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
-				String fechaDevolucion = rs.getString(2);
-				String idPrestamo = String.valueOf(rs.getInt(1));
-				if(!fechaDevolucion.equalsIgnoreCase("null") || !fechaDevolucion.equalsIgnoreCase("") || !fechaDevolucion.equalsIgnoreCase(" ")) {
-					idPrestamo = "*" + String.valueOf(rs.getInt(1));
+				String idLibro = String.valueOf(rs.getInt(3));
+				if(!rs.wasNull()) {
+					idLibro = "*" + String.valueOf(rs.getInt(3));
 					numDevueltos++;
 				}				
 				
 //							String idCD = rs.getString(3);
 				String titulo = rs.getString(4);
 				String autor = rs.getString(5);
-				String stock = String.valueOf(rs.getInt(7));
+				String stock = String.valueOf(rs.getInt(8));
 				
-				modelo.addRow(new Object[] {idPrestamo,titulo,autor,stock});
+				modelo.addRow(new Object[] {idLibro,titulo,autor,stock});
 				
 				numRows++;
 			}
@@ -273,8 +297,8 @@ public class FrontDevolver extends JFrame{
 			prestamoDevuelto = true;
 		}
 		
-		tablaLIB.getColumnModel().getColumn(3).setCellRenderer(new ClientsTableButtonRendererPres());
-		tablaLIB.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(), usuario,prestamoDevuelto));
+		tablaLIB.getColumnModel().getColumn(4).setCellRenderer(new ClientsTableButtonRendererPres());
+		tablaLIB.getColumnModel().getColumn(4).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(), tipoArticulo));
         
 		return tablaLIB;
 	}
