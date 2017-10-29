@@ -26,9 +26,11 @@ public class FrontActores extends JFrame {
 	private ImageIcon iconoActor;
 	private JButton anadirActor;
 	private JButton atrasActor;
+	private Usuario usuario;
 //	private JButton cerrarSesionActor;
 
-	public FrontActores() {
+	public FrontActores(Usuario usu) {
+		usuario = usu;
 		conexion = new Conexion();
 		iconoActor = new ImageIcon("iconos\\chaplin.png");
 		this.setTitle("Añade un actor");
@@ -111,7 +113,7 @@ public class FrontActores extends JFrame {
 	class crear extends MouseAdapter {
 		public void mouseClicked(MouseEvent event) {
 			if (event.getSource() == atrasActor) {
-				FrontCrearArticulo cr = new FrontCrearArticulo();
+				FrontCrearArticulo cr = new FrontCrearArticulo(usuario);
 				cr.setVisible(true);
 			}
 //			if (event.getSource() == cerrarSesionActor) {

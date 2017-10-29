@@ -310,21 +310,12 @@ public class FrontCrearArticulo  extends JFrame{
 	    			frame.setVisible(true);
 	    		}
 	        }
-<<<<<<< HEAD
-	    	  if (event.getSource()==cerrarSesionCD||event.getSource()==cerrarSesionDVD||event.getSource()==cerrarSesionLIBRO){
-		    		FrontLogin lg= new FrontLogin();
-		    		lg.setVisible(true);
-		    }if (event.getSource()==actoresDVD){
-		    	FrontActores act= new FrontActores();
-		    	act.setVisible(true);
-=======
 	    	
 	    	//Cerrar sesión
 	    	if (event.getSource() == cerrarSesionCD||event.getSource() == cerrarSesionDVD||event.getSource() == cerrarSesionLIBRO){
 	    		usuario = null;
 	    		FrontLogin lg = new FrontLogin();
 	    		lg.setVisible(true);
->>>>>>> branch 'master' of https://github.com/Pianek/CentroCultural1.git
 		    }
 
 	    	//Añadir elementos a la BBDD
