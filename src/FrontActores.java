@@ -16,11 +16,8 @@ import javax.swing.border.EmptyBorder;
 public class FrontActores extends JFrame {
 	private Conexion conexion;
 	private JPanel panelPrincipal;
-	private JPanel panelCentral;
-	// private JPanel panelIzquierda;
-	// private JPanel panelDerecha;
-	private JLabel NombreActor;
-	private JLabel NombrePelicula;
+	private JLabel nombreActor;
+	private JLabel nombrePelicula;
 	private JTextField fNombreActor;
 	private JTextField fNombrePelicula;
 	private ImageIcon iconoActor;
@@ -36,75 +33,53 @@ public class FrontActores extends JFrame {
 		this.setTitle("Añade un actor");
 		this.setSize(1000,500);	
 		
-		setBounds(1000, 500, 1000, 1000);
+		//setBounds(1000, 500, 1000, 1000);
 		panelPrincipal=new JPanel();
-		panelPrincipal.setBorder(new EmptyBorder(5, 100, 5, 100));			
-		panelPrincipal.setLayout(new GridLayout(2, 2, 100, 30));
+		panelPrincipal.setBorder(new EmptyBorder(355, 500, 365, 500));			
+		panelPrincipal.setLayout(new GridLayout(4, 2, 1, 5));
 		
-		setVisible(true);
+		this.setVisible(true);
 		this.setLocationRelativeTo(null);   
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		BorderLayout fondoEntero= new BorderLayout();
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
-
-	// setBounds(100,500,1000,1000);public void init() {
-//		panelPrincipal = new JPanel();
-//		panelPrincipal.setLayout(new BorderLayout());
-//		panelPrincipal.setBorder(new EmptyBorder(new Insets(300, 450, 300, 450)));
-
-		// panelIzquierda = new JPanel();
-		// panelDerecha= new JPanel();
-		// panelCentral= new JPanel();
-		// panelCentral.setLayout(new GridLayout(4, 1, 3, 3));
-		// panelPrincipal.add("Center", panelCentral);
-		// panelPrincipal.add("West", panelIzquierda);
-		// panelPrincipal.add("East", panelDerecha);
 		getContentPane().add(panelPrincipal);
 
 		JLabel icono_actor = new JLabel();
-		icono_actor.setBounds(150, 100, 500, 500);
+		icono_actor.setBounds(50, 100, 500, 500);
 		icono_actor.setIcon(iconoActor);
-		panelPrincipal.add(icono_actor);
 
-		JLabel NombreActor = new JLabel("Nombre actor");
-		NombreActor.setBounds(600, 50, 100, 25);
-		;
-		panelPrincipal.add(NombreActor);
+		nombreActor = new JLabel("Nombre actor");
+		panelPrincipal.add(nombreActor);
 
 		fNombreActor = new JTextField(10);
-		fNombreActor.setBounds(600, 10, 200, 20);
 		panelPrincipal.add(fNombreActor);
 
-		JLabel NombrePelicula = new JLabel("Nombre Pelicula");
-		NombrePelicula.setBounds(620, 68, 100, 50);
-		;
-		panelPrincipal.add(NombreActor);
+		nombrePelicula = new JLabel("Nombre Pelicula");
+		panelPrincipal.add(nombrePelicula);
 
 		fNombrePelicula = new JTextField(10);
-		fNombrePelicula.setBounds(545, 103, 200, 25);
 		panelPrincipal.add(fNombrePelicula);
 
 		anadirActor = new JButton("Añadir");
-		anadirActor.setBounds(600, 283, 100, 20);
 		anadirActor.addMouseListener(new crear());
+		anadirActor.setBounds(750, 500, 100, 50);
 		panelPrincipal.add(anadirActor);
 
 		atrasActor = new JButton("Atrás");
-		atrasActor.setBounds(900, 50, 100, 25);
 		atrasActor.addMouseListener(new crear());
+		atrasActor.setBounds(550, 500, 100, 50);
 		panelPrincipal.add(atrasActor);
 
+		panelPrincipal.add(icono_actor);
 //		cerrarSesionActor = new JButton("Cerrar Sesion");
 //		cerrarSesionActor.setBounds(600, 50, 10, 25);
 //		cerrarSesionActor.addMouseListener(new crear());
 //		panelPrincipal.add(cerrarSesionActor);
 
 		panelPrincipal.setBackground(new Color(99, 193, 111));
-		// panelIzquierda.setBackground(new Color (99,193,111));
-		// panelDerecha.setBackground(new Color (99,193,111));
-		// panelCentral.setBackground(new Color (99,193,111));
 
 		
 
