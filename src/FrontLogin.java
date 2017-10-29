@@ -31,8 +31,8 @@ public class FrontLogin extends JFrame {
 //		panel.setLayout(box);
 		
 		panel=new JPanel();
-		panel.setBorder(new EmptyBorder(300,500,300,500));
-		panel.setLayout(new GridLayout(5, 1, 70, 70));
+		panel.setBorder(new EmptyBorder(270,620,270,620));
+		panel.setLayout(new GridLayout(5, 1, 70, 10));
 		this.setLocationRelativeTo(null);
 		
 		this.setTitle("Login");
@@ -49,15 +49,12 @@ public class FrontLogin extends JFrame {
 		
 		usuario = new JLabel("Usuario");
 		fUsuario = new JTextField(10);
-		fUsuario.setBounds(100, 10, 100, 100);
 		
 		password = new JLabel("Contraseña");
 		fPassword = new JPasswordField(10);
 		fPassword.setEchoChar('*');
-		fPassword.setBounds(100, 10, 100, 100);
 		
 		aceptar = new JButton("Aceptar");
-		aceptar.setBounds(100, 10, 100, 150);
 		aceptar.addMouseListener(new acceder());
 		
 		panel.setBackground(new Color (99,193,111));
