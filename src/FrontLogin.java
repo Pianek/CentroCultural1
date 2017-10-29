@@ -77,12 +77,17 @@ public class FrontLogin extends JFrame {
 	    public void mouseClicked(MouseEvent event){
 	    	String permiso = "";
 	    	ResultSet rs = null;
+	    	Usuario usuario = new Usuario(fUsuario.getText(), fPassword.getText());
 	    	if(event.getSource() == aceptar) {
-	    		Usuario usuario = new Usuario(fUsuario.getText(), fPassword.getText());
 	    		rs = conexion.getResultSet(usuario.buscarUsuario());
 	    		try {
 	    			rs.next();
+	    			usuario.setIdUsuario(rs.getInt(1));
+	    			usuario.setNombre(rs.getString(2));
+	    			usuario.setPassword(rs.getString(3));
 					permiso = rs.getString(4);
+					usuario.setPermisos(permiso);
+					
 				} catch (SQLException e) {
 					System.out.println("Error al buscar el permiso");
 					e.printStackTrace();
@@ -91,10 +96,10 @@ public class FrontLogin extends JFrame {
 				}
 	    	}
 	    	if(permiso.equalsIgnoreCase("usuario")) {
-	    		FrontUsuario prestamo = new FrontUsuario();
+	    		FrontUsuario prestamo = new FrontUsuario(usuario);
 	    		prestamo.setVisible(true);
 	    	}else if(permiso.equalsIgnoreCase("administrador")) {
-	    		FrontAdmin admin = new FrontAdmin();
+	    		FrontAdmin admin = new FrontAdmin(usuario);
 	    		admin.setVisible(true);
 	    	}
 	    }
