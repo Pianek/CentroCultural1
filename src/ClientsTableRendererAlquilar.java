@@ -115,7 +115,7 @@ public class ClientsTableRendererAlquilar extends DefaultCellEditor {
 		}else {
 			stock = Integer.parseInt( table.getValueAt(row, 4).toString());
 		}
-		conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
+		conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + stock + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
 		
 		Articulo articulo = null;
 		
@@ -131,6 +131,6 @@ public class ClientsTableRendererAlquilar extends DefaultCellEditor {
 		}
 		
 		Prestamo prestamo = new Prestamo(usuario, articulo);
-		prestamo.anadirArticuloPres();
+		conexion.ejecutarSentencia(prestamo.anadirArticuloPres());
 	}
 }

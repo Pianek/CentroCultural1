@@ -77,7 +77,7 @@ public class Conexion{
 				consulta = conn.prepareStatement(sentencia);
 				sentenciaValida = consulta.executeUpdate();
 			} catch (SQLException e) {
-				System.out.println("No se ha podido realizar inserción de datos");
+				System.out.println("No se ha podido realizar la inserción de datos");
 			}
 			break;
 		case "U" :

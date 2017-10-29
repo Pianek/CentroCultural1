@@ -78,7 +78,7 @@ public class FrontUsuario extends JFrame {
 			}
 			
 			if (evento.getSource() == devolver) {
-				FrontDevolver frame = new FrontDevolver(usuario);
+				FrontPrestamos frame = new FrontPrestamos(usuario);
 				frame.setVisible(true);
 			}
 			

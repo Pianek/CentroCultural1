@@ -115,7 +115,7 @@ public class FrontAdmin extends JFrame{
 			}
 			
 			if (event.getSource() == bDevolver){
-				FrontDevolver frame = new FrontDevolver(usuario);
+				FrontPrestamos frame = new FrontPrestamos(usuario);
 				frame.setVisible(true);
 			}
 

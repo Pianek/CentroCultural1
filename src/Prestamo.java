@@ -11,11 +11,11 @@ public class Prestamo {
 	
 	
 	public Prestamo(Usuario usu, Articulo art) {
-		id_prestamo = crearId();
 		usuario = usu;
-		fecha_reserva = "CURDATE()";
-		fecha_devolucion = "";
 		articulo = art;
+		id_prestamo = 0;
+		fecha_reserva = "CURDATE()";
+		fecha_devolucion = "NULL";
 	}
 	
 	public int getIdPrestamo() {
@@ -51,40 +51,39 @@ public class Prestamo {
 	}
 	
 	public int crearId() {
-		int id=0;
+		int id = 0;
 		Conexion c = new Conexion();
-		c.establecerConexion();
-		ResultSet rs = c.getResultSet("SELECT idPrestamo" + 
-								 	  "FROM prestamo" + 
+		ResultSet rs = c.getResultSet("SELECT idPrestamo " + 
+								 	  "FROM prestamo " + 
 								 	  "WHERE fechaPrestamo = " + fecha_reserva + 
-								 	  "AND Usuario_idUsuario = " + usuario.getIdUsuario());
-		if(rs != null) {
+								 	  " AND Usuario_idUsuario = " + usuario.getIdUsuario());
+		
 			try {
-				rs.next();
-				id=rs.getInt("1");
+				if(rs.next()) {
+					id = rs.getInt(1);
+				}else {
+					rs = c.getResultSet("SELECT max(idPrestamo) FROM prestamo");
+					rs.next();
+					id = rs.getInt(1)+1;
+					c.ejecutarSentencia("INSERT INTO prestamo (idPrestamo, fechaPrestamo, fechaDevolucionTotal, Usuario_idUsuario) "  
+											+ "VALUES (" + id + ", CURDATE(), NULL, " + usuario.getIdUsuario() + ")");
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}else {
-			rs = c.getResultSet("SELECT max(idPrestamo) FROM prestamo");
-			try {
-				id=rs.getInt("1")+1;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		c.cerrarConexion();
 		return id;
 	}
 
 	public String crear() {
 		this.setIdPrestamo(crearId());	
-		return "INSERT INTO	prestamo (idPrestamo, fechaPrestamo, fechaDevolucion, Usuario_idUsuario)"+				  
+		return "INSERT INTO	prestamo (idPrestamo, fechaPrestamo, fechaDevolucionTotal, Usuario_idUsuario) "+				  
 				"VALUES (" + id_prestamo +","+ fecha_reserva+ ","+ fecha_devolucion+ ",\""+ usuario.getIdUsuario()+ ")\";";
 		
 	}
 	
 	public String buscar() {
-		return "SELECT idPrestamo, fechaPrestamo,fechaDevolucion, Usuario_idUsuario FROM prestamo";
+		return "SELECT idPrestamo, fechaPrestamo,fechaDevolucionTotal, Usuario_idUsuario FROM prestamo";
 	}
 
 	public String actualizarStock() {
@@ -93,16 +92,14 @@ public class Prestamo {
 	
 	public String anadirArticuloPres() {
 		this.setIdPrestamo(crearId());	
-		articulo.setStock(articulo.getStock()-1);
-		return "INSERT INTO " + articulo.getTipo() + "_has_prestamo (" + articulo.getTipo().toUpperCase() + "_id" + articulo.getTipo().toUpperCase() + ", Prestamo_idPrestamo, Prestamo_Usuario_idUsuario) "
-				+ " VALUES " + articulo.getId_articulo() + "," + this.id_prestamo + "," + this.usuario.getIdUsuario();
+		return "INSERT INTO " + articulo.getTipo() + "_has_prestamo "
+				+ "(" + articulo.getTipo().toUpperCase() + "_id" + articulo.getTipo().toUpperCase() + ", Prestamo_idPrestamo, Prestamo_Usuario_idUsuario, fechaDevolucion) "
+				+ " VALUES (" + articulo.getId_articulo() + "," + this.id_prestamo + "," + this.usuario.getIdUsuario() + "," + this.fecha_devolucion + ");";
 	}
 	
 	public String devolverArticuloPres() {
 		this.setIdPrestamo(crearId());	
 		articulo.setStock(articulo.getStock()+1);
-		
-		
 		return "UPDATE " + articulo.getTipo() + "_has_prestamo "
 				+ "SET fechaDevolucion = CURDATE() "  
 				+ " WHERE "		
