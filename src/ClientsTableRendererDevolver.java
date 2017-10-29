@@ -5,11 +5,10 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 
-public class ClientsTableRendererPrestamos extends DefaultCellEditor {
+public class ClientsTableRendererDevolver extends DefaultCellEditor {
 	private JButton button;
 	private String label;
 	private boolean clicked;
@@ -17,8 +16,9 @@ public class ClientsTableRendererPrestamos extends DefaultCellEditor {
 	private JTable table;
 	private Conexion conexion;
 	private Usuario usuario;
+	private boolean devolucionPrestamo;
 
-	public ClientsTableRendererPrestamos(JCheckBox checkBox) {
+	public ClientsTableRendererDevolver(JCheckBox checkBox) {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
@@ -29,7 +29,7 @@ public class ClientsTableRendererPrestamos extends DefaultCellEditor {
 		});
 	}
 
-	public ClientsTableRendererPrestamos(JCheckBox checkBox, Usuario usu) {
+	public ClientsTableRendererDevolver(JCheckBox checkBox, Usuario usu, boolean devolucionPrestamo) {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
@@ -40,16 +40,16 @@ public class ClientsTableRendererPrestamos extends DefaultCellEditor {
 		});
 		usuario = usu;
 		conexion = new Conexion();
+		this.devolucionPrestamo = devolucionPrestamo;
 	}
 
-	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
-			int column) {
+	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		this.table = table;
 		this.row = row;
 		this.col = column;
 
 		button.setBackground(UIManager.getColor("Button.background"));
-		label = (value == null) ? "Ver detalles" : value.toString();
+		label = (value == null) ? "DEVUELTO" : value.toString();
 		button.setText(label);
 		
 		return button;
@@ -57,7 +57,7 @@ public class ClientsTableRendererPrestamos extends DefaultCellEditor {
 
 	public Object getCellEditorValue() {
 		if (clicked) {
-			detalles();
+			devolver();
 		}
 		clicked = false;
 		return new String(label);
@@ -72,8 +72,7 @@ public class ClientsTableRendererPrestamos extends DefaultCellEditor {
 		super.fireEditingStopped();
 	}
 	
-	public void detalles() {
-		FrontDevolver devolver = new FrontDevolver(usuario);
-		devolver.setVisible(true);
+	public void devolver() {
+		
 	}
 }

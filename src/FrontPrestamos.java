@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -61,7 +60,6 @@ public class FrontPrestamos extends JFrame{
 		setVisible(true);
 		this.setLocationRelativeTo(null);   
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		BorderLayout fondoEntero= new BorderLayout();
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
@@ -70,7 +68,11 @@ public class FrontPrestamos extends JFrame{
 		DefaultTableModel modelo = new DefaultTableModel() {
 			//setting the jtable read only
 			public boolean isCellEditable(int row, int column) {
-				return false;
+				boolean aux = false;
+				if(column == 3) {
+					aux = true;
+				}
+				return aux;
 			}
         };
 
