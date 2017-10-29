@@ -16,6 +16,7 @@ public class CD extends Articulo {
 		this.cantante = cantante;
 		this.discografia = discografia;
 	}
+	
 	public String getCantante() {
 		return cantante;
 	}

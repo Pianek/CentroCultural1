@@ -24,7 +24,7 @@ public class FrontActores extends JFrame {
 	private JButton anadirActor;
 	private JButton atrasActor;
 	private Usuario usuario;
-//	private JButton cerrarSesionActor;
+	private JButton cerrarSesionActor;
 
 	public FrontActores(Usuario usu) {
 		usuario = usu;
@@ -63,7 +63,7 @@ public class FrontActores extends JFrame {
 		fNombrePelicula = new JTextField(10);
 		panelPrincipal.add(fNombrePelicula);
 
-		anadirActor = new JButton("Añadir");
+		anadirActor = new JButton("Añadir al reparto");
 		anadirActor.addMouseListener(new crear());
 		anadirActor.setBounds(750, 500, 100, 50);
 		panelPrincipal.add(anadirActor);
@@ -74,10 +74,10 @@ public class FrontActores extends JFrame {
 		panelPrincipal.add(atrasActor);
 
 		panelPrincipal.add(icono_actor);
-//		cerrarSesionActor = new JButton("Cerrar Sesion");
-//		cerrarSesionActor.setBounds(600, 50, 10, 25);
-//		cerrarSesionActor.addMouseListener(new crear());
-//		panelPrincipal.add(cerrarSesionActor);
+		cerrarSesionActor = new JButton("Cerrar Sesion");
+		cerrarSesionActor.setBounds(600, 50, 10, 25);
+		cerrarSesionActor.addMouseListener(new crear());
+		panelPrincipal.add(cerrarSesionActor);
 
 		panelPrincipal.setBackground(new Color(99, 193, 111));
 
@@ -91,13 +91,37 @@ public class FrontActores extends JFrame {
 				FrontCrearArticulo cr = new FrontCrearArticulo(usuario);
 				cr.setVisible(true);
 			}
-//			if (event.getSource() == cerrarSesionActor) {
-//				FrontLogin lg = new FrontLogin();
-//				lg.setVisible(true);
+			if (event.getSource() == cerrarSesionActor) {
+				FrontLogin lg = new FrontLogin();
+				lg.setVisible(true);
 
 			}
-
+		boolean valido=true;
+		if(event.getSource()==anadirActor){
+			
+			
+			
+//			Actores act= new Actores(fNombreActor.getText());
+//			DVD titulo= new DVD(nombrePelicula.getText());
+//			valido = conexion.ejecutarSentencia(Actores.crear());
 		}
+//		SELECT actores.idActores, actores.Nombre
+//		From  actores; where nombre like (cajatexto.gerText())
+//		SELECT dvd.idDVD, dvd.titulo
+//		From  dvd;titulo like (cajaTexto.getText())
+//
+//		insert  into  actores_has_dvd.Actores_idActores values  ('')
+		}
+		}
+		public String  relacionar(){
+			return ("SELECT actores.idActores, actores.nombre  FROM actores "
+					+ "WHERE actores.nombre  ="+ nombreActor.getText()+"(SELECT dvd.titulo, dvd.idDVD FROM dvd"
+					+"WHERE  dvd.titulo ="+nombrePelicula.getText()+")"
+					+"INSERT INTO actores_has_prestamo (");
+			
+			
+		
 	}
+}
 
 

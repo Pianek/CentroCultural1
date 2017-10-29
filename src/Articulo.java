@@ -14,6 +14,7 @@ public class Articulo {
 		this.stock=stock;
 	}
 	
+	
 	public String getTipo() {
 		String aux = "";
 		char id = String.valueOf(id_articulo).charAt(0);
