@@ -169,7 +169,7 @@ class ClientsTableButtonRendererPres extends JButton implements TableCellRendere
 				setText((value == null) ? "DEVUELTO" : value.toString());
 			}else {
 				setBackground(UIManager.getColor("Button.background"));
-				setText((value == null) ? "Devolver" : value.toString());
+				setText((value == null) ? "Ver detalles" : value.toString());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -202,8 +202,7 @@ class ClientsTableButtonRendererPres extends JButton implements TableCellRendere
 			e.printStackTrace();
 		}
 		
-		setBackground(UIManager.getColor("Button.background"));
-		setText((value == null) ? "Ver detalles" : value.toString());
+	
 		return this;
 	}
 }

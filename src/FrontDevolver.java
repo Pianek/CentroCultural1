@@ -331,7 +331,8 @@ class ClientsTableButtonRendererPres extends JButton implements TableCellRendere
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
 		
-		String devuelto = (table.getValueAt(row, column).toString()).substring(0,1);
+		String devuelto = (table.getValueAt(row, 0).toString()).substring(0,1);
+		
 		if(devuelto.equals("*")) {
 			setBackground(UIManager.getColor("Button.background"));
 			setText((value == null) ? "DEVUELTO" : value.toString());
