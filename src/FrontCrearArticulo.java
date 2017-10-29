@@ -29,6 +29,7 @@ public class FrontCrearArticulo  extends JFrame{
 	private JButton anadirLIBRO;
 	private JButton atrasCD;
 	private JButton atrasDVD;
+	private JButton actoresDVD;
 	private JButton atrasLIBRO;
 	private JButton  cerrarSesionCD;
 	private JButton  cerrarSesionDVD;
@@ -186,9 +187,14 @@ public class FrontCrearArticulo  extends JFrame{
 		paneldvd.add(TextoStockDVD);
 	
 		anadirDVD = new JButton("Añadir");
-		anadirDVD.setBounds(600,283,100,20);
+		anadirDVD.setBounds(590,320,100,20);
 		anadirDVD.addMouseListener(new crear());
 		paneldvd.add(anadirDVD);
+		
+		actoresDVD  = new JButton ("Añadir actores");
+		actoresDVD.setBounds(550,283,175,20);
+		actoresDVD.addMouseListener(new crear());
+		paneldvd.add(actoresDVD);
 		
 		atrasDVD  = new JButton ("Atrás");
 		atrasDVD.setBounds(900, 50, 100, 25);
@@ -304,12 +310,21 @@ public class FrontCrearArticulo  extends JFrame{
 	    			frame.setVisible(true);
 	    		}
 	        }
+<<<<<<< HEAD
+	    	  if (event.getSource()==cerrarSesionCD||event.getSource()==cerrarSesionDVD||event.getSource()==cerrarSesionLIBRO){
+		    		FrontLogin lg= new FrontLogin();
+		    		lg.setVisible(true);
+		    }if (event.getSource()==actoresDVD){
+		    	FrontActores act= new FrontActores();
+		    	act.setVisible(true);
+=======
 	    	
 	    	//Cerrar sesión
 	    	if (event.getSource() == cerrarSesionCD||event.getSource() == cerrarSesionDVD||event.getSource() == cerrarSesionLIBRO){
 	    		usuario = null;
 	    		FrontLogin lg = new FrontLogin();
 	    		lg.setVisible(true);
+>>>>>>> branch 'master' of https://github.com/Pianek/CentroCultural1.git
 		    }
 
 	    	//Añadir elementos a la BBDD
