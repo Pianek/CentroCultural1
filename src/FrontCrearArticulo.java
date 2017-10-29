@@ -317,6 +317,11 @@ public class FrontCrearArticulo  extends JFrame{
 	    		FrontLogin lg = new FrontLogin();
 	    		lg.setVisible(true);
 		    }
+	    	if (event.getSource() ==  actoresDVD){
+	    		usuario = null;
+	    		FrontActores act = new FrontActores(usuario);
+	    		act.setVisible(true);
+		    }
 
 	    	//Añadir elementos a la BBDD
 	    	boolean valido= true;
@@ -339,6 +344,7 @@ public class FrontCrearArticulo  extends JFrame{
 					JOptionPane.showMessageDialog(anadirDVD, "No se ha podido crear");
 				}	
 	        }
+	        
 	        
 	        if(event.getSource() == anadirLIBRO){
 	        	Libro libro= new Libro(textoTituloLibro.getText(),textoAutor.getText(),textoCapMuestra.getText(),Integer.parseInt(textoNumPag.getText()),Integer.parseInt(textoStockLibro.getText())); 

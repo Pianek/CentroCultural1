@@ -35,7 +35,7 @@ public class FrontActores extends JFrame {
 		this.setTitle("Añade un actor");
 		this.setSize(1000,500);	
 		
-		//setBounds(1000, 500, 1000, 1000);
+
 		panelPrincipal=new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(355, 500, 365, 500));			
 		panelPrincipal.setLayout(new GridLayout(4, 2, 1, 5));
@@ -54,9 +54,11 @@ public class FrontActores extends JFrame {
 		icono_actor.setIcon(iconoActor);
 
 		nombreActor = new JLabel("Nombre actor");
+		nombreActor.setBounds(700,100,150,150);
 		panelPrincipal.add(nombreActor);
 
 		fNombreActor = new JTextField(10);
+		nombreActor.setBounds(700,100,150,150);
 		panelPrincipal.add(fNombreActor);
 
 		nombrePelicula = new JLabel("Nombre Pelicula");
@@ -72,7 +74,7 @@ public class FrontActores extends JFrame {
 
 		atrasActor = new JButton("Atrás");
 		atrasActor.addMouseListener(new crear());
-		atrasActor.setBounds(550, 500, 100, 50);
+		atrasActor.setBounds(550, 100, 100, 50);
 		panelPrincipal.add(atrasActor);
 
 		panelPrincipal.add(icono_actor);
@@ -87,6 +89,8 @@ public class FrontActores extends JFrame {
 
 	}
 
+
+
 	class crear extends MouseAdapter {
 		public void mouseClicked(MouseEvent event) {
 			if (event.getSource() == atrasActor) {
@@ -100,25 +104,24 @@ public class FrontActores extends JFrame {
 			}
 			boolean valido=true;
 			if(event.getSource()==anadirActor){
-				int idActor = 0, idPeli = 0;
-				
+				int idActor = 0, idPeli = 0;				
 				//Buscar id del actor
-				ResultSet rs = conexion.getResultSet("SELECT idActores FROM actores WHERE UPPER(Nombre) LIKE UPPER(" + nombreActor.getText() + ")");
+				ResultSet rs = conexion.getResultSet("SELECT idActores FROM actores WHERE UPPER(Nombre) LIKE UPPER(" + fNombreActor.getText() + ")");
 				try {
 					rs.next();
 					idActor = rs.getInt(1);
 				} catch (SQLException e) {
-					System.out.println("No se ha encontrado id para el actor " + nombreActor.getText());
+					System.out.println("No se ha encontrado id para el actor " + fNombreActor.getText());
 					e.printStackTrace();
 				}
 				
 				//Buscar id del DVD
-				rs = conexion.getResultSet("SELECT idDVD FROM dvd WHERE UPPER(titulo) LIKE UPPER(" + nombrePelicula.getText() + ")");
+				rs = conexion.getResultSet("SELECT idDVD FROM dvd WHERE UPPER(titulo) LIKE UPPER(" + fNombrePelicula.getText() + ")");
 				try {
 					rs.next();
 					idPeli = rs.getInt(1);
 				} catch (SQLException e) {
-					System.out.println("No se ha encontrado id para la pelicula " + nombrePelicula.getText());
+					System.out.println("No se ha encontrado id para la pelicula " + fNombrePelicula.getText());
 					e.printStackTrace();
 				}
 				
@@ -128,7 +131,8 @@ public class FrontActores extends JFrame {
 		}
 		
 		public String  relacionar(int idActor, int idPeli){
-			return ("");
+			return ("INSERT TO actores_has_dvd(Actores_idActores,DVD_idDVD)"
+					+"VALUES("+idActor+ ",\"" +idPeli+")");
 			
 		}
 		
