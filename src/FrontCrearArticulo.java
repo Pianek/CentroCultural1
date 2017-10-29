@@ -319,11 +319,11 @@ public class FrontCrearArticulo  extends JFrame{
 		    }
 
 	    	//Añadir elementos a la BBDD
-	    	boolean valido= (true);
+	    	boolean valido= true;
 	        if(event.getSource() == anadirCD){	
 	        	CD cd = new CD(textoTituloCD.getText(), Integer.parseInt(textoStock.getText()), textoCantante.getText(), textoDiscografia.getText());
 	        	valido = conexion.ejecutarSentencia(cd.crear());
-	        	if (valido) {
+	        	if (valido == false) {
 	        		JOptionPane.showMessageDialog(anadirCD, "Se ha creado con exito");
 	        	}else {
 	        		JOptionPane.showMessageDialog(anadirCD, "No se ha podido crear");
@@ -333,7 +333,7 @@ public class FrontCrearArticulo  extends JFrame{
 	        if(event.getSource() == anadirDVD){
 	        	DVD dvd= new DVD(TextoTitulo.getText(),TextoDirector.getText(),TextoProductor.getText(),Integer.parseInt(TextoStockDVD.getText())); 
 	        	valido = conexion.ejecutarSentencia(dvd.crear());
-	        	if (valido) {
+	        	if (valido == false) {
 	        		JOptionPane.showMessageDialog(anadirDVD, "Se ha creado con exito");
 				}else {
 					JOptionPane.showMessageDialog(anadirDVD, "No se ha podido crear");
@@ -344,7 +344,7 @@ public class FrontCrearArticulo  extends JFrame{
 	        	Libro libro= new Libro(textoTituloLibro.getText(),textoAutor.getText(),textoCapMuestra.getText(),Integer.parseInt(textoNumPag.getText()),Integer.parseInt(textoStockLibro.getText())); 
 	        	System.out.println(libro.crear());   
 	        	valido = conexion.ejecutarSentencia(libro.crear());
-	        	if (valido) {
+	        	if (valido == false) {
 	        		JOptionPane.showMessageDialog(anadirLIBRO, "Se ha creado con exito");
 	        	}else {
 	        		JOptionPane.showMessageDialog(anadirLIBRO, "No se ha podido crear");
