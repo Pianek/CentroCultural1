@@ -14,11 +14,15 @@ import javax.swing.table.TableCellRenderer;
 
 public class FrontAlquilarDVD  extends JPanel{
 
-	Articulo articulo;
-	JTable tabla;
-	JButton alquilar; 
+	private Articulo articulo;
+	private JTable tabla;
+	private JButton alquilar; 
+	private Usuario usuario;
 	
-	public FrontAlquilarDVD() {
+	public FrontAlquilarDVD(Usuario usu) {
+		
+		usuario = usu;
+		
 		alquilar = new JButton();
 		tabla = rellenarTabla();
 		this.add(new JScrollPane(tabla));
@@ -71,7 +75,7 @@ public class FrontAlquilarDVD  extends JPanel{
 		tabla = new JTable(modelo);
 		
 		tabla.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRendererDVD());
-		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRendererAlquilar(new JCheckBox(), tipo));
+		tabla.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRendererAlquilar(new JCheckBox(), tipo, usuario));
 		
 		return tabla;
 	}

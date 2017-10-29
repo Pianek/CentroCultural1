@@ -6,7 +6,7 @@ public class CD extends Articulo {
 	private String discografia;
 	
 	
-	public CD(int id, String ti, int stock,   String cantante, String discografia) {
+	public CD(int id, String ti, int stock, String cantante, String discografia) {
 		super(id, ti, stock);			
 		this.cantante = cantante;
 		this.discografia = discografia;

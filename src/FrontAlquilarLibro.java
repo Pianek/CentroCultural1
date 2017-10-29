@@ -12,11 +12,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 public class FrontAlquilarLibro extends JPanel{
-	Articulo articulo;
-	JTable tabla;
-	JButton alquilar; 
 	
-	public FrontAlquilarLibro() {
+	private Articulo articulo;
+	private JTable tabla;
+	private JButton alquilar;
+	private Usuario usuario;
+	
+	public FrontAlquilarLibro(Usuario usu) {
+		
+		usuario = usu;
+		
 		alquilar = new JButton();
 		tabla = rellenarTabla();
 		this.add(new JScrollPane(tabla));
@@ -69,7 +74,7 @@ public class FrontAlquilarLibro extends JPanel{
 		tabla = new JTable(modelo);
 		
 		tabla.getColumnModel().getColumn(6).setCellRenderer(new ClientsTableButtonRendererLibro());
-		tabla.getColumnModel().getColumn(6).setCellEditor(new ClientsTableRendererAlquilar(new JCheckBox(), tipo));
+		tabla.getColumnModel().getColumn(6).setCellEditor(new ClientsTableRendererAlquilar(new JCheckBox(), tipo, usuario));
 		
 		return tabla;
 	}

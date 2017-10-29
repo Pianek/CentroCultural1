@@ -22,6 +22,7 @@ public class ClientsTableRendererAlquilar extends DefaultCellEditor {
 	private String tipoArticulo;
 	private Conexion conexion;
 	private int stock; 
+	private Usuario usuario;
 
 	public ClientsTableRendererAlquilar(JCheckBox checkBox) {
 		super(checkBox);
@@ -34,7 +35,7 @@ public class ClientsTableRendererAlquilar extends DefaultCellEditor {
 		});
 	}
 
-	public ClientsTableRendererAlquilar(JCheckBox checkBox,String tipo) {
+	public ClientsTableRendererAlquilar(JCheckBox checkBox,String tipo, Usuario usu) {
 		super(checkBox);
 		button = new JButton();
 		button.setOpaque(true);
@@ -43,6 +44,7 @@ public class ClientsTableRendererAlquilar extends DefaultCellEditor {
 				fireEditingStopped();
 			}
 		});
+		usuario = usu;
 		tipoArticulo = tipo;
 		conexion = new Conexion();
 	}
@@ -115,6 +117,20 @@ public class ClientsTableRendererAlquilar extends DefaultCellEditor {
 		}
 		conexion.ejecutarSentencia("UPDATE " + tipoArticulo +" SET stock = " + (stock-1) + " WHERE id" + tipoArticulo.toUpperCase() + " = " + table.getValueAt(row, 0));
 		
-		//FALTA AÑADIR A tipoArticulo_has_prestamo!!
+		Articulo articulo = null;
+		
+		if(tipoArticulo.equals("cd")) {
+			articulo = (Articulo) new CD(Integer.parseInt(table.getValueAt(row, 0).toString()), table.getValueAt(row, 1).toString(),Integer.parseInt(table.getValueAt(row, 4).toString()),
+					table.getValueAt(row, 2).toString(),table.getValueAt(row, 3).toString());
+		}else if(tipoArticulo.equals("dvd")) {
+			articulo = (Articulo) new DVD(Integer.parseInt(table.getValueAt(row, 0).toString()), table.getValueAt(row, 1).toString(),Integer.parseInt(table.getValueAt(row, 4).toString()),
+					table.getValueAt(row, 3).toString(),table.getValueAt(row, 2).toString());
+		}else if(tipoArticulo.equals("libro")){
+			articulo = (Articulo) new Libro(Integer.parseInt(table.getValueAt(row, 0).toString()), table.getValueAt(row, 1).toString(),Integer.parseInt(table.getValueAt(row, 5).toString()),
+					table.getValueAt(row, 2).toString(),Integer.parseInt(table.getValueAt(row, 4).toString()),table.getValueAt(row, 3).toString());
+		}
+		
+		Prestamo prestamo = new Prestamo(usuario, articulo);
+		prestamo.anadirArticuloPres();
 	}
 }

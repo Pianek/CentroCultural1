@@ -10,11 +10,12 @@ public class Prestamo {
 	private String fecha_devolucion; 
 	
 	
-	public Prestamo( Usuario usu, String reserva, String devolucion) {
+	public Prestamo(Usuario usu, Articulo art) {
 		id_prestamo = crearId();
 		usuario = usu;
-		fecha_reserva = reserva;
-		fecha_devolucion = devolucion;
+		fecha_reserva = "CURDATE()";
+		fecha_devolucion = "";
+		articulo = art;
 	}
 	
 	public int getIdPrestamo() {
@@ -38,7 +39,7 @@ public class Prestamo {
 	}
 
 	public void setFechaReserva(String fecha_reserva) {
-		this.fecha_reserva = fecha_reserva;
+		this.fecha_reserva = "\"" + fecha_reserva + "\"";
 	}
 
 	public String getFechaDevolucion() {
@@ -46,7 +47,7 @@ public class Prestamo {
 	}
 
 	public void setFechaDevolucion(String fecha_devolucion) {
-		this.fecha_devolucion = fecha_devolucion;
+		this.fecha_devolucion = "\"" + fecha_devolucion + "\"";
 	}
 	
 	public int crearId() {
@@ -55,7 +56,7 @@ public class Prestamo {
 		c.establecerConexion();
 		ResultSet rs = c.getResultSet("SELECT idPrestamo" + 
 								 	  "FROM prestamo" + 
-								 	  "WHERE fechaPrestamo = \"" + fecha_reserva + "\"" +
+								 	  "WHERE fechaPrestamo = " + fecha_reserva + 
 								 	  "AND Usuario_idUsuario = " + usuario.getIdUsuario());
 		if(rs != null) {
 			try {
@@ -78,7 +79,7 @@ public class Prestamo {
 	public String crear() {
 		this.setIdPrestamo(crearId());	
 		return "INSERT INTO	prestamo (idPrestamo, fechaPrestamo, fechaDevolucion, Usuario_idUsuario)"+				  
-				"VALUES (" + id_prestamo +",\""+ fecha_reserva+ ",\""+ fecha_devolucion+ ",\""+ usuario.getIdUsuario()+ ")\";";
+				"VALUES (" + id_prestamo +","+ fecha_reserva+ ","+ fecha_devolucion+ ",\""+ usuario.getIdUsuario()+ ")\";";
 		
 	}
 	
@@ -102,10 +103,10 @@ public class Prestamo {
 		articulo.setStock(articulo.getStock()+1);
 		
 		return "UPDATE " + articulo.getTipo() + "_has_prestamo "
-				+ "SET fechaDevolucion = CURDATE() " + articulo.getTipo() 
+				+ "SET fechaDevolucion = CURDATE() "  
 				+ " WHERE "		
 				+ articulo.getTipo().toUpperCase() + "_id" + articulo.getTipo().toUpperCase() + " = " + articulo.getId_articulo() 
 				+ " Prestamo_idPrestamo = " + this.id_prestamo 
-				+" Prestamo_Usuario_idUsuario = " + this.usuario.getIdUsuario();
+				+ " Prestamo_Usuario_idUsuario = " + this.usuario.getIdUsuario();
 	}
 }

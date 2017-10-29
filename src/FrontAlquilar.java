@@ -49,7 +49,7 @@ public class FrontAlquilar extends JFrame{
 		panelcd.setBackground(new Color (215,246,185));				
 		panelcd.add(lblcd);
 		
-		FrontAlquilarCD  cd=  new FrontAlquilarCD();
+		FrontAlquilarCD  cd=  new FrontAlquilarCD(usuario);
 		cd.setBounds(100, 50, 900, 900);
 		cd.setLayout(new GridLayout(2,2,100,300));
 		cd.setBackground(new Color (215,246,185));
@@ -78,7 +78,7 @@ public class FrontAlquilar extends JFrame{
 		paneldvd.setBackground(new Color (215,246,185));
 		paneldvd.add(lbldvd);
 		
-		FrontAlquilarDVD  dvd=  new FrontAlquilarDVD();
+		FrontAlquilarDVD  dvd=  new FrontAlquilarDVD(usuario);
 		dvd.setBounds(100, 50, 900, 900);
 		dvd.setLayout(new GridLayout(2,2,100,300));
 		dvd.setBackground(new Color (215,246,185));
@@ -107,7 +107,7 @@ public class FrontAlquilar extends JFrame{
 		panelLibro.setBackground(new Color (215,246,185));
 		panelLibro.add(lbllibro);
 		
-		FrontAlquilarLibro  libro=  new FrontAlquilarLibro();
+		FrontAlquilarLibro  libro=  new FrontAlquilarLibro(usuario);
 		libro.setBounds(100, 50, 900, 900);
 		libro.setLayout(new GridLayout(2,2,100,300));
 		libro.setBackground(new Color (215,246,185));
@@ -145,7 +145,7 @@ public class FrontAlquilar extends JFrame{
 			//Boton de atrás
 	    	if (event.getSource() == atrasCD || event.getSource() == atrasDVD || event.getSource() == atrasLIBRO){
 	    		if(usuario.getPermisos().equalsIgnoreCase("ADMINISTRADOR")) {
-	    			FrontAdmin frame = new  FrontAdmin(usuario);
+	    			FrontAdmin frame = new FrontAdmin(usuario);
 			        frame.setVisible(true);
 	    		}else if(usuario.getPermisos().equalsIgnoreCase("USUARIO")){
 	    			FrontUsuario frame = new FrontUsuario(usuario);

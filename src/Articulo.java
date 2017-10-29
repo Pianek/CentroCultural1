@@ -3,13 +3,11 @@ public class Articulo {
 	private int id_articulo;
 	private String titulo;
 	private int stock;
-	private String tipo;
 	
 	public Articulo(int id, String ti, int stock) {
 		this.id_articulo=id;
 		this.titulo=ti;
 		this.stock=stock;
-		this.tipo = "";
 	}
 	public Articulo(String titulo, int stock) {
 		this.titulo=titulo;
