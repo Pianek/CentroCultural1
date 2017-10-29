@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -68,7 +67,6 @@ public class FrontDevolver extends JFrame{
 		setVisible(true);
 		this.setLocationRelativeTo(null);   
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		BorderLayout fondoEntero= new BorderLayout();
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
@@ -83,6 +81,8 @@ public class FrontDevolver extends JFrame{
 
         tipoArticulo = "cd";
         
+        int numRows = 0, numDevueltos = 0;
+        
 		try {
 			Conexion conexion = new Conexion();
 			ResultSet rs = conexion.getResultSet("SELECT p.idPrestamo, pcd.fechaDevolucion, cd.* " + 
@@ -96,18 +96,20 @@ public class FrontDevolver extends JFrame{
 
 			// Creamos las columnas.
 			modelo.addColumn("Código préstamo");
-			modelo.addColumn("Fecha entrada");
-			modelo.addColumn("Nº articulos");
-			modelo.addColumn("Detalles");
+			modelo.addColumn("Título");
+			modelo.addColumn("Cantante");
+			modelo.addColumn("Discografía");
+			modelo.addColumn("Stock");
+			modelo.addColumn("Opciones");
 			
-			
-			// Bucle para cada resultado en la consulta
+						// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
 				String fechaDevolucion = rs.getString(2);
 				String idPrestamo = String.valueOf(rs.getInt(1));
 				if(!fechaDevolucion.equalsIgnoreCase("null") || !fechaDevolucion.equalsIgnoreCase("") || !fechaDevolucion.equalsIgnoreCase(" ")) {
 					idPrestamo = "1" + String.valueOf(rs.getInt(1));
+					numDevueltos++;
 				}				
 				
 //				String idCD = rs.getString(3);
@@ -117,6 +119,8 @@ public class FrontDevolver extends JFrame{
 				String stock = String.valueOf(rs.getInt(7));
 				
 				modelo.addRow(new Object[] {idPrestamo,titulo,cantante,discografia,stock});
+				
+				numRows++;
 			}
 			conexion.cerrarConexion();
 		} catch (SQLException e) {
@@ -126,8 +130,13 @@ public class FrontDevolver extends JFrame{
 		
 		tablaCD = new JTable(modelo);
 		
+		boolean prestamoDevuelto = false;
+		if(numDevueltos == numRows) {
+			prestamoDevuelto = true;
+		}
+		
 		tablaCD.getColumnModel().getColumn(3).setCellRenderer(new ClientsTableButtonRendererPres());
-		tablaCD.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererPrestamos(new JCheckBox(), usuario));
+		tablaCD.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(), usuario, prestamoDevuelto));
         
 		return tablaCD;
 	}
@@ -142,6 +151,8 @@ public class FrontDevolver extends JFrame{
 
         tipoArticulo = "dvd";
         
+        int numRows = 0, numDevueltos = 0;
+        
 		try {
 			Conexion conexion = new Conexion();
 			ResultSet rs = conexion.getResultSet("SELECT p.idPrestamo, pdvd.fechaDevolucion, dvd.* " + 
@@ -155,20 +166,31 @@ public class FrontDevolver extends JFrame{
 
 			// Creamos las columnas.
 			modelo.addColumn("Código préstamo");
-			modelo.addColumn("Fecha entrada");
-			modelo.addColumn("Nº articulos");
-			modelo.addColumn("Detalles");
+			modelo.addColumn("Título");
+			modelo.addColumn("Productora");
+			modelo.addColumn("Director");
+			modelo.addColumn("Stock");
+			modelo.addColumn("Opciones");
 			
-			
-			// Bucle para cada resultado en la consulta
+						// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
+				String fechaDevolucion = rs.getString(2);
 				String idPrestamo = String.valueOf(rs.getInt(1));
-				String fecha = rs.getString(2);
-				String fechaDevolucion = rs.getString(3);
-				String numeroArt = String.valueOf(rs.getInt(4) + rs.getInt(5) + rs.getInt(6));
+				if(!fechaDevolucion.equalsIgnoreCase("null") || !fechaDevolucion.equalsIgnoreCase("") || !fechaDevolucion.equalsIgnoreCase(" ")) {
+					idPrestamo = "1" + String.valueOf(rs.getInt(1));
+					numDevueltos++;
+				}				
 				
-				modelo.addRow(new Object[] {idPrestamo,fecha,numeroArt});
+//				String idCD = rs.getString(3);
+				String titulo = rs.getString(4);
+				String productora = rs.getString(5);
+				String director = rs.getString(6);
+				String stock = String.valueOf(rs.getInt(7));
+				
+				modelo.addRow(new Object[] {idPrestamo,titulo,productora,director,stock});
+				
+				numRows++;
 			}
 			conexion.cerrarConexion();
 		} catch (SQLException e) {
@@ -178,8 +200,13 @@ public class FrontDevolver extends JFrame{
 		
 		tablaDVD = new JTable(modelo);
 		
+		boolean prestamoDevuelto = false;
+		if(numDevueltos == numRows) {
+			prestamoDevuelto = true;
+		}
+		
 		tablaDVD.getColumnModel().getColumn(3).setCellRenderer(new ClientsTableButtonRendererPres());
-		tablaDVD.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererPrestamos(new JCheckBox(), usuario));
+		tablaDVD.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(), usuario, prestamoDevuelto));
         
 		return tablaDVD;
 	}
@@ -194,6 +221,8 @@ public class FrontDevolver extends JFrame{
 
         tipoArticulo = "libro";
         
+        int numRows = 0, numDevueltos = 0;
+        
 		try {
 			Conexion conexion = new Conexion();
 			ResultSet rs = conexion.getResultSet("SELECT p.idPrestamo, plib.fechaDevolucion, libro.* " + 
@@ -207,20 +236,29 @@ public class FrontDevolver extends JFrame{
 
 			// Creamos las columnas.
 			modelo.addColumn("Código préstamo");
-			modelo.addColumn("Fecha entrada");
-			modelo.addColumn("Nº articulos");
-			modelo.addColumn("Detalles");
+			modelo.addColumn("Título");
+			modelo.addColumn("Autor");
+			modelo.addColumn("Stock");
+			modelo.addColumn("Opciones");
 			
-			
-			// Bucle para cada resultado en la consulta
+						// Bucle para cada resultado en la consulta
 			while (rs.next()){
 				
+				String fechaDevolucion = rs.getString(2);
 				String idPrestamo = String.valueOf(rs.getInt(1));
-				String fecha = rs.getString(2);
-				String fechaDevolucion = rs.getString(3);
-				String numeroArt = String.valueOf(rs.getInt(4) + rs.getInt(5) + rs.getInt(6));
+				if(!fechaDevolucion.equalsIgnoreCase("null") || !fechaDevolucion.equalsIgnoreCase("") || !fechaDevolucion.equalsIgnoreCase(" ")) {
+					idPrestamo = "*" + String.valueOf(rs.getInt(1));
+					numDevueltos++;
+				}				
 				
-				modelo.addRow(new Object[] {idPrestamo,fecha,numeroArt});
+//							String idCD = rs.getString(3);
+				String titulo = rs.getString(4);
+				String autor = rs.getString(5);
+				String stock = String.valueOf(rs.getInt(7));
+				
+				modelo.addRow(new Object[] {idPrestamo,titulo,autor,stock});
+				
+				numRows++;
 			}
 			conexion.cerrarConexion();
 		} catch (SQLException e) {
@@ -230,8 +268,13 @@ public class FrontDevolver extends JFrame{
 		
 		tablaLIB = new JTable(modelo);
 		
+		boolean prestamoDevuelto = false;
+		if(numDevueltos == numRows) {
+			prestamoDevuelto = true;
+		}
+		
 		tablaLIB.getColumnModel().getColumn(3).setCellRenderer(new ClientsTableButtonRendererPres());
-		tablaLIB.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererPrestamos(new JCheckBox(), usuario));
+		tablaLIB.getColumnModel().getColumn(3).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(), usuario,prestamoDevuelto));
         
 		return tablaLIB;
 	}
@@ -265,9 +308,9 @@ class ClientsTableButtonRendererPres extends JButton implements TableCellRendere
 			int row, int column) {
 		
 		String devuelto = (table.getValueAt(row, column).toString()).substring(0,1);
-		if(devuelto.equals("1")) {
+		if(devuelto.equals("*")) {
 			setBackground(UIManager.getColor("Button.background"));
-			setText((value == null) ? "Devuelto" : value.toString());
+			setText((value == null) ? "DEVUELTO" : value.toString());
 		}else {
 			setBackground(UIManager.getColor("Button.background"));
 			setText((value == null) ? "Devolver" : value.toString());
