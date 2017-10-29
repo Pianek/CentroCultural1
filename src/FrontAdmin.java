@@ -13,18 +13,21 @@ import javax.swing.border.EmptyBorder;
 
 
 public class FrontAdmin extends JFrame{
-	JPanel panelPrincipal;
-	JPanel panelAbajo;
-	JPanel panelBotones;
-	JPanel panelIzquierda;
-	JPanel panelDerecha;
-	JButton bCrear;
-	JButton bGestionar;
-	JButton bAlquilar;
-	JButton bDevolver;
-	JButton cerrarSesion;
+	
+	private JPanel panelPrincipal;
+	private JPanel panelAbajo;
+	private JPanel panelBotones;
+	private JPanel panelIzquierda;
+	private JPanel panelDerecha;
+	private JButton bCrear;
+	private JButton bGestionar;
+	private JButton bAlquilar;
+	private JButton bDevolver;
+	private JButton cerrarSesion;
+	private Usuario usuario;
 
-	public FrontAdmin(){
+	public FrontAdmin(Usuario usu){
+		usuario = usu;
 		this.setTitle("Panel Administrador");
 		this.setSize(300,300);
 		init();
@@ -97,27 +100,29 @@ public class FrontAdmin extends JFrame{
 	class MiClick extends  MouseAdapter {
 		public void mouseClicked(MouseEvent event) {
 			if (event.getSource() == bCrear) {
-				FrontCrearArticulo frame = new FrontCrearArticulo();
+				FrontCrearArticulo frame = new FrontCrearArticulo(usuario);
 				frame.setVisible(true);
 			}
-			if (event.getSource()==cerrarSesion){
-	    		FrontLogin lg= new FrontLogin();
-	    		lg.setVisible(true);
-	    }
 			
 			if (event.getSource() == bGestionar){
-				FrontGestionar frame = new FrontGestionar();
+				FrontGestionar frame = new FrontGestionar(usuario);
 				frame.setVisible(true);
 			}
 			
 			if (event.getSource() == bAlquilar){
-				FrontAlquilar frame = new FrontAlquilar();
+				FrontAlquilar frame = new FrontAlquilar(usuario);
 				frame.setVisible(true);
 			}
 			
 			if (event.getSource() == bDevolver){
-				FrontDevolver frame = new FrontDevolver();
+				FrontDevolver frame = new FrontDevolver(usuario);
 				frame.setVisible(true);
+			}
+
+			if (event.getSource()==cerrarSesion){
+				usuario = null;
+	    		FrontLogin lg= new FrontLogin();
+	    		lg.setVisible(true);
 			}
 		}
 	}

@@ -6,16 +6,17 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-	import javax.swing.JFrame;
-	import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-	import javax.swing.JTabbedPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-	import javax.swing.border.EmptyBorder;
+import javax.swing.border.EmptyBorder;
 
 public class FrontCrearArticulo  extends JFrame{
+	
 	private JPanel  panelPrincipal;	
 	private Conexion conexion;
 	
@@ -47,11 +48,13 @@ public class FrontCrearArticulo  extends JFrame{
 	private JTextArea textoCapMuestra;
 	private JTextField textoNumPag;
 	private JTextField textoStockLibro;
-	
+	private Usuario usuario;
 	
 	
 
-	public FrontCrearArticulo(){			
+	public FrontCrearArticulo(Usuario usu){			
+		
+		usuario = usu;
 		
 		conexion= new Conexion();
 		iconoCD = new ImageIcon("iconos\\iconoCD.png");
@@ -298,23 +301,37 @@ public class FrontCrearArticulo  extends JFrame{
 	class crear extends MouseAdapter{//se crea una clase privada
 		public void mouseClicked(MouseEvent event){
 			//Boton de atrás
-	    	if (event.getSource()==atrasCD || event.getSource()==atrasDVD || event.getSource()==atrasLIBRO){
-	    		FrontAdmin frame = new  FrontAdmin();
-		        frame.setVisible(true);
+	    	if (event.getSource() == atrasCD || event.getSource() == atrasDVD || event.getSource() == atrasLIBRO){
+	    		if(usuario.getPermisos().equalsIgnoreCase("ADMINISTRADOR")) {
+	    			FrontAdmin frame = new  FrontAdmin(usuario);
+			        frame.setVisible(true);
+	    		}else if(usuario.getPermisos().equalsIgnoreCase("USUARIO")){
+	    			FrontUsuario frame = new FrontUsuario(usuario);
+	    			frame.setVisible(true);
+	    		}
 	        }
+<<<<<<< HEAD
 	    	  if (event.getSource()==cerrarSesionCD||event.getSource()==cerrarSesionDVD||event.getSource()==cerrarSesionLIBRO){
 		    		FrontLogin lg= new FrontLogin();
 		    		lg.setVisible(true);
 		    }if (event.getSource()==actoresDVD){
 		    	FrontActores act= new FrontActores();
 		    	act.setVisible(true);
+=======
+	    	
+	    	//Cerrar sesión
+	    	if (event.getSource() == cerrarSesionCD||event.getSource() == cerrarSesionDVD||event.getSource() == cerrarSesionLIBRO){
+	    		usuario = null;
+	    		FrontLogin lg = new FrontLogin();
+	    		lg.setVisible(true);
+>>>>>>> branch 'master' of https://github.com/Pianek/CentroCultural1.git
 		    }
 
-	   //Añadir elementos a la BBDD
-	    	 boolean valido= (true);
-	        if(event.getSource()==anadirCD){	
+	    	//Añadir elementos a la BBDD
+	    	boolean valido= (true);
+	        if(event.getSource() == anadirCD){	
 	        	CD cd = new CD(textoTituloCD.getText(), Integer.parseInt(textoStock.getText()), textoCantante.getText(), textoDiscografia.getText());
-	        	valido=conexion.ejecutarSentencia(cd.crear());
+	        	valido = conexion.ejecutarSentencia(cd.crear());
 	        	if (valido) {
 	        		JOptionPane.showMessageDialog(anadirCD, "Se ha creado con exito");
 	        	}else {
@@ -322,9 +339,9 @@ public class FrontCrearArticulo  extends JFrame{
 	        	}
 	        }
 	        
-	        if(event.getSource()==anadirDVD){
+	        if(event.getSource() == anadirDVD){
 	        	DVD dvd= new DVD(TextoTitulo.getText(),TextoDirector.getText(),TextoProductor.getText(),Integer.parseInt(TextoStockDVD.getText())); 
-	        	valido=conexion.ejecutarSentencia(dvd.crear());
+	        	valido = conexion.ejecutarSentencia(dvd.crear());
 	        	if (valido) {
 	        		JOptionPane.showMessageDialog(anadirDVD, "Se ha creado con exito");
 				}else {
@@ -332,10 +349,10 @@ public class FrontCrearArticulo  extends JFrame{
 				}	
 	        }
 	        
-	        if(event.getSource()==anadirLIBRO){
+	        if(event.getSource() == anadirLIBRO){
 	        	Libro libro= new Libro(textoTituloLibro.getText(),textoAutor.getText(),textoCapMuestra.getText(),Integer.parseInt(textoNumPag.getText()),Integer.parseInt(textoStockLibro.getText())); 
 	        	System.out.println(libro.crear());   
-	        	valido=conexion.ejecutarSentencia(libro.crear());
+	        	valido = conexion.ejecutarSentencia(libro.crear());
 	        	if (valido) {
 	        		JOptionPane.showMessageDialog(anadirLIBRO, "Se ha creado con exito");
 	        	}else {

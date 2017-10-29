@@ -19,11 +19,14 @@ public class FrontGestionar  extends JFrame{
 	private JButton atrasCD;
 	private JButton atrasDVD;
 	private JButton atrasLIBRO;
-	private JButton  cerrarSesionCD;
-	private JButton  cerrarSesionDVD;
-	private JButton  cerrarSesionLIBRO;
+	private JButton cerrarSesionCD;
+	private JButton cerrarSesionDVD;
+	private JButton cerrarSesionLIBRO;
+	private Usuario usuario;
 	
-	public FrontGestionar(){
+	public FrontGestionar(Usuario usu){
+		
+		usuario = usu;
 		
 		this.setTitle("Selecciona tu artículo");
 		this.setSize(1000,100);	
@@ -139,15 +142,24 @@ public class FrontGestionar  extends JFrame{
 	}
 	class atras extends MouseAdapter{
 		public void mouseClicked(MouseEvent event){
+			
 			//Boton de atrás
-	    	if (event.getSource()==atrasCD || event.getSource()==atrasDVD || event.getSource()==atrasLIBRO){
-	    		FrontAdmin frame = new  FrontAdmin();
-		        frame.setVisible(true);
+	    	if (event.getSource() == atrasCD || event.getSource() == atrasDVD || event.getSource() == atrasLIBRO){
+	    		if(usuario.getPermisos().equalsIgnoreCase("ADMINISTRADOR")) {
+	    			FrontAdmin frame = new  FrontAdmin(usuario);
+			        frame.setVisible(true);
+	    		}else if(usuario.getPermisos().equalsIgnoreCase("USUARIO")){
+	    			FrontUsuario frame = new FrontUsuario(usuario);
+	    			frame.setVisible(true);
+	    		}
 	        }
-	    	if (event.getSource()==cerrarSesionCD||event.getSource()==cerrarSesionDVD||event.getSource()==cerrarSesionLIBRO){
-	    		FrontLogin lg= new FrontLogin();
+	    	
+	    	//Cerrar sesión
+	    	if (event.getSource() == cerrarSesionCD||event.getSource() == cerrarSesionDVD||event.getSource() == cerrarSesionLIBRO){
+	    		usuario = null;
+	    		FrontLogin lg = new FrontLogin();
 	    		lg.setVisible(true);
-	    }
+	    	}
 	    }
 	}
 }

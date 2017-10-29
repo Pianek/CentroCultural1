@@ -13,8 +13,11 @@ public class FrontDevolver  extends JFrame{
 	private JLabel  lblcd;
 	private JLabel lbldvd;
 	private JLabel lbllibro;
+	private Usuario usuario;
 		
-	public FrontDevolver(){
+	public FrontDevolver(Usuario usu){
+		
+		usuario = usu;
 		
 		this.setTitle("Selecciona tu artículo");
 		this.setSize(1000,500);	

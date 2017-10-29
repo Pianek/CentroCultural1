@@ -17,8 +17,10 @@ public class FrontUsuario extends JFrame {
 	private JButton alquilar;
 	private JButton devolver;
 	private JButton cerrarSesion;
+	private Usuario	usuario;
 	
-	public FrontUsuario() {
+	public FrontUsuario(Usuario usu) {
+		usuario = usu;
 		this.setTitle("Panel usuario");
 		this.setSize(1000,1000);
 		init();
@@ -71,15 +73,18 @@ public class FrontUsuario extends JFrame {
 		public void mouseClicked (MouseEvent evento) {
 			
 			if (evento.getSource() == alquilar) {
-				FrontAlquilar frame = new FrontAlquilar();
+				FrontAlquilar frame = new FrontAlquilar(usuario);
 				frame.setVisible(true);
 			}
 			
 			if (evento.getSource() == devolver) {
-				FrontDevolver frame = new FrontDevolver();
+				FrontDevolver frame = new FrontDevolver(usuario);
 				frame.setVisible(true);
 			}
+			
+			//Cerrar sesión
 			if (evento.getSource() == cerrarSesion) {
+				usuario = null;
 				FrontLogin lg= new FrontLogin();
 	    		lg.setVisible(true);
 			}
