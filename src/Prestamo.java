@@ -101,6 +101,7 @@ public class Prestamo {
 		this.setIdPrestamo(crearId());	
 		articulo.setStock(articulo.getStock()+1);
 		
+		
 		return "UPDATE " + articulo.getTipo() + "_has_prestamo "
 				+ "SET fechaDevolucion = CURDATE() " + articulo.getTipo() 
 				+ " WHERE "		

@@ -8,14 +8,15 @@ public class MainCentroCultural {
 //		FrontLogin login = new FrontLogin(); 
 //		FrontAlquilar  alquilar= new FrontAlquilar();
 //		FrontActualizarBorrar AB = new FrontActualizarBorrar();
-//		FrontLogin login = new FrontLogin(); 
+//	FrontLogin login = new FrontLogin(); 
 //		FrontAdmin admin = new FrontAdmin();
 //		FrontPrestamo prestamo = new FrontPrestamo();
 //		FrontActualizarBorrarCD actualizarCD = new FrontActualizarBorrarCD();
 //		FrontActualizarBorrarDVD actualizarDVD = new FrontActualizarBorrarDVD();
 //		FrontActualizarBorrarLibro actualizarLibro = new FrontActualizarBorrarLibro();
-		FrontGestionar  gs = new FrontGestionar();
+//		FrontGestionar  gs = new FrontGestionar();
 //		FrontCrearArticulo cr= new FrontCrearArticulo();
 		//FrontUsuario ffu= new FrontUsuario();
+		FrontActores act= new FrontActores();
 	}
 }
