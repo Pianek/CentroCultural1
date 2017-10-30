@@ -105,15 +105,27 @@ public class FrontDevolver extends JFrame{
         
 		try {
 			Conexion conexion = new Conexion();
-			ResultSet rs = conexion.getResultSet("SELECT p.idPrestamo, pcd.fechaDevolucion, cd.* " + 
+			ResultSet rs;
+			if(usuario.getPermisos().equalsIgnoreCase("administrador")) {
+				rs = conexion.getResultSet("SELECT p.idPrestamo, pcd.fechaDevolucion, cd.* " + 
 												 "FROM prestamo p " + 
 												 "LEFT JOIN cd_has_prestamo as pcd ON (p.Usuario_idUsuario = pcd.Prestamo_Usuario_idUsuario " + 
 												 									  "AND p.idPrestamo = pcd.Prestamo_idPrestamo) " + 
 												 "LEFT JOIN cd ON (pcd.CD_idCD = cd.idCD) " + 
-												 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + " " +  
-												 "AND cd.idCD IS NOT NULL " + 
+												 "WHERE cd.idCD IS NOT NULL " + 
 												 "AND p.idPrestamo = " + idPrestamo + " " +
 												 "GROUP BY cd.idCD;");
+			}else {
+				rs = conexion.getResultSet("SELECT p.idPrestamo, pcd.fechaDevolucion, cd.* " + 
+						 "FROM prestamo p " + 
+						 "LEFT JOIN cd_has_prestamo as pcd ON (p.Usuario_idUsuario = pcd.Prestamo_Usuario_idUsuario " + 
+						 									  "AND p.idPrestamo = pcd.Prestamo_idPrestamo) " + 
+						 "LEFT JOIN cd ON (pcd.CD_idCD = cd.idCD) " + 
+						 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + " " +  
+						 "AND cd.idCD IS NOT NULL " + 
+						 "AND p.idPrestamo = " + idPrestamo + " " +
+						 "GROUP BY cd.idCD;");
+			}
 
 			// Creamos las columnas.
 			modelo.addColumn("Código préstamo");
@@ -179,15 +191,28 @@ public class FrontDevolver extends JFrame{
         
 		try {
 			Conexion conexion = new Conexion();
-			ResultSet rs = conexion.getResultSet("SELECT p.idPrestamo, pdvd.fechaDevolucion, dvd.* " + 
-												 "FROM prestamo p " + 
-												 "LEFT JOIN dvd_has_prestamo as pdvd ON (p.Usuario_idUsuario = pdvd.Prestamo_Usuario_idUsuario "
-												 										+ "AND p.idPrestamo = pdvd.Prestamo_idPrestamo) " + 
-												 "LEFT JOIN dvd ON (pdvd.DVD_idDVD = dvd.idDVD) " + 
-												 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + " " + 
-												 "AND dvd.idDVD IS NOT NULL " +  
-												 "AND p.idPrestamo = " + idPrestamo + " " + 
-												 "GROUP BY dvd.idDVD;");
+			ResultSet rs;
+			if(usuario.getPermisos().equalsIgnoreCase("administrador")) {
+				rs = conexion.getResultSet(" SELECT p.idPrestamo, pdvd.fechaDevolucion, dvd.* " + 
+										 	"FROM prestamo p " + 
+										 	"LEFT JOIN dvd_has_prestamo as pdvd ON (p.Usuario_idUsuario = pdvd.Prestamo_Usuario_idUsuario "
+											 										+ "AND p.idPrestamo = pdvd.Prestamo_idPrestamo) " + 
+											"LEFT JOIN dvd ON (pdvd.DVD_idDVD = dvd.idDVD) " + 
+											"WHERE dvd.idDVD IS NOT NULL " +  
+											"AND p.idPrestamo = " + idPrestamo + " " + 
+											"GROUP BY dvd.idDVD;");
+			}else {
+				rs = conexion.getResultSet("SELECT p.idPrestamo, pdvd.fechaDevolucion, dvd.* " + 
+						 "FROM prestamo p " + 
+						 "LEFT JOIN dvd_has_prestamo as pdvd ON (p.Usuario_idUsuario = pdvd.Prestamo_Usuario_idUsuario "
+						 										+ "AND p.idPrestamo = pdvd.Prestamo_idPrestamo) " + 
+						 "LEFT JOIN dvd ON (pdvd.DVD_idDVD = dvd.idDVD) " + 
+						 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + " " + 
+						 "AND dvd.idDVD IS NOT NULL " +  
+						 "AND p.idPrestamo = " + idPrestamo + " " + 
+						 "GROUP BY dvd.idDVD;");
+			}
+			
 
 			// Creamos las columnas.
 			modelo.addColumn("Código préstamo");
@@ -253,16 +278,27 @@ public class FrontDevolver extends JFrame{
         
 		try {
 			Conexion conexion = new Conexion();
-			ResultSet rs = conexion.getResultSet("SELECT p.idPrestamo, plib.fechaDevolucion, libro.* " + 
+			ResultSet rs;
+			if(usuario.getPermisos().equalsIgnoreCase("administrador")) {
+				rs = conexion.getResultSet("SELECT p.idPrestamo, plib.fechaDevolucion, libro.* " + 
 												 "FROM prestamo p " + 
 												 "LEFT JOIN libro_has_prestamo as plib ON (p.Usuario_idUsuario = plib.Prestamo_Usuario_idUsuario "
 												 										+ "AND p.idPrestamo = plib.Prestamo_idPrestamo) " + 
 												 "LEFT JOIN libro ON (plib.LIBRO_idLIBRO = libro.idLIBRO) " + 
-												 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + " " + 
-												 "AND libro.idLIBRO IS NOT NULL " + 
+												 "WHERE libro.idLIBRO IS NOT NULL " + 
 												 "AND p.idPrestamo = " + idPrestamo + " " +
 												 "GROUP BY libro.idLIBRO;");
-
+			}else {
+				rs = conexion.getResultSet("SELECT p.idPrestamo, plib.fechaDevolucion, libro.* " + 
+						 "FROM prestamo p " + 
+						 "LEFT JOIN libro_has_prestamo as plib ON (p.Usuario_idUsuario = plib.Prestamo_Usuario_idUsuario "
+						 										+ "AND p.idPrestamo = plib.Prestamo_idPrestamo) " + 
+						 "LEFT JOIN libro ON (plib.LIBRO_idLIBRO = libro.idLIBRO) " + 
+						 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + " " + 
+						 "AND libro.idLIBRO IS NOT NULL " + 
+						 "AND p.idPrestamo = " + idPrestamo + " " +
+						 "GROUP BY libro.idLIBRO;");
+			}
 			// Creamos las columnas.
 			modelo.addColumn("Código CD");
 			modelo.addColumn("Título");

@@ -80,13 +80,24 @@ public class FrontPrestamos extends JFrame{
 
 		try {
 			Conexion conexion = new Conexion();
-			ResultSet rs = conexion.getResultSet("SELECT p.idPrestamo, p.fechaPrestamo, p.fechaDevolucionTotal, count(pcd.CD_idCD) as cd, count(pdvd.DVD_idDVD) as dvd, count(plib.LIBRO_idLIBRO) as libro " + 
-												 "FROM prestamo p " + 
-												 "LEFT JOIN cd_has_prestamo as pcd ON (p.Usuario_idUsuario = pcd.Prestamo_Usuario_idUsuario AND p.idPrestamo = pcd.Prestamo_idPrestamo) " + 
-												 "LEFT JOIN dvd_has_prestamo as pdvd ON (p.Usuario_idUsuario = pdvd.Prestamo_Usuario_idUsuario AND p.idPrestamo = pdvd.Prestamo_idPrestamo) " + 
-												 "LEFT JOIN libro_has_prestamo as plib ON (p.Usuario_idUsuario = plib.Prestamo_Usuario_idUsuario AND p.idPrestamo = plib.Prestamo_idPrestamo) " + 
-												 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + 
-												 " GROUP BY p.idPrestamo");
+			ResultSet rs;
+			if(usuario.getPermisos().equalsIgnoreCase("administrador")) {
+				rs = conexion.getResultSet("SELECT p.idPrestamo, p.fechaPrestamo, p.fechaDevolucionTotal, count(pcd.CD_idCD) as cd, count(pdvd.DVD_idDVD) as dvd, count(plib.LIBRO_idLIBRO) as libro " + 
+						 "FROM prestamo p " + 
+						 "LEFT JOIN cd_has_prestamo as pcd ON (p.Usuario_idUsuario = pcd.Prestamo_Usuario_idUsuario AND p.idPrestamo = pcd.Prestamo_idPrestamo) " + 
+						 "LEFT JOIN dvd_has_prestamo as pdvd ON (p.Usuario_idUsuario = pdvd.Prestamo_Usuario_idUsuario AND p.idPrestamo = pdvd.Prestamo_idPrestamo) " + 
+						 "LEFT JOIN libro_has_prestamo as plib ON (p.Usuario_idUsuario = plib.Prestamo_Usuario_idUsuario AND p.idPrestamo = plib.Prestamo_idPrestamo) " + 
+						 "GROUP BY p.idPrestamo");
+			}else {
+				rs = conexion.getResultSet("SELECT p.idPrestamo, p.fechaPrestamo, p.fechaDevolucionTotal, count(pcd.CD_idCD) as cd, count(pdvd.DVD_idDVD) as dvd, count(plib.LIBRO_idLIBRO) as libro " + 
+						 "FROM prestamo p " + 
+						 "LEFT JOIN cd_has_prestamo as pcd ON (p.Usuario_idUsuario = pcd.Prestamo_Usuario_idUsuario AND p.idPrestamo = pcd.Prestamo_idPrestamo) " + 
+						 "LEFT JOIN dvd_has_prestamo as pdvd ON (p.Usuario_idUsuario = pdvd.Prestamo_Usuario_idUsuario AND p.idPrestamo = pdvd.Prestamo_idPrestamo) " + 
+						 "LEFT JOIN libro_has_prestamo as plib ON (p.Usuario_idUsuario = plib.Prestamo_Usuario_idUsuario AND p.idPrestamo = plib.Prestamo_idPrestamo) " + 
+						 "WHERE p.Usuario_idUsuario = " + usuario.getIdUsuario() + 
+						 " GROUP BY p.idPrestamo");
+			}
+			
 
 			// Creamos las columnas.
 			modelo.addColumn("Código préstamo");
