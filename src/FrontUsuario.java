@@ -32,7 +32,7 @@ public class FrontUsuario extends JFrame {
 	public void init() {	
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-	    panel.setBorder(new EmptyBorder(new Insets(300, 450, 300, 450)));
+	    panel.setBorder(new EmptyBorder(new Insets(180, 270, 180, 270)));
 		
 	    panelBotones = new JPanel();
 	    panelAbajo= new JPanel();		
@@ -41,7 +41,6 @@ public class FrontUsuario extends JFrame {
 		panelBotones.setBackground(new Color (99,193,111));
 		panelAbajo.setBackground(new Color (99,193,111));
 		
-		panel.setBorder(new EmptyBorder(350,400,350,400));
 		add(panel);
 	    panel.setLayout(new GridLayout(2, 2, 3, 3));
 	    panel.setLayout(new GridLayout(3, 2, 3, 3));
