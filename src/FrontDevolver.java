@@ -301,7 +301,7 @@ public class FrontDevolver extends JFrame{
 			prestamoDevuelto = true;
 		}
 		
-		tablaLIB.getColumnModel().getColumn(4).setCellRenderer(new ClientsTableButtonRendererPres());
+		tablaLIB.getColumnModel().getColumn(4).setCellRenderer(new ClientsTableButtonRendererDev());
 		tablaLIB.getColumnModel().getColumn(4).setCellEditor(new ClientsTableRendererDevolver(new JCheckBox(), tipoArticulo));
         
 		return tablaLIB;
@@ -326,9 +326,9 @@ public class FrontDevolver extends JFrame{
 	}
 }
 
-class ClientsTableButtonRendererPres extends JButton implements TableCellRenderer {
+class ClientsTableButtonRendererDev extends JButton implements TableCellRenderer {
 	
-	public ClientsTableButtonRendererPres() {
+	public ClientsTableButtonRendererDev() {
 		setOpaque(true);
 	}
 
