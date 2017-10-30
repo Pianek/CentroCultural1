@@ -22,7 +22,7 @@ public class FrontActores extends JFrame {
 	private JLabel nombrePelicula;
 	private JTextField fNombreActor;
 	private JTextField fNombrePelicula;
-	private ImageIcon iconoActor;
+//	private ImageIcon iconoActor;
 	private JButton anadirActor;
 	private JButton atrasActor;
 	private Usuario usuario;
@@ -31,14 +31,14 @@ public class FrontActores extends JFrame {
 	public FrontActores(Usuario usu) {
 		usuario = usu;
 		conexion = new Conexion();
-		iconoActor = new ImageIcon("iconos\\chaplin.png");
+//		iconoActor = new ImageIcon("iconos\\chaplin.png");
 		this.setTitle("Añade un actor");
 		this.setSize(1000,500);	
 		
 
 		panelPrincipal=new JPanel();
-		panelPrincipal.setBorder(new EmptyBorder(355, 500, 365, 500));			
-		panelPrincipal.setLayout(new GridLayout(4, 2, 1, 5));
+		panelPrincipal.setBorder(new EmptyBorder(425, 600, 425, 600));			
+		panelPrincipal.setLayout(new GridLayout(4, 2, 5, 5));
 		
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);   
@@ -49,9 +49,9 @@ public class FrontActores extends JFrame {
 	
 		getContentPane().add(panelPrincipal);
 
-		JLabel icono_actor = new JLabel();
-		icono_actor.setBounds(50, 100, 500, 500);
-		icono_actor.setIcon(iconoActor);
+//		JLabel icono_actor = new JLabel();
+//		icono_actor.setBounds(25, 100, 500, 500);
+//		icono_actor.setIcon(iconoActor);
 
 		nombreActor = new JLabel("Nombre actor");
 		nombreActor.setBounds(700,100,150,150);
@@ -77,7 +77,7 @@ public class FrontActores extends JFrame {
 		atrasActor.setBounds(550, 100, 100, 50);
 		panelPrincipal.add(atrasActor);
 
-		panelPrincipal.add(icono_actor);
+//		panelPrincipal.add(icono_actor);
 		cerrarSesionActor = new JButton("Cerrar Sesion");
 		cerrarSesionActor.setBounds(600, 50, 10, 25);
 		cerrarSesionActor.addMouseListener(new crear());

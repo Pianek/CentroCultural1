@@ -50,18 +50,22 @@ public class FrontDevolver extends JFrame{
 		tablaDVD = rellenarTablaDVD();
 		tablaLIB = rellenarTablaLIB();
 		
-		cd = new JPanel();
-		dvd = new JPanel();
-		libro = new JPanel();
+//		cd = new JPanel();
+//		dvd = new JPanel();
+//		libro = new JPanel();
 		
 		//Diseño panel principal
-		cd.add(new JScrollPane(tablaCD));
-		dvd.add(new JScrollPane(tablaDVD));
-		libro.add(new JScrollPane(tablaLIB));
+//		cd.add(new JScrollPane(tablaCD));
+//		dvd.add(new JScrollPane(tablaDVD));
+//		libro.add(new JScrollPane(tablaLIB));
 		
-		panelPrincipal.add(cd);
-		panelPrincipal.add(dvd);
-		panelPrincipal.add(libro);
+		panelPrincipal.add(new JScrollPane(tablaCD));
+		panelPrincipal.add(new JScrollPane(tablaDVD));
+		panelPrincipal.add(new JScrollPane(tablaLIB));
+		
+//		panelPrincipal.add(cd);
+//		panelPrincipal.add(dvd);
+//		panelPrincipal.add(libro);
 		
 		atras = new JButton ("Atrás");
 		atras.setBounds(1200, 502, 100, 25);

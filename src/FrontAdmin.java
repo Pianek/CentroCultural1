@@ -43,7 +43,7 @@ public class FrontAdmin extends JFrame{
 	public void init(){	
 	   panelPrincipal = new JPanel();
 	   panelPrincipal.setLayout(new BorderLayout());
-       panelPrincipal.setBorder(new EmptyBorder(new Insets(240, 450, 240, 450)));
+       panelPrincipal.setBorder(new EmptyBorder(new Insets(340, 550, 340, 550)));
        
        panelBotones = new JPanel();
        panelIzquierda = new JPanel();

@@ -31,7 +31,7 @@ public class FrontLogin extends JFrame {
 //		panel.setLayout(box);
 		
 		panel=new JPanel();
-		panel.setBorder(new EmptyBorder(270,620,270,620));
+		panel.setBorder(new EmptyBorder(420,820,420,820));
 		panel.setLayout(new GridLayout(5, 1, 70, 10));
 		this.setLocationRelativeTo(null);
 		
