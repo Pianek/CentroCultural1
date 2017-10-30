@@ -161,20 +161,6 @@ class ClientsTableButtonRendererPres extends JButton implements TableCellRendere
 		}
 		
 		Conexion conexion = new Conexion();
-		ResultSet devuelto = conexion.getResultSet("SELECT fechaDevolucionTotal FROM prestamo WHERE idPrestamo = " + id);
-		try {
-			devuelto.next();
-			if(devuelto.wasNull()) {
-				setBackground(UIManager.getColor("Button.background"));
-				setText((value == null) ? "DEVUELTO" : value.toString());
-			}else {
-				setBackground(UIManager.getColor("Button.background"));
-				setText((value == null) ? "Ver detalles" : value.toString());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		ResultSet rsCD = conexion.getResultSet("SELECT * FROM cd_has_prestamo WHERE Prestamo_idPrestamo = " + id + " AND fechaDevolucion IS NULL;");
 		ResultSet rsDVD = conexion.getResultSet("SELECT * FROM dvd_has_prestamo WHERE Prestamo_idPrestamo = " + id + " AND fechaDevolucion IS NULL;");
@@ -195,14 +181,35 @@ class ClientsTableButtonRendererPres extends JButton implements TableCellRendere
 			if(devueltos == 0) {
 				conexion.ejecutarSentencia("UPDATE prestamo SET fechaDevolucionTotal = CURDATE() WHERE idPrestamo = " + id);
 			}
-			
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-	
+		
+		try {
+			
+			ResultSet rsdevnull = conexion.getResultSet("SELECT fechaDevolucionTotal FROM prestamo WHERE idPrestamo = " + id);
+			rsdevnull.next();
+			if(devueltos == 0 && rsdevnull.wasNull()) {
+				conexion.ejecutarSentencia("UPDATE prestamo SET fechaDevolucionTotal = CURDATE() WHERE idPrestamo = " + id);
+			}
+			
+			ResultSet devuelto = conexion.getResultSet("SELECT fechaDevolucionTotal FROM prestamo WHERE idPrestamo = " + id);
+			
+			devuelto.next();
+			if(devuelto.wasNull()) {
+				setBackground(UIManager.getColor("Button.background"));
+				setText((value == null) ? "DEVUELTO" : value.toString());
+			}else {
+				setBackground(UIManager.getColor("Button.background"));
+				setText((value == null) ? "Ver detalles" : value.toString());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return this;
 	}
 }
