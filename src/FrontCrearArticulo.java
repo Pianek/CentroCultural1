@@ -155,7 +155,7 @@ public class FrontCrearArticulo  extends JFrame{
 		paneldvd.add(iconodvd);
 	
 		JLabel tituloDVD = new JLabel("Titulo de la Pelicula");
-		tituloDVD.setBounds(600, 5, 200,200);
+		tituloDVD.setBounds(600, 1, 200,200);
 		paneldvd.add(tituloDVD);
 		
 		TextoTitulo = new JTextField(10);
@@ -187,22 +187,22 @@ public class FrontCrearArticulo  extends JFrame{
 		paneldvd.add(TextoStockDVD);
 	
 		anadirDVD = new JButton("Añadir");
-		anadirDVD.setBounds(590,320,100,20);
+		anadirDVD.setBounds(590,280,100,20);
 		anadirDVD.addMouseListener(new crear());
 		paneldvd.add(anadirDVD);
 		
 		actoresDVD  = new JButton ("Añadir actores");
-		actoresDVD.setBounds(550,283,175,20);
+		actoresDVD.setBounds(800,100,175,20);
 		actoresDVD.addMouseListener(new crear());
 		paneldvd.add(actoresDVD);
 		
 		atrasDVD  = new JButton ("Atrás");
-		atrasDVD.setBounds(900, 50, 100, 25);
+		atrasDVD.setBounds(750, 55, 100, 25);
 		atrasDVD.addMouseListener(new crear());
 		paneldvd.add(atrasDVD);
 		
 		cerrarSesionDVD  = new JButton ("Cerrar Sesion");
-		cerrarSesionDVD.setBounds(1050, 50, 135, 25);
+		cerrarSesionDVD.setBounds(900, 55, 135, 25);
 		cerrarSesionDVD.addMouseListener(new crear());
 		paneldvd.add(cerrarSesionDVD);
 		
